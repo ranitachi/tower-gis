@@ -127,10 +127,10 @@ class SiteController extends Controller
 					$data[$i]['site_id']=$f[1];
 					$data[$i]['site_name']=$f[2];
 					$data[$i]['alamat']=$f[4];
-					$data[$i]['long_koord']=$f[5];
-					$data[$i]['lat_koord']=$f[6];
+					$data[$i]['long_koord']=str_replace(',', '.', $f[5]);
+					$data[$i]['lat_koord']=str_replace(',', '.',$f[6]);
 					$data[$i]['type_power']=$f[7];
-					$data[$i]['luas_tanah']=$f[8];
+					$data[$i]['luas_tanah']=str_replace(',', '.',$f[8]);
 					$data[$i]['imb_no']=$f[9];
 
 					if($f[10]!='')
@@ -142,8 +142,8 @@ class SiteController extends Controller
 					else
 						$data[$i]['tanggal']='0000-00-00';
 
-					$data[$i]['tinggi_menara_1']=$f[11];
-					$data[$i]['njop_m']=$f[12];
+					$data[$i]['tinggi_menara_1']=str_replace(',', '.',$f[11]);
+					$data[$i]['njop_m']=str_replace(',', '.',$f[12]);
 					$data[$i]['imb_tahun']=$f[13];
 					$data[$i]['keterangan']=$f[14];
 					$i++;
@@ -169,11 +169,31 @@ class SiteController extends Controller
 		$d=array();
 		foreach ($site as $k => $v) 
 		{
-			$ven=Vendor::find($v->vendor_id);
+			
 			$d[$k]=$v;
-			$d[$k]['vendor']=$ven->nama_vendor;
-			$d[$k]['koordinat']=$v->lat_koord.' , '.$v->long_koord;
+			$d[$k]['no']=$k+1;
+			$d[$k]['koordinat']=$v->lat_koord.' <br> '.$v->long_koord;
 			$d[$k]['button']='<button class="btn btn-xs btn-primary" type="button" onclick="edit(\''.$v->id.'\')"><i class="fa fa-edit"></i></button><button class="btn btn-xs btn-danger" type="button" onclick="hapus(\''.$v->id.'\')"><i class="fa fa-trash"></i></button>';
+			
+			if($v->vendor_id!=null)
+			{
+				$ven=Vendor::find($v->vendor_id);
+				if(count($ven)!=0)
+				{
+					$d[$k]['vendor']=$ven->nama_vendor;
+					$d[$k]['icon']=$ven->logo;
+				}
+				else
+				{
+					
+					$d[$k]['vendor']='-';
+					$d[$k]['icon']='/img/tower-icon.png';
+				}
+			}
+			else{
+				$d[$k]['vendor']='-';
+				$d[$k]['icon']='/img/tower-icon.png';
+			}
 		}
 		$d=$site->toJson();
 		$dt=$dt.$d.'}';
@@ -269,6 +289,16 @@ class SiteController extends Controller
 	      // print_r($d);
 	      $store = Site::insert($d);
 
+    }
+
+    public function Hapus($id)
+    {
+    	$site = Site::find($id);
+		$hapus=$site->delete();
+		if($hapus)
+			return "Data Site Berhasil Di Hapus";
+		else
+			return "Data Site Gagal Di Hapus"; 
     }
     //
 }

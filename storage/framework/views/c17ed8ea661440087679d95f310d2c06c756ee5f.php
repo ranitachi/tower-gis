@@ -95,7 +95,7 @@
 				var oTable1 = $('#datasite').dataTable({
 					"ajax": APP_URL+'/json_site/-1/1',
 					"columns": [
-	                    { "data": "id" },
+	                    { "data": "no" },
 	                    { "data": "site_id" },
 	                    { "data": "operator_name" },
 	                    { "data": "vendor" },
@@ -120,6 +120,34 @@
 
 			$('#form').load(APP_URL+'/site_form/-1');
 		}
+
+	function hapus(id)
+	{
+		bootbox.confirm({
+			message: "<h2>Yakin ingin Menghapus Data Site Ini ?</h2>",
+			buttons: {
+				confirm: {
+					label: "OK",
+					className: "btn-primary btn-sm",
+				},
+				cancel: {
+					label: "Cancel",
+					className: "btn-sm",
+				}
+			},
+			callback: function(result) {
+				var urll=APP_URL+'/site-hapus/'+id;
+				$.ajax({
+					url : urll,
+					success : function(a){
+						pesan(a);
+						datasite();
+						$('.nav-tabs a[href="#home4"]').tab('show');
+					}
+				})
+			}
+		});
+	}
 // });
 </script>
 <?php $__env->stopSection(); ?>

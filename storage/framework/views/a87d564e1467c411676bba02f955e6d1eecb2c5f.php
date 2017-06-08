@@ -1,4 +1,4 @@
-<div id="navbar" class="navbar navbar-default    navbar-collapse       h-navbar">
+<div id="navbar" class="navbar navbar-default">
       <script type="text/javascript">
         try{ace.settings.check('navbar' , 'fixed')}catch(e){}
       </script>
@@ -12,26 +12,12 @@
             </small>
           </a>
 
-          <button class="pull-right navbar-toggle navbar-toggle-img collapsed" type="button" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">
-            <span class="sr-only">Toggle user menu</span>
 
-            <img src="<?php echo e(asset('avatars/user.jpg')); ?>" alt="Jason's Photo" />
-          </button>
-
-          <button class="pull-right navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#sidebar">
-            <span class="sr-only">Toggle sidebar</span>
-
-            <span class="icon-bar"></span>
-
-            <span class="icon-bar"></span>
-
-            <span class="icon-bar"></span>
-          </button>
         </div>
 
        
 
-        <nav role="navigation" class="navbar-menu pull-left collapse navbar-collapse">
+        <!-- <nav role="navigation" class="navbar-menu pull-left collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li>
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -82,6 +68,6 @@
               <i class="ace-icon fa fa-search icon-only bigger-110"></i>
             </button>
           </form>
-        </nav>
+        </nav> -->
       </div><!-- /.navbar-container -->
     </div>

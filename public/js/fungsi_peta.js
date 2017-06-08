@@ -136,11 +136,25 @@
 			    map.setTilt(45);
 				var infoContent=new Array();
 				var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+				// var coordsDiv = document.getElementById('coords');
+				map.addListener('mousemove', function(event) {
+		          var text =
+		              'lat: ' + event.latLng.lat().toFixed(5) + ', ' +
+		              'lang: ' + event.latLng.lng().toFixed(5)+'';
+		             $('div#coords').html(text);
+		        });
+				// var shadowImage = new google.maps.MarkerImage(
+				//     'http://maps.gstatic.com/mapfiles/shadow50.png', null, null,
+				//     new google.maps.Point(10, 34)
+				// );
+
+
 				$.ajax({
 					url : APP_URL+'/json_site/-1/-1',
 					dataType : 'JSON',
 					success:function(a){
-
+						// alert(a[145].lat_koord+'-'+a[145].long_koord);
 				    	if(a.length!=0)
 				    	{
 							for( i = 0; i < a.length; i++ ) 
@@ -156,7 +170,10 @@
 						            map: map,
 						            title: a[i].operator_name,
 						            draggable : true,
-						            icon : APP_URL+'/img/pin-tower-small.png',
+						            animation: google.maps.Animation.DROP,
+						            // shadow:'http://maps.gstatic.com/mapfiles/shadow50.png'
+						            icon : APP_URL+a[i].icon,
+						            // icon : APP_URL+'/img/red_circle_thumb.png',
 						            // scale:0.7
 						        });
 						        
@@ -287,3 +304,9 @@
 					        google.maps.event.removeListener(boundsListener);
 					    });
 			}
+
+
+function pesan(ps)
+{
+	bootbox.alert('<h2>'+ps+'</h2>');
+}

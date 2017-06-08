@@ -2,12 +2,12 @@
 	<thead>
 		<tr>
 			<th class="center">No</th>
-			<th>Site ID</th>
+			<th  style="width:120px;">Site ID</th>
 			<th>Operator</th>
 			<th>Vendor</th>
 			<th>Alamat</th>
-			<th>Koordinat</th>
-			<th></th>
+			<th style="width:120px;">Koordinat</th>
+			<th style="width:100px;"></th>
 		</tr>
 	</thead>
 

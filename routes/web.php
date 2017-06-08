@@ -28,6 +28,7 @@ Route::get('site_form/{id}',['as'=>'admin','uses'=>'SiteController@Siteform']);
 Route::get('json_site/{id}/{datatable}',['uses'=>'SiteController@SiteJson']);
 Route::post('site/simpan/{id}', ['as'=>'admin','uses'=>'SiteController@Proccess']);
 Route::get('site-import',array('as'=>'admin','uses'=>'SiteController@Import'));
+Route::get('site-hapus/{id}',array('as'=>'admin','uses'=>'SiteController@Hapus'));
 Route::get('format-excel',array('as'=>'admin','uses'=>'SiteController@FileFormat'));
 Route::post('format-excel',['as'=>'admin','uses'=>'SiteController@UploadFile']);
 

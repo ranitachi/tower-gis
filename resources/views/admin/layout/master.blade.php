@@ -51,6 +51,7 @@
 		<script src="{{asset('js/ace.min.js')}}"></script>
 		<script src="{{asset('js/fungsi_peta.js')}}"></script>
 	  	<script src="{{asset('js/chosen.jquery.min.js')}}"></script>
+
 		@yield('jqueryscript')
 
 
@@ -130,9 +131,7 @@
 			})
 		</script>
 	</body>
-</html>
-
-		
+</html>	
 			<script type="text/javascript">
 				var APP_URL = {!! json_encode(url('/')) !!}
 				// alert(APP_URL);

@@ -67,21 +67,14 @@
               </div><!-- /.ace-settings-box -->
             </div>
 
-            <div class="page-header">
-              <h1>
-                Map
-                <small>
-                  <i class="ace-icon fa fa-angle-double-right"></i>
-                  
-                </small>
-              </h1>
-            </div><!-- /.page-header -->
+          
 
             <div class="row">
               <div class="col-xs-12">
                 <!-- PAGE CONTENT BEGINS -->
                 <div id="map_wrapper">
                   <div id="map_canvas" class="mapping"></div>
+                  <div id="coords" class=""></div>
               </div>
 
                 
@@ -100,6 +93,21 @@
   #vendor_chosen,#operator_chosen,#site_chosen
   {
     width:100% !important;
+  }
+  #coords 
+  {
+    background-color: black;
+    color: white;
+    float:left;
+    font-size: 10px;
+    font-family: verdana;
+    /*font-style: italic;*/
+    padding: 5px;
+    height:25px;
+    position:fixed;
+    margin-top:-25;
+    width: 200px;
+    text-align: left;
   }
 </style>
 <?php echo $__env->make('front.layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

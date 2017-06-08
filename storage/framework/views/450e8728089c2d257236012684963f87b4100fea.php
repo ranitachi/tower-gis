@@ -2,22 +2,13 @@
 <html>
   <?php echo $__env->make('front.include.head', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <body class="no-skin">
-		<div id="navbar" class="navbar navbar-default navbar-collapse">
-			<script type="text/javascript">
-				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-			</script>
-
+		<div id="navbar" class="navbar">
 			  <?php echo $__env->make('front.include.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-			  <?php echo $__env->make('front.include.sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 			  <?php echo $__env->yieldContent('content'); ?>
-			  
-			  <?php echo $__env->make('front.include.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-			</a>
 		</div><!-- /.main-container -->
+			<?php echo $__env->make('front.include.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 		<!-- basic scripts -->
 
@@ -156,11 +147,16 @@
 </html>
 <style type="text/css">
 	#map_wrapper {
-    	height: 570px;
+    	height: 700px;
 	}
 
 	#map_canvas {
 	    width: 100%;
 	    height: 100%;
+	}
+	
+	.navbar
+	{
+		/*min-height: 80px !important;*/
 	}
 </style>

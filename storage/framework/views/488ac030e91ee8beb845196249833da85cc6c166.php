@@ -51,6 +51,7 @@
 		<script src="<?php echo e(asset('js/ace.min.js')); ?>"></script>
 		<script src="<?php echo e(asset('js/fungsi_peta.js')); ?>"></script>
 	  	<script src="<?php echo e(asset('js/chosen.jquery.min.js')); ?>"></script>
+
 		<?php echo $__env->yieldContent('jqueryscript'); ?>
 
 
@@ -130,9 +131,7 @@
 			})
 		</script>
 	</body>
-</html>
-
-		
+</html>	
 			<script type="text/javascript">
 				var APP_URL = <?php echo json_encode(url('/')); ?>
 

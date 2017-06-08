@@ -2,22 +2,13 @@
 <html>
   @include('front.include.head')
 <body class="no-skin">
-		<div id="navbar" class="navbar navbar-default navbar-collapse">
-			<script type="text/javascript">
-				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-			</script>
-
+		<div id="navbar" class="navbar">
 			  @include('front.include.header')
-			  @include('front.include.sidebar')
 
 			  @yield('content')
-			  
-			  @include('front.include.footer')
 
-			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-			</a>
 		</div><!-- /.main-container -->
+			@include('front.include.footer')
 
 		<!-- basic scripts -->
 
@@ -155,11 +146,16 @@
 </html>
 <style type="text/css">
 	#map_wrapper {
-    	height: 570px;
+    	height: 700px;
 	}
 
 	#map_canvas {
 	    width: 100%;
 	    height: 100%;
+	}
+	
+	.navbar
+	{
+		/*min-height: 80px !important;*/
 	}
 </style>
