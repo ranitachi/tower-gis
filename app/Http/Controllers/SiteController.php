@@ -46,7 +46,7 @@ class SiteController extends Controller
 		$i=0;
 		$vendor=Vendor::all();
 		$vn=array();
-		foreach ($vendor as $k => $v) 
+		foreach ($vendor as $k => $v)
 		{
 			$vn[$v->id]=$v;
 		}
@@ -54,15 +54,15 @@ class SiteController extends Controller
 		$operator=Operator::where('status_tampil','1')->get();
 		$op=$opm=array();
 
-		foreach ($operator as $k => $vv) 
+		foreach ($operator as $k => $vv)
 		{
 			$op[$vv->id]=$vv;
-			$om=str_replace(' ', '_', $vv->nama_operator);
+			$om=strtolower(str_replace(' ', '_', $vv->nama_operator));
 			$opm[$om]=$vv;
 			// echo $om.'<br>';
 		}
 
-		foreach ($d as $k => $v) 
+		foreach ($d as $k => $v)
 		{
 			if($k!=0)
 			{
@@ -74,10 +74,10 @@ class SiteController extends Controller
 					{
 						$id_op=explode(',', $f[3]);
 						$op_id='';
-						foreach ($id_op as $ko => $vo) 
+						foreach ($id_op as $ko => $vo)
 						{
-							$iom=str_replace(' ', '_', trim($vo));
-							
+							$iom=strtolower(str_replace(' ', '_', trim($vo)));
+
 							if(isset($opm[$iom]))
 							{
 								$operator_id=$opm[$iom]->id;
@@ -94,7 +94,7 @@ class SiteController extends Controller
 									$i_op['alamat']='';
 									$getid=Operator::create($i_op);
 									$op_id.=$getid->id.',';
-									
+
 								}
 							}
 						}
@@ -104,7 +104,7 @@ class SiteController extends Controller
 					else
 					{
 						$iom=str_replace(' ', '_', $f[3]);
-						
+
 						if(isset($opm[$iom]))
 						{
 							$operator_id=$opm[$iom]->id;
@@ -150,7 +150,7 @@ class SiteController extends Controller
 				}
 			}
 		}
-		
+
 		// echo '<pre>';
 		// print_r($data);
 		// echo '</pre>';
@@ -167,14 +167,14 @@ class SiteController extends Controller
 
 		$dt='{"data":';
 		$d=array();
-		foreach ($site as $k => $v) 
+		foreach ($site as $k => $v)
 		{
-			
+
 			$d[$k]=$v;
 			$d[$k]['no']=$k+1;
 			$d[$k]['koordinat']=$v->lat_koord.' <br> '.$v->long_koord;
 			$d[$k]['button']='<button class="btn btn-xs btn-primary" type="button" onclick="edit(\''.$v->id.'\')"><i class="fa fa-edit"></i></button><button class="btn btn-xs btn-danger" type="button" onclick="hapus(\''.$v->id.'\')"><i class="fa fa-trash"></i></button>';
-			
+
 			if($v->vendor_id!=null)
 			{
 				$ven=Vendor::find($v->vendor_id);
@@ -182,17 +182,20 @@ class SiteController extends Controller
 				{
 					$d[$k]['vendor']=$ven->nama_vendor;
 					$d[$k]['icon']=$ven->logo;
+					$d[$k]['initial']=$ven->initial;
 				}
 				else
 				{
-					
+
 					$d[$k]['vendor']='-';
 					$d[$k]['icon']='/img/tower-icon.png';
+					$d[$k]['initial']='';
 				}
 			}
 			else{
 				$d[$k]['vendor']='-';
 				$d[$k]['icon']='/img/tower-icon.png';
+				$d[$k]['initial']='';
 			}
 		}
 		$d=$site->toJson();
@@ -219,11 +222,11 @@ class SiteController extends Controller
 		$site=Site::where('vendor_id', '=', $vendor_id)->get();
 
 		$op=array();
-		foreach ($site as $k => $v) 
+		foreach ($site as $k => $v)
 		{
 			$o=explode(',', $v->operator_id);
 			$on=explode(',', $v->operator_name);
-			foreach ($o as $ko => $vo) 
+			foreach ($o as $ko => $vo)
 			{
 				$op[$o[$ko]]=$on[$ko];
 			}
@@ -235,7 +238,7 @@ class SiteController extends Controller
 		{
 			$cmb= '<select name="operator" id="operator">
                              <option value="">-Pilih Operator-</option>';
-                foreach ($op as $ke => $va) 
+                foreach ($op as $ke => $va)
                 {
                 	$cmb.= '<option value="'.$ke.'__'.$va.'">'.$va.'</option>';
                 }
@@ -251,7 +254,7 @@ class SiteController extends Controller
 
 	public function Sitedata()
 	{
-		return view('site.data'); 
+		return view('site.data');
 	}
 	public function Siteform($id=-1)
 	{
@@ -265,10 +268,10 @@ class SiteController extends Controller
 		// echo '<pre>';
 		// print_r($d);
 		// echo '</pre>';
-		return view('site.form',$data); 
+		return view('site.form',$data);
 	}
 
-	public function Proccess() 
+	public function Proccess()
 	{
 
 	      $data = Input::all();
@@ -282,7 +285,7 @@ class SiteController extends Controller
 	      }
 	      $o_id=substr($o_id, 0,-1);
 	      $d['operator_id']=$o_id;
-	      
+
 	      $o_name=substr($o_name, 0,-1);
 	      $d['operator_name']=$o_name;
 	      unset($d['operator']);
@@ -298,7 +301,7 @@ class SiteController extends Controller
 		if($hapus)
 			return "Data Site Berhasil Di Hapus";
 		else
-			return "Data Site Gagal Di Hapus"; 
+			return "Data Site Gagal Di Hapus";
     }
     //
 }

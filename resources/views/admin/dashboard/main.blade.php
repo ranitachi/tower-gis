@@ -33,7 +33,7 @@
                   <div id="map_canvas" class="mapping"></div>
               </div>
 
-                
+
                 <!-- PAGE CONTENT ENDS -->
               </div><!-- /.col -->
             </div>
@@ -53,11 +53,11 @@
   }
 </style>
 <script type="text/javascript">
-      jQuery(function($) {
-          // Asynchronously Load the map API 
-          var script = document.createElement('script');
-          script.src = "//maps.googleapis.com/maps/api/js?key=AIzaSyAYzgG72G3M3HVGRdzkvtvO5c4N7lmIuiY&callback=allsite";
-          document.body.appendChild(script);
-      });
+      // jQuery(function($) {
+      //     // Asynchronously Load the map API
+      //     var script = document.createElement('script');
+      //     script.src = "//maps.googleapis.com/maps/api/js?key=AIzaSyAYzgG72G3M3HVGRdzkvtvO5c4N7lmIuiY&callback=allsite";
+      //     document.body.appendChild(script);
+      // });
 
       </script>

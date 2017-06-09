@@ -1,8 +1,8 @@
 			function peta_awal(){
 			    // definisikan koordinat awal untuk peta
-			        var awal = new google.maps.LatLng(-6.8639254,107.2597868); 
+			        var awal = new google.maps.LatLng(-6.8639254,107.2597868);
 			       // peta option, berupa setting bagaimana peta itu akan muncul
-			       var petaoption = {zoom: 8,center: awal,mapTypeId: google.maps.MapTypeId.ROADMAP}; 
+			       var petaoption = {zoom: 8,center: awal,mapTypeId: google.maps.MapTypeId.ROADMAP};
 			      // menuliskan koordinat peta dan memunculkannya ke halaman web
 			      peta = new google.maps.Map(document.getElementById("map_canvas"),petaoption);
 
@@ -17,17 +17,17 @@
 			    var mapOptions = {
 			        mapTypeId: 'roadmap'
 			    };
-			                    
+
 			    // Display a map on the page
 			    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 			    map.setTilt(45);
-			        
+
 			    // Multiple Markers
 			    var markers = [
 			        ['HCPT,Smartfren ', -6.0487,106.5600],
 			        ['Smartfren', -6.2164,106.4190]
 			    ];
-			                        
+
 			    // Info Window Content
 			    var infoWindowContent = [
 			        ['<div class="info_content">' +
@@ -37,11 +37,11 @@
 			        '<h3>Smartfren</h3>' +
 			        '<p>Gembong Masjid Rt.02/01 Kec.Balaraja</p></div>']
 			    ];
-			        
+
 			    // Display multiple markers on a map
 			    var infoWindow = new google.maps.InfoWindow(), marker, i;
-			    
-			    // Loop through our array of markers & place each one on the map  
+
+			    // Loop through our array of markers & place each one on the map
 			    for( i = 0; i < markers.length; i++ ) {
 			        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
 			        bounds.extend(position);
@@ -51,8 +51,8 @@
 			            title: markers[i][0],
 			            draggable : true
 			        });
-			        
-			        // Allow each marker to have an info window    
+
+			        // Allow each marker to have an info window
 			        google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			            return function() {
 			                infoWindow.setContent(infoWindowContent[i][0]);
@@ -73,7 +73,7 @@
 			        this.setZoom(11);
 			        google.maps.event.removeListener(boundsListener);
 			    });
-			    
+
 			}
 
 			function setpeta(param)
@@ -92,9 +92,9 @@
 					center: lokasibaru,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
 				};
-				
+
 				peta = new google.maps.Map(document.getElementById("map_canvas"),petaoption);
-				 
+
 				 // ngasih fungsi marker buat generate koordinat latitude & longitude
 				tanda = new google.maps.Marker({
 					position: lokasibaru,
@@ -118,7 +118,7 @@
 				        })(tanda));
 					}
 				});
-				
+
 				// ketika markernya didrag, koordinatnya langsung di selipin di textfield
 				google.maps.event.addListener(tanda, 'dragend', function(event){
 						// document.getElementById('latitude').value = this.getPosition().lat();
@@ -157,9 +157,9 @@
 						// alert(a[145].lat_koord+'-'+a[145].long_koord);
 				    	if(a.length!=0)
 				    	{
-							for( i = 0; i < a.length; i++ ) 
+							for( i = 0; i < a.length; i++ )
 					    	{
-						    	infoContent[i]='<div class="info_content">' +
+						    	infoContent[i]='<div class="info_content"><img src="'+APP_URL+'/images/gallery/image-2.jpg" style="float:left;width:100px;margin:0 15px 5px 0">' +
 				        							'<h4>'+a[i].site_id+'</h4>' +
 				        							'<p>Operator : '+a[i].operator_name+'<br>'+a[i].alamat+'</p></div>';
 
@@ -171,13 +171,18 @@
 						            title: a[i].operator_name,
 						            draggable : true,
 						            animation: google.maps.Animation.DROP,
-						            // shadow:'http://maps.gstatic.com/mapfiles/shadow50.png'
+												label: {
+									        text: a[i].initial,
+													fontSize: "9px",
+									        color: 'white'
+									      },
+												// shadow:'http://maps.gstatic.com/mapfiles/shadow50.png'
 						            icon : APP_URL+a[i].icon,
 						            // icon : APP_URL+'/img/red_circle_thumb.png',
 						            // scale:0.7
 						        });
-						        
-						        // Allow each marker to have an info window    
+
+						        // Allow each marker to have an info window
 						        google.maps.event.addListener(marker, 'click', (function(marker, i) {
 						            return function() {
 						                infoWindow.setContent(infoContent[i]);
@@ -198,8 +203,8 @@
 						        this.setZoom(11);
 						        google.maps.event.removeListener(boundsListener);
 						    });
-							
-							
+
+
 				    	}
 				    	else
 				    	{
@@ -226,11 +231,11 @@
 			    var mapOptions = {
 			        mapTypeId: 'roadmap'
 			    };
-			                    
+
 			    // Display a map on the page
 			    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 			    map.setTilt(45);
-				
+
 				var infoWindow = new google.maps.InfoWindow(), marker, i;
 
 				$.ajax({
@@ -240,7 +245,7 @@
 
 				    	if(a.length!=0)
 				    	{
-							for( i = 0; i < a.length; i++ ) 
+							for( i = 0; i < a.length; i++ )
 					    	{
 						    	var infoContent='<div class="info_content">' +
 				        							'<h4>'+a[i].site_id+'</h4>' +
@@ -254,8 +259,8 @@
 						            title: a[i].operator_name,
 						            draggable : true
 						        });
-						        
-						        // Allow each marker to have an info window    
+
+						        // Allow each marker to have an info window
 						        google.maps.event.addListener(marker, 'click', (function(marker, i) {
 						            return function() {
 						                infoWindow.setContent(infoContent);
@@ -276,7 +281,7 @@
 						        this.setZoom(11);
 						        google.maps.event.removeListener(boundsListener);
 						    });
-							
+
 							$('div#opr').load(APP_URL+'/vendor_site_operator/'+id+'/combo',function(){
 								$('#operator').chosen();
 							});

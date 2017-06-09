@@ -6,26 +6,27 @@
 							Application &copy; 2013-2014
 						</span>
 
-						
+
 					</div>
 				</div>
 			</div>
 			 -->
 
 <div id="footer">
-	<h2>Ini Footer</h2>
+	Ini Footer
 </div>
 
 <style type="text/css">
 	div#footer
 	{
 		position: fixed;
-		bottom:0px;
+		bottom:19px;
 		width: 100%;
 		float:left;
 		text-align: center;
 		background-color: #000;
-		height: 60px;
+		height: 42px;
 		color:white;
+		/*margin-bottom: -30px !important;*/
 	}
 </style>

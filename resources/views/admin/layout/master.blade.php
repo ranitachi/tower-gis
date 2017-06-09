@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
   @include('admin.include.head')
-  
+
 <body class="no-skin">
 		<div id="navbar" class="navbar navbar-default">
 			<script type="text/javascript">
 				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
 			</script>
-
-
 			  @include('admin.include.header')
 		</div>
 		<div class="main-container" id="main-container">
@@ -28,7 +26,7 @@
 
 		<!--[if !IE]> -->
 		<meta name="_token" content="{!! csrf_token() !!}" />
-		<script src="{{asset('js/jquery.2.1.1.min.js')}}"></script>	
+		<script src="{{asset('js/jquery.2.1.1.min.js')}}"></script>
 	  	<script src="{{asset('js/bootstrap.min.js')}}"></script>
 		<script src="{{asset('js/jquery-ui.custom.min.js')}}"></script>
 		<script src="{{asset('js/jquery.ui.touch-punch.min.js')}}"></script>
@@ -59,34 +57,34 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			jQuery(function($) {
-				
-				
+
+
 				/////////////////////////////////////
 				$(document).one('ajaxloadstart.page', function(e) {
 					$tooltip.remove();
 				});
-			
-				
+
+
 				$('#recent-box [data-rel="tooltip"]').tooltip({placement: tooltip_placement});
 				function tooltip_placement(context, source) {
 					var $source = $(source);
 					var $parent = $source.closest('.tab-content')
 					var off1 = $parent.offset();
 					var w1 = $parent.width();
-			
+
 					var off2 = $source.offset();
 					//var w2 = $source.width();
-			
+
 					if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
 					return 'left';
 				}
-			
-			
+
+
 				$('.dialogs,.comments').ace_scroll({
 					size: 300
 			    });
-				
-				
+
+
 				//Android's default browser somehow is confused when tapping on label which will lead to dragging the task
 				//so disable dragging when clicking on label
 				var agent = navigator.userAgent.toLowerCase();
@@ -97,7 +95,7 @@
 					var label = li.find('label.inline').get(0);
 					if(label == e.target || $.contains(label, e.target)) e.stopImmediatePropagation() ;
 				});
-			
+
 				$('#tasks').sortable({
 					opacity:0.8,
 					revert:true,
@@ -116,22 +114,22 @@
 					if(this.checked) $(this).closest('li').addClass('selected');
 					else $(this).closest('li').removeClass('selected');
 				});
-			
-			
+
+
 				//show the dropdowns on top or bottom depending on window height and menu position
 				$('#task-tab .dropdown-hover').on('mouseenter', function(e) {
 					var offset = $(this).offset();
-			
+
 					var $w = $(window)
-					if (offset.top > $w.scrollTop() + $w.innerHeight() - 100) 
+					if (offset.top > $w.scrollTop() + $w.innerHeight() - 100)
 						$(this).addClass('dropup');
 					else $(this).removeClass('dropup');
 				});
-			
+
 			})
 		</script>
 	</body>
-</html>	
+</html>
 			<script type="text/javascript">
 				var APP_URL = {!! json_encode(url('/')) !!}
 				// alert(APP_URL);
