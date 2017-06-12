@@ -140,7 +140,23 @@
 			</script>
 			<script type="text/javascript">
 				var APP_URL = {!! json_encode(url('/')) !!}
-				// alert(APP_URL);
+        var markers = new Array();
+        var tanda = new Array();
+        var map;
+        $.ajax({
+					url : APP_URL+'/json_site/-1/-1',
+					dataType : 'JSON',
+					success:function(a){
+						// alert(a[145].lat_koord+'-'+a[145].long_koord);
+				    	if(a.length!=0)
+				    	{
+                for (var i=0;i<a.length;i++)
+                {
+                    markers[a[i].vendor_id]=new Array();
+                }
+              }
+            }
+          });
 			</script>
 	</body>
 </html>
@@ -161,4 +177,5 @@
 	{
 		/*min-height: 80px !important;*/
 	}
+
 </style>

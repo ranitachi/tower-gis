@@ -13,20 +13,22 @@
 			 -->
 
 <div id="footer">
-	Ini Footer
+	Copyright &copy; {{date('Y')}}  - <a href="{{URL::to('Login')}}">Login</a>
 </div>
 
 <style type="text/css">
 	div#footer
 	{
 		position: fixed;
-		bottom:19px;
+		bottom:0px;
 		width: 100%;
 		float:left;
-		text-align: center;
+		text-align: right;
 		background-color: #000;
-		height: 42px;
+		height: 55px;
 		color:white;
+		padding:15px 10px 0 0;
+		font-size: 15px;
 		/*margin-bottom: -30px !important;*/
 	}
 </style>

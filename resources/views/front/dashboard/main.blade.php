@@ -44,7 +44,7 @@
                     </div>
                   </div>
 
-                 
+
                   <div class="ace-settings-item">
                     <!-- <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" /> -->
                      <div class="row">
@@ -64,21 +64,23 @@
 
                 </div><!-- /.pull-left -->
 
-               
+
               </div><!-- /.ace-settings-box -->
             </div>
 
-          
+
 
             <div class="row">
               <div class="col-xs-12">
                 <!-- PAGE CONTENT BEGINS -->
                 <div id="map_wrapper">
+
                   <div id="map_canvas" class="mapping"></div>
+                  <div id="legend" class=""></div>
                   <div id="coords" class=""></div>
               </div>
 
-                
+
                 <!-- PAGE CONTENT ENDS -->
               </div><!-- /.col -->
             </div><!-- /.row -->
@@ -95,7 +97,7 @@
   {
     width:100% !important;
   }
-  #coords 
+  #coords
   {
     background-color: black;
     color: white;
@@ -106,7 +108,24 @@
     padding: 5px;
     height:25px;
     position:fixed;
-    margin-top:-25;
+    bottom:55;
+    width: 200px;
+    text-align: left;
+  }
+  #legend
+  {
+    background-color: black;
+    opacity:0.8;
+    color: white;
+    float:left;
+    font-size: 10px;
+    font-family: verdana;
+    /*font-style: italic;*/
+    padding: 5px;
+    height:180px;
+    position:fixed;
+    /*margin-top:-25;*/
+    bottom:80px;
     width: 200px;
     text-align: left;
   }

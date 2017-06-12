@@ -69,6 +69,7 @@ class SiteController extends Controller
 				if($v!='')
 				{
 					$f=explode(';', $v);
+					// echo count($f).'<br>';
 					$opr=explode(',', $f[3]);
 					if(count($opr)>1)
 					{
@@ -96,6 +97,10 @@ class SiteController extends Controller
 									$op_id.=$getid->id.',';
 
 								}
+								else {
+									# code...
+									$op_id.=$cek->id.',';
+								}
 							}
 						}
 						$op_id=substr($op_id, 0,-1);
@@ -118,7 +123,15 @@ class SiteController extends Controller
 								$i_op['nama_operator']=$f[3];
 								$i_op['status_tampil']='1';
 								$i_op['alamat']='';
-								Operator::insert($i_op);
+								$getid=Operator::insert($i_op);
+								$data[$i]['operator_id']=$getid->id;
+							}
+							else {
+								# code...
+								foreach ($cek as $kc => $vc) {
+									# code...
+									$data[$i]['operator_id']=$vc->id;
+								}
 							}
 						}
 					}
@@ -208,7 +221,9 @@ class SiteController extends Controller
 	}
 	public function SiteByVendor($vendor_id,$jenis)
 	{
-		$site=Site::where('vendor_id', '=', $vendor_id)->get();
+		$site=Site::join('vendor','site.vendor_id','vendor.id')
+								->where('vendor_id', '=', $vendor_id)->get();
+
 		if($jenis=='json')
 			return response()->json($site);
 		else
