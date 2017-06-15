@@ -2,8 +2,8 @@
         <div class="navbar-header pull-left">
           <a href="{{URL::to('admin')}}" class="navbar-brand">
             <small>
-              {{-- <i class="fa fa-leaf"></i> --}}
-              SITE NAME
+              <i class="fa fa-cogs"></i>&nbsp;
+              <span style="font-size:18px;">SIM Menara</span>
             </small>
           </a>
         </div>
