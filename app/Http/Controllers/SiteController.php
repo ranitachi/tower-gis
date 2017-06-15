@@ -186,7 +186,7 @@ class SiteController extends Controller
 			$d[$k]=$v;
 			$d[$k]['no']=$k+1;
 			$d[$k]['koordinat']=$v->lat_koord.' <br> '.$v->long_koord;
-			$d[$k]['showmap']='<button class="btn btn-xs btn-primary" type="button" onclick="showmap(\''.$v->lat_koord.'\',\''.$v->long_koord.'\')"><i class="glyphicon glyphicon-map-marker"></i></button><button class="btn btn-xs btn-danger" type="button" onclick="showstreet(\''.$v->lat_koord.'\',\''.$v->long_koord.'\')"><i class="glyphicon glyphicon-road"></i></button>';
+			$d[$k]['showmap']='<button class="btn btn-xs btn-primary" type="button" onclick="showmap('.$v->lat_koord.','.$v->long_koord.')"><i class="glyphicon glyphicon-map-marker"></i></button><button class="btn btn-xs btn-danger" type="button" onclick="showstreet('.$v->lat_koord.','.$v->long_koord.')"><i class="glyphicon glyphicon-road"></i></button>';
 			$d[$k]['button']='<button class="btn btn-xs btn-primary" type="button" onclick="edit(\''.$v->id.'\')"><i class="fa fa-edit"></i></button><button class="btn btn-xs btn-danger" type="button" onclick="hapus(\''.$v->id.'\')"><i class="fa fa-trash"></i></button>';
 
 			if($v->vendor_id!=null)
@@ -242,21 +242,53 @@ class SiteController extends Controller
 		{
 			$o=explode(',', $v->operator_id);
 			$on=explode(',', $v->operator_name);
+			// echo $v->operator_id.'<br>';
 			foreach ($o as $ko => $vo)
 			{
 				$op[$o[$ko]]=$on[$ko];
 			}
+		}
+		// echo '<pre>';
+		// print_r($site->operator_id);
+		// echo '</pre>';
+		if($jenis=='json')
+			return response()->json($op);
+		else if($jenis=='combo')
+		{
+			$cmb= '<select name="operator" id="operator" onchange="setsite(this.value)">
+                             <option value="">-Pilih Operator-</option>';
+                foreach ($op as $ke => $va)
+                {
+                	$cmb.= '<option value="'.$ke.'__'.$va.'">'.$va.'</option>';
+                }
+            $cmb.='</select>';
+            return $cmb;
+		}
+		else
+		{
+			return $op;
+		}
+
+	}
+	public function SiteByOperator($vendor_id,$jenis)
+	{
+		$site=Site::where('vendor_id', '=', $vendor_id)->get();
+
+		$op=array();
+		foreach ($site as $k => $v)
+		{
+				$op[$v->id]=$v;
 		}
 
 		if($jenis=='json')
 			return response()->json($op);
 		else if($jenis=='combo')
 		{
-			$cmb= '<select name="operator" id="operator">
-                             <option value="">-Pilih Operator-</option>';
+			$cmb= '<select  name="site" id="site" onchange="setpeta(this.value)">
+                             <option value="">-Pilih Site-</option>';
                 foreach ($op as $ke => $va)
                 {
-                	$cmb.= '<option value="'.$ke.'__'.$va.'">'.$va.'</option>';
+                	$cmb.= '<option value="'.$ke.'__'.$va->site_id.'__'.$va->operator_name.'__'.$va->lat_koord.'__'.$v->long_koord.'">'.$va->site_id.'-'.$va->operator_name.'</option>';
                 }
             $cmb.='</select>';
             return $cmb;

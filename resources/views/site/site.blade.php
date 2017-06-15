@@ -167,7 +167,7 @@
       $('#modal-info').modal('show');
     }
   }
-  function showstreet(terminal,lat,lng)
+  function showstreet(lat,lng)
   {
     if(lat=='')
     {

@@ -47,7 +47,7 @@
               pov: {
                 heading: 165,
                 pitch: 0,
-                zoom:2
+                zoom:1
               }
             });
     }

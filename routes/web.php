@@ -41,6 +41,7 @@ Route::get('showmap/{lat}/{long}',['uses'=>'SiteController@Showmap']);
 
 Route::get('vendor_site/{id}/{jenis}',['uses'=>'SiteController@SiteByVendor']);
 Route::get('vendor_site_operator/{id}/{jenis}',['uses'=>'SiteController@SiteByVendorOperator']);
+Route::get('vendor_by_operator/{vendor_id}/{jenis}',['uses'=>'SiteController@SiteByOperator']);
 
 Route::get('json_vendor/{id}/{datatable}',['uses'=>'VendorController@VendorJson']);
 Route::get('vendor_data',array('as'=>'admin','uses'=>'VendorController@Vendordata'));

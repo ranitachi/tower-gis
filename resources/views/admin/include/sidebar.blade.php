@@ -71,6 +71,14 @@
 							</span>
 						</a>
 					</li>
+					<li class="{{Request::path() =='kepaladinas'?'active':''}}">
+						<a href="{{URL::to('kepaladinas')}}" >
+							<i class="menu-icon fa fa-book"></i>
+							<span class="menu-text">
+								Data Kepala Dinas
+							</span>
+						</a>
+					</li>
 
 				</ul><!-- /.nav-list -->
 
