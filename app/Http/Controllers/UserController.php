@@ -20,4 +20,10 @@ class UserController extends Controller
         return redirect()->route('login.index')->with('message', 'Periksa kembali username dan password anda.');
       }
     }
+
+    public function logout()
+    {
+      Auth::logout();
+      return redirect()->route('login.index');
+    }
 }

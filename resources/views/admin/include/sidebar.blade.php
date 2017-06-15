@@ -48,7 +48,8 @@
 						</a>
 					</li>
 					<li class="{{Request::path() =='user'?'active':''}}">
-						<a href="{{URL::to('user')}}" >
+						{{-- <a href="{{URL::to('user')}}" > --}}
+						<a href="#" >
 							<i class="menu-icon fa fa-users"></i>
 							<span class="menu-text">
 								Manage User
@@ -64,7 +65,8 @@
 						</a>
 					</li>
 					<li class="{{Request::path() =='skrd'?'active':''}}">
-						<a href="{{URL::to('skrd')}}" >
+						{{-- <a href="{{URL::to('skrd')}}" > --}}
+						<a href="#" >
 							<i class="menu-icon fa fa-book"></i>
 							<span class="menu-text">
 								Manage SKRD
@@ -72,7 +74,8 @@
 						</a>
 					</li>
 					<li class="{{Request::path() =='kepaladinas'?'active':''}}">
-						<a href="{{URL::to('kepaladinas')}}" >
+						{{-- <a href="{{URL::to('kepaladinas')}}" > --}}
+						<a href="#" >
 							<i class="menu-icon fa fa-book"></i>
 							<span class="menu-text">
 								Data Kepala Dinas
