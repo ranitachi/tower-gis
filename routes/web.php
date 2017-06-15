@@ -50,5 +50,6 @@ Route::post('vendor/simpan/{id}', ['as'=>'admin','uses'=>'VendorController@Procc
 
 Route::get('login', 'UserController@index')->name('login.index');
 Route::post('login/authenticate', 'UserController@authenticate')->name('login.auth');
+Route::get('logout', 'UserController@logout')->name('logout');
 
 Route::get('user', 'UserController@manageuser')->name('user.manage');

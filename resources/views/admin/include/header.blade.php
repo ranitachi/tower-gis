@@ -25,21 +25,14 @@
                 <li>
                   <a href="#">
                     <i class="ace-icon fa fa-cog"></i>
-                    Settings
-                  </a>
-                </li>
-
-                <li>
-                  <a href="profile.html">
-                    <i class="ace-icon fa fa-user"></i>
-                    Profile
+                    Change Password
                   </a>
                 </li>
 
                 <li class="divider"></li>
 
                 <li>
-                  <a href="#">
+                  <a href="{{route('logout')}}">
                     <i class="ace-icon fa fa-power-off"></i>
                     Logout
                   </a>
