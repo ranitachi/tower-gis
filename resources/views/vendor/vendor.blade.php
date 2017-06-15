@@ -102,7 +102,40 @@
 			$('#form').load(APP_URL+'/vendor_form/'+id);
 			$('.nav-tabs a[href="#form"]').tab('show');
 		}
+    function hapus(id)
+    {
+      bootbox.confirm({
+         message: "<h2>Yakin ingin Menghapus Data Vendor Ini ?</h2>",
+         buttons: {
+           confirm: {
+            label: "OK",
+            className: "btn-primary btn-sm",
+           },
+           cancel: {
+            label: "Cancel",
+            className: "btn-sm",
+           }
+         },
+         callback: function(result) {
+           if(result)
+           {
 
+             $.ajax({
+               url : APP_URL+'/vendor_hapus/'+id,
+               success : function(a){
+                 bootbox.alert({
+                   message : '<h3>'+a+'</h3>',
+                   callback:function(){
+                     datavendor();
+                     $('.nav-tabs a[href="#home4"]').tab('show');
+                   }
+                 })
+             }
+           })
+         }
+       }
+      });
+    }
   function BrowseServer( startupPath, functionData )
 	{
 		var finder = new CKFinder();

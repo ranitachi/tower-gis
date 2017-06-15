@@ -139,15 +139,19 @@
 				}
 			},
 			callback: function(result) {
-				var urll=APP_URL+'/site-hapus/'+id;
-				$.ajax({
-					url : urll,
-					success : function(a){
-						pesan(a);
-						datasite();
-						$('.nav-tabs a[href="#home4"]').tab('show');
-					}
-				})
+        if(result)
+        {
+
+  				var urll=APP_URL+'/site-hapus/'+id;
+  				$.ajax({
+  					url : urll,
+  					success : function(a){
+  						pesan(a);
+  						datasite();
+  						$('.nav-tabs a[href="#home4"]').tab('show');
+  					}
+          })
+        }
 			}
 		});
 	}

@@ -108,6 +108,40 @@
       // alert(indeks+'--'+biaya);
       $('#distribusi_biaya').val(dist);
     }
+    function hapus(id)
+    {
+      bootbox.confirm({
+         message: "<h2>Yakin ingin Menghapus Data Biaya Retribusi Ini ?</h2>",
+         buttons: {
+           confirm: {
+            label: "OK",
+            className: "btn-primary btn-sm",
+           },
+           cancel: {
+            label: "Cancel",
+            className: "btn-sm",
+           }
+         },
+         callback: function(result) {
+           if(result)
+           {
+
+             $.ajax({
+               url : APP_URL+'/biaya_hapus/'+id,
+               success : function(a){
+                 bootbox.alert({
+                   message : '<h3>'+a+'</h3>',
+                   callback:function(){
+                     datavendor();
+                     $('.nav-tabs a[href="#home4"]').tab('show');
+                   }
+                 })
+             }
+           })
+         }
+       }
+      });
+    }
 // });
 </script>
 @endsection

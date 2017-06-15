@@ -11,13 +11,13 @@ class VendorController extends Controller
 {
 	public function index()
 	{
-		$vendor=Vendor::orderBy('nama_vendor', 'asc')->get();
+		$vendor=Vendor::where('status_tampil','=','1')->orderBy('nama_vendor', 'asc')->get();
 		$data=array('vendor'=>$vendor,'title'=>'Vendor Page');
 		return view('vendor.vendor',$data);
 	}
 	public function Vendor()
 	{
-		$vendor=Vendor::orderBy('nama_vendor', 'asc')->get();
+		$vendor=Vendor::where('status_tampil','=','1')->orderBy('nama_vendor', 'asc')->get();
 		$data=array('vendor'=>$vendor,'title'=>'Vendor Page');
 		return view('vendor.vendor',$data);
 	}
@@ -26,7 +26,7 @@ class VendorController extends Controller
 	{
 
 		if($id==-1)
-			$vendor=Vendor::orderBy('nama_vendor', 'asc')->get();
+			$vendor=Vendor::where('status_tampil','=','1')->orderBy('nama_vendor', 'asc')->get();
 		else
 			$vendor=Vendor::find($id);
 
@@ -58,7 +58,7 @@ class VendorController extends Controller
 		if($id!=-1)
 			$d=Vendor::find($id);
 
-		$vendor=Vendor::all();
+		$vendor=Vendor::where('status_tampil','=','1')->get();
 		$data=array('vendor'=>$vendor,'id'=>$id,'d'=>$d);
 		return view('vendor.form',$data);
 	}
@@ -81,5 +81,16 @@ class VendorController extends Controller
 	      }
 	      echo $store;
     }
+
+		function Hapus($id)
+		{
+			$d=Vendor::find($id);
+			$d->status_tampil='0';
+			$c=$d->save();
+			if($c)
+				return 'Data Vendor Berhasil Di Hapus';
+			else
+				return 'Data Vendor Gagal Di Hapus';
+		}
     //
 }

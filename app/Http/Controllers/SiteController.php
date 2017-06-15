@@ -174,7 +174,7 @@ class SiteController extends Controller
 	public function SiteJson($id=-1,$datatable=-1)
 	{
 		if($id==-1)
-			$site=Site::all();
+			$site=Site::where('status_tampil','=','1')->get();
 		else
 			$site=Site::find($id);
 
@@ -223,7 +223,7 @@ class SiteController extends Controller
 	public function SiteByVendor($vendor_id,$jenis)
 	{
 		$site=Site::join('vendor','site.vendor_id','vendor.id')
-								->where('vendor_id', '=', $vendor_id)->get();
+								->where('vendor_id', '=', $vendor_id)->where('status_tampil','=','1')->get();
 
 		if($jenis=='json')
 			return response()->json($site);
@@ -235,7 +235,7 @@ class SiteController extends Controller
 	}
 	public function SiteByVendorOperator($vendor_id,$jenis)
 	{
-		$site=Site::where('vendor_id', '=', $vendor_id)->get();
+		$site=Site::where('vendor_id', '=', $vendor_id)->where('status_tampil','=','1')->get();
 
 		$op=array();
 		foreach ($site as $k => $v)
@@ -272,7 +272,7 @@ class SiteController extends Controller
 	}
 	public function SiteByOperator($vendor_id,$id,$jenis)
 	{
-		$site=Site::where('vendor_id', '=', $vendor_id)->get();
+		$site=Site::where('vendor_id', '=', $vendor_id)->where('status_tampil','=','1')->get();
 
 		$op=array();
 		foreach ($site as $k => $v)
@@ -359,11 +359,14 @@ class SiteController extends Controller
     public function Hapus($id)
     {
     	$site = Site::find($id);
-		$hapus=$site->delete();
-		if($hapus)
-			return "Data Site Berhasil Di Hapus";
-		else
-			return "Data Site Gagal Di Hapus";
+			$site->status_tampil='0';
+			$hapus=$site->save();
+			// $hapus=$site->delete();
+			if($hapus)
+				return "Data Site Berhasil Di Hapus";
+			else
+				return "Data Site Gagal Di Hapus";
     }
+
     //
 }

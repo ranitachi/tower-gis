@@ -5,11 +5,28 @@
 
 		<div class="col-xs-12 col-sm-9">
 			<div class="clearfix">
+
 				<select name="zona" id="zona" class="chosen-select form-control" data-placeholder="Zona">
           <option value=""></option>
-          <option value="Zona 1">Zona 1</option>
-          <option value="Zona 2">Zona 2</option>
-          <option value="Zona 3">Zona 3</option>
+					@if ($id!=-1)
+						@if ($d->zona=='Zona 1')
+							<option value="Zona 1" selected="selected">Zona 1</option>
+							<option value="Zona 2">Zona 2</option>
+							<option value="Zona 3">Zona 3</option>
+						@elseif ($d->zona=='Zona 2')
+							<option value="Zona 1">Zona 1</option>
+							<option value="Zona 2" selected="selected">Zona 2</option>
+							<option value="Zona 3">Zona 3</option>
+						@elseif ($d->zona=='Zona 3')
+							<option value="Zona 1">Zona 1</option>
+							<option value="Zona 2">Zona 2</option>
+							<option value="Zona 3" selected="selected">Zona 3</option>
+						@endif
+					@else
+						<option value="Zona 1">Zona 1</option>
+						<option value="Zona 2">Zona 2</option>
+						<option value="Zona 3">Zona 3</option>
+					@endif
         </select>
 			</div>
 		</div>

@@ -44,4 +44,14 @@ class BiayaController extends Controller
 	      }
 	      echo $store;
     }
+    function Hapus($id)
+    {
+      $d=Biaya::find($id);
+      $d->status_tampil='0';
+      $c=$d->save();
+      if($c)
+        return 'Data Biaya Retribusi Berhasil Di Hapus';
+      else
+        return 'Data Biaya Retribusi Gagal Di Hapus';
+    }
 }

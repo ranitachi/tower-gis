@@ -10,13 +10,13 @@ class OperatorController extends Controller
 {
    	public function index()
 	{
-		$operator=Operator::orderBy('nama_operator', 'asc')->get();
+		$operator=Operator::where('status_tampil','=','1')->orderBy('nama_operator', 'asc')->get();
 		$data=array('operator'=>$operator,'title'=>'Operator Page');
 		return view('operator.operator',$data);
 	}
 	public function Operator()
 	{
-		$operator=Operator::orderBy('nama_operator', 'asc')->get();
+		$operator=Operator::where('status_tampil','=','1')->orderBy('nama_operator', 'asc')->get();
 		// $operator=Operator::all();
 		$data=array('vendor'=>$operator,'title'=>'Operator Page');
 		return view('operator.operator',$data);
@@ -26,7 +26,7 @@ class OperatorController extends Controller
 	{
 
 		if($id==-1)
-			$operator=Operator::orderBy('nama_operator', 'asc')->get();
+			$operator=Operator::where('status_tampil','=','1')->orderBy('nama_operator', 'asc')->get();
 		else
 			$operator=Operator::find($id);
 
@@ -59,7 +59,7 @@ class OperatorController extends Controller
 		if($id!=-1)
 			$d=Operator::find($id);
 
-		$operator=Operator::all();
+		$operator=Operator::where('status_tampil','=','1')->get();
 		$data=array('operator'=>$operator,'id'=>$id,'d'=>$d);
 		return view('operator.form',$data);
 	}
@@ -86,7 +86,7 @@ class OperatorController extends Controller
 	public function DataOperator($id=-1,$jenis)
 	{
 		if($id==-1)
-			$operator=Operator::all();
+			$operator=Operator::where('status_tampil','=','1')->get();
 		else
 			$operator=Operator::find($id);
 
@@ -108,4 +108,14 @@ class OperatorController extends Controller
 			return $op;
 		}
 	}
+  function Hapus($id)
+  {
+    $d=Operator::find($id);
+    $d->status_tampil='0';
+    $c=$d->save();
+    if($c)
+      return 'Data Operator Berhasil Di Hapus';
+    else
+      return 'Data Operator Gagal Di Hapus';
+  }
 }
