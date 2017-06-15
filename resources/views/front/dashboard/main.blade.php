@@ -33,7 +33,7 @@
                       <label class="lbl col-xs-12" for="ace-settings-navbar">Operator</label>
                       <div class="col-sm-12">
                         <div class="" id="opr">
-                          <select name="operator" id="operator">
+                          <select name="operator" id="operator" onchange="setsite(this.value)">
                              <option value="">-Pilih Operator-</option>
                               @foreach($operator as $k => $v)
                                 <option value="{{$v->id}}__{{$v->nama_operator}}">{{$v->nama_operator}}</option>
@@ -50,7 +50,7 @@
                      <div class="row">
                       <label class="lbl col-xs-12" for="ace-settings-navbar">Site</label>
                       <div class="col-sm-12">
-                        <div class="">
+                        <div class="" id="tower">
                           <select name="site" id="site" onchange="setpeta(this.value)">
                              <option value="">-Pilih Site-</option>
                               @foreach($site as $k => $v)
