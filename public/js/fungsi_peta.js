@@ -10,7 +10,7 @@
 						peta = new google.maps.Map(document.getElementById("map_canvas"),petaoption);
 						peta.setTilt(45);
 						var infoContent=new Array();
-						var infoWindow = new google.maps.InfoWindow(), marker, i;
+						infoWindow = new google.maps.InfoWindow(), marker, i;
 						peta.addListener('mousemove', function(event) {
 									var text =
 											'lat: ' + event.latLng.lat().toFixed(5) + ', ' +
@@ -20,75 +20,6 @@
 			}
 			//-6.4443696
 			//106.0720427
-			function addmarker(vendor_id)
-			{
-
-			}
-			function initialize() {
-
-			    var map;
-			    var bounds = new google.maps.LatLngBounds();
-			    var mapOptions = {
-			        mapTypeId: 'roadmap'
-			    };
-
-			    // Display a map on the page
-			    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-			    map.setTilt(45);
-
-			    // Multiple Markers
-			    var markers = [
-			        ['HCPT,Smartfren ', -6.0487,106.5600],
-			        ['Smartfren', -6.2164,106.4190]
-			    ];
-
-			    // Info Window Content
-			    var infoWindowContent = [
-			        ['<div class="info_content">' +
-			        '<h3>HCPT,Smartfren</h3>' +
-			        '<p>Jl. Kp. Sukadiri Rt.02/01 Kec.Sukadiri</p></div>'],
-			        ['<div class="info_content">' +
-			        '<h3>Smartfren</h3>' +
-			        '<p>Gembong Masjid Rt.02/01 Kec.Balaraja</p></div>']
-			    ];
-
-			    // Display multiple markers on a map
-			    var infoWindow = new google.maps.InfoWindow(), marker, i;
-
-			    // Loop through our array of markers & place each one on the map
-			    for( i = 0; i < markers.length; i++ ) {
-			        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
-			        bounds.extend(position);
-			        marker = new google.maps.Marker({
-			            position: position,
-			            map: map,
-			            title: markers[i][0],
-			            draggable : true
-			        });
-
-			        // Allow each marker to have an info window
-			        google.maps.event.addListener(marker, 'click', (function(marker, i) {
-			            return function() {
-			                infoWindow.setContent(infoWindowContent[i][0]);
-			                infoWindow.open(map, marker);
-			            }
-			        })(marker, i));
-			        google.maps.event.addListener(marker, 'dragend', function(event){
-							// document.getElementById('latitude').value = this.getPosition().lat();
-							//document.getElementById('longitude').value = this.getPosition().lng();
-							alert(this.getPosition().lat());
-					});
-			        // Automatically center the map fitting all markers on the screen
-			        map.fitBounds(bounds);
-			    }
-
-			    // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
-			    var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-			        this.setZoom(11);
-			        google.maps.event.removeListener(boundsListener);
-			    });
-
-			}
 
 			function allsite()
 			{
@@ -98,7 +29,7 @@
 			    };
 			    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 			    map.setTilt(45);
-				var infoContent=new Array();
+
 				var infoWindow = new google.maps.InfoWindow(), marker, i;
 
 				// var coordsDiv = document.getElementById('coords');
@@ -120,6 +51,9 @@
 						    	infoContent[i]='<div class="info_content"><img src="'+APP_URL+'/images/gallery/image-2.jpg" style="float:left;width:100px;margin:0 15px 5px 0">' +
 				        							'<h4>'+a[i].site_id+'</h4>' +
 				        							'<p>Operator : '+a[i].operator_name+'<br>'+a[i].alamat+'</p></div>';
+								  infoContentByID[a[i].id]='<div class="info_content"><img src="'+APP_URL+'/images/gallery/image-2.jpg" style="float:left;width:100px;margin:0 15px 5px 0">' +
+										        							'<h4>'+a[i].site_id+'</h4>' +
+										        							'<p>Operator : '+a[i].operator_name+'<br>'+a[i].alamat+'</p></div>';
 
 						        var position = new google.maps.LatLng(a[i].lat_koord, a[i].long_koord);
 						        bounds.extend(position);
@@ -140,6 +74,7 @@
 						            // scale:0.7
 						        });
 										markers[a[i].vendor_id].push(marker);
+										dsite_id[a[i].id].push(marker);
 										tanda.push(marker);
 						        // Allow each marker to have an info window
 						        google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -225,6 +160,7 @@
 				var d=param.split('__');
 				var id=d[0];
 				var operator_name=d[1];
+
 				if(markers[vendor_id].length!=0)
 				{
 					if(id=='')
@@ -235,7 +171,10 @@
 							var marker = markers[vendor_id][i];
 							marker.setAnimation(google.maps.Animation.DROP);
 							marker.setMap(map);
+							map.setZoom(11);
 						}
+						infoWindow.close();
+						map.setCenter();
 						$('div#tower').load(APP_URL+'/vendor_by_operator/'+vendor_id+'/-1/combo',function(){
 							$('#site').chosen();
 						});
@@ -249,7 +188,10 @@
 							var marker = markers[vendor_id][i];
 							marker.setAnimation(google.maps.Animation.DROP);
 							marker.setMap(map);
+							map.setZoom(11);
 						}
+						// infoWindow.close();
+						map.setCenter();
 							$('div#tower').load(APP_URL+'/vendor_by_operator/'+vendor_id+'/'+id+'/combo',function(){
 								$('#site').chosen();
 							});
@@ -275,7 +217,27 @@
 				var operator_name=d[2];
 				var lat_koord=d[3];
 				var long_koord=d[4];
-				
+				showMarker();
+				infoWindow = new google.maps.InfoWindow({
+          content: infoContentByID[id]
+        });
+				if(dsite_id[id].length!=0)
+				{
+					if(id!='')
+					{
+						for (var i = 0; i < dsite_id[id].length; i++)
+						{
+							// alert(markers[vendor_id][i].id);
+							var marker = dsite_id[id][i];
+							marker.setAnimation(google.maps.Animation.DROP);
+							marker.setMap(map);
+							map.setZoom(18);
+							map.setCenter(marker.getPosition());
+							infoWindow.open(map,marker);
+						}
+					}
+
+				}
 			}
 function pesan(ps)
 {

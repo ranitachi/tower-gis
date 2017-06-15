@@ -142,6 +142,10 @@
 				var APP_URL = {!! json_encode(url('/')) !!}
         var markers = new Array();
         var tanda = new Array();
+        var dsite_id = new Array();
+        var infoContent=new Array();
+        var infoContentByID=new Array();
+        var infoWindow;
         var map;
         $.ajax({
 					url : APP_URL+'/json_site/-1/-1',
@@ -153,6 +157,7 @@
                 for (var i=0;i<a.length;i++)
                 {
                     markers[a[i].vendor_id]=new Array();
+                    dsite_id[a[i].id]=new Array();
                 }
               }
             }
