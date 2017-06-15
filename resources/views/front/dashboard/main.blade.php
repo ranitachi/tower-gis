@@ -51,7 +51,7 @@
                       <label class="lbl col-xs-12" for="ace-settings-navbar">Site</label>
                       <div class="col-sm-12">
                         <div class="" id="tower">
-                          <select name="site" id="site" onchange="setpeta(this.value)">
+                          <select name="site" id="site" onchange="setpeta(-1,this.value)">
                              <option value="">-Pilih Site-</option>
                               @foreach($site as $k => $v)
                                 <option value="{{$v->id}}__{{$v->site_id}}__{{$v->operator_name}}__{{$v->lat_koord}}__{{$v->long_koord}}">{{$v->site_id}}-{{$v->operator_name}}</option>

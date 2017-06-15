@@ -293,7 +293,7 @@ class SiteController extends Controller
 			return response()->json($op);
 		else if($jenis=='combo')
 		{
-			$cmb= '<select  name="site" id="site" onchange="setpeta(this.value)">
+			$cmb= '<select  name="site" id="site" onchange="setpeta('.$vendor_id.',this.value)">
                              <option value="">-Pilih Site-</option>';
                 foreach ($op as $ke => $va)
                 {
