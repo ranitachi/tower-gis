@@ -76,8 +76,8 @@
                 <div id="map_wrapper">
 
                   <div id="map_canvas" class="mapping"></div>
-                  <div id="legend" class=""></div>
-                  <div id="coords" class=""></div>
+                  {{-- <div id="legend" class=""></div> --}}
+                  {{-- <div id="coords" class=""></div> --}}
               </div>
 
 
