@@ -12,7 +12,7 @@
 */
 
 Route::get('/', array('as'=>'front','uses'=>'FrontController@index'));
-Route::get('admin', array('as'=>'admin','uses'=>'AdminController@index'));
+Route::get('admin', array('as'=>'admin','uses'=>'AdminController@index'))->name('admin.dashboard');
 Route::get('site',array('as'=>'admin','uses'=>'SiteController@index'));
 Route::get('vendor',array('as'=>'admin','uses'=>'VendorController@index'));
 Route::get('biaya',array('as'=>'admin','uses'=>'BiayaController@index'));
@@ -46,3 +46,8 @@ Route::get('json_vendor/{id}/{datatable}',['uses'=>'VendorController@VendorJson'
 Route::get('vendor_data',array('as'=>'admin','uses'=>'VendorController@Vendordata'));
 Route::get('vendor_form/{id}',['as'=>'admin','uses'=>'VendorController@Vendorform']);
 Route::post('vendor/simpan/{id}', ['as'=>'admin','uses'=>'VendorController@Proccess']);
+
+Route::get('login', 'UserController@index')->name('login.index');
+Route::post('login/authenticate', 'UserController@authenticate')->name('login.auth');
+
+Route::get('user', 'UserController@manageuser')->name('user.manage');
