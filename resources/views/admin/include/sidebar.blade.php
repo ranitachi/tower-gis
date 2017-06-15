@@ -63,6 +63,14 @@
 							</span>
 						</a>
 					</li>
+					<li class="{{Request::path() =='skrd'?'active':''}}">
+						<a href="{{URL::to('skrd')}}" >
+							<i class="menu-icon fa fa-book"></i>
+							<span class="menu-text">
+								Manage SKRD
+							</span>
+						</a>
+					</li>
 
 				</ul><!-- /.nav-list -->
 
