@@ -255,7 +255,7 @@ class SiteController extends Controller
 			return response()->json($op);
 		else if($jenis=='combo')
 		{
-			$cmb= '<select name="operator" id="operator" onchange="setsite(this.value)">
+			$cmb= '<select name="operator" id="operator" onchange="setsite('.$vendor_id.',this.value)">
                              <option value="">-Pilih Operator-</option>';
                 foreach ($op as $ke => $va)
                 {
@@ -270,13 +270,22 @@ class SiteController extends Controller
 		}
 
 	}
-	public function SiteByOperator($vendor_id,$jenis)
+	public function SiteByOperator($vendor_id,$id,$jenis)
 	{
 		$site=Site::where('vendor_id', '=', $vendor_id)->get();
 
 		$op=array();
 		foreach ($site as $k => $v)
 		{
+			$dop=explode(',',$v->operator_id);
+			if($id!=-1)
+			{
+				if(in_array($id,$dop))
+				{
+					$op[$v->id]=$v;
+				}
+			}
+			else
 				$op[$v->id]=$v;
 		}
 
