@@ -15,7 +15,7 @@
                 <img class="nav-user-photo" src="{{asset('avatars/user.jpg')}}" alt="Jason's Photo" />
                 <span class="user-info">
                   <small>Welcome,</small>
-                  Jason
+                  Administrator
                 </span>
 
                 <i class="ace-icon fa fa-caret-down"></i>
