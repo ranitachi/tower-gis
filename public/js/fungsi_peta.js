@@ -224,22 +224,36 @@
 			{
 				var d=param.split('__');
 				var id=d[0];
-				var site_id=d[1];
-				var operator_name=d[2];
-				var lat_koord=d[3];
-				var long_koord=d[4];
+				var operator_name=d[1];
 				if(markers[vendor_id].length!=0)
 				{
-					for (var i = 0; i < markers[vendor_id].length; i++)
+					if(id=='')
 					{
-						// alert(markers[vendor_id][i].id);
-						var marker = markers[vendor_id][i];
-						marker.setAnimation(google.maps.Animation.DROP);
-						marker.setMap(map);
-					}
-						$('div#tower').load(APP_URL+'/vendor_by_operator/'+vendor_id+'/'+id+'/combo',function(){
+						for (var i = 0; i < markers[vendor_id].length; i++)
+						{
+							// alert(markers[vendor_id][i].id);
+							var marker = markers[vendor_id][i];
+							marker.setAnimation(google.maps.Animation.DROP);
+							marker.setMap(map);
+						}
+						$('div#tower').load(APP_URL+'/vendor_by_operator/'+vendor_id+'/-1/combo',function(){
 							$('#site').chosen();
 						});
+					}
+					else
+					{
+
+						for (var i = 0; i < markers[vendor_id].length; i++)
+						{
+							// alert(markers[vendor_id][i].id);
+							var marker = markers[vendor_id][i];
+							marker.setAnimation(google.maps.Animation.DROP);
+							marker.setMap(map);
+						}
+							$('div#tower').load(APP_URL+'/vendor_by_operator/'+vendor_id+'/'+id+'/combo',function(){
+								$('#site').chosen();
+							});
+					}
 					}
 					else
 					{
@@ -253,7 +267,16 @@
 					}
 			}
 
-
+			function setpeta(vendor_id,param)
+			{
+				var d=param.split('__');
+				var id=d[0];
+				var site_id=d[1];
+				var operator_name=d[2];
+				var lat_koord=d[3];
+				var long_koord=d[4];
+				
+			}
 function pesan(ps)
 {
 	bootbox.alert('<h2>'+ps+'</h2>');
