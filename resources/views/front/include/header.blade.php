@@ -6,10 +6,11 @@
       <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
           <a href="{{URL::to('/')}}" class="navbar-brand">
-            <small>
+            <img src="{{asset('images/logocuy.png')}}" alt="">
+            {{-- <small>
               <i class="fa fa-cogs"></i>&nbsp;
               SIM Menara
-            </small>
+            </small> --}}
           </a>
         </div>
 
