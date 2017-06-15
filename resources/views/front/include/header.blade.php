@@ -1,4 +1,4 @@
-<div id="navbar" class="navbar navbar-default">
+<div id="navbar" class="navbar navbar-default" style="border-bottom: 5px solid #1e75a7;">
       <script type="text/javascript">
         try{ace.settings.check('navbar' , 'fixed')}catch(e){}
       </script>
@@ -6,13 +6,12 @@
       <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
           <a href="{{URL::to('/')}}" class="navbar-brand">
-            <small>
-              {{-- <i class="fa fa-leaf"></i> --}}
-              SITE NAME
-            </small>
+            <img src="{{asset('images/logocuy.png')}}" alt="">
+            {{-- <small>
+              <i class="fa fa-cogs"></i>&nbsp;
+              SIM Menara
+            </small> --}}
           </a>
-
-
         </div>
 
 

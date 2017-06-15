@@ -12,7 +12,7 @@
 */
 
 Route::get('/', array('as'=>'front','uses'=>'FrontController@index'));
-Route::get('admin', array('as'=>'admin','uses'=>'AdminController@index'))->name('admin.dashboard');
+Route::get('admin', array('as'=>'admin.dashboard','uses'=>'AdminController@index'));
 Route::get('site',array('as'=>'admin','uses'=>'SiteController@index'));
 Route::get('vendor',array('as'=>'admin','uses'=>'VendorController@index'));
 Route::get('biaya',array('as'=>'admin','uses'=>'BiayaController@index'));
