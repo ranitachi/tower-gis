@@ -204,7 +204,7 @@
 							$('div#opr').load(APP_URL+'/vendor_site_operator/'+id+'/combo',function(){
 								$('#operator').chosen();
 							});
-							$('div#tower').load(APP_URL+'/vendor_by_operator/'+id+'/combo',function(){
+							$('div#tower').load(APP_URL+'/vendor_by_operator/'+id+'/-1/combo',function(){
 								$('#site').chosen();
 							});
 					  }
@@ -214,13 +214,13 @@
 						  	$('div#opr').load(APP_URL+'/dataoperator/-1/combo',function(){
 									$('#operator').chosen();
 								});
-								$('div#tower').load(APP_URL+'/vendor_by_operator/-1/combo',function(){
+								$('div#tower').load(APP_URL+'/vendor_by_operator/-1/-1/combo',function(){
 									$('#site').chosen();
 								});
 					  }
 			}
 
-			function setsite(param)
+			function setsite(vendor_id,param)
 			{
 				var d=param.split('__');
 				var id=d[0];
@@ -228,6 +228,29 @@
 				var operator_name=d[2];
 				var lat_koord=d[3];
 				var long_koord=d[4];
+				if(markers[vendor_id].length!=0)
+				{
+					for (var i = 0; i < markers[vendor_id].length; i++)
+					{
+						// alert(markers[vendor_id][i].id);
+						var marker = markers[vendor_id][i];
+						marker.setAnimation(google.maps.Animation.DROP);
+						marker.setMap(map);
+					}
+						$('div#tower').load(APP_URL+'/vendor_by_operator/'+vendor_id+'/'+id+'/combo',function(){
+							$('#site').chosen();
+						});
+					}
+					else
+					{
+							peta_awal();
+							$('div#opr').load(APP_URL+'/dataoperator/-1/combo',function(){
+								$('#operator').chosen();
+							});
+							$('div#tower').load(APP_URL+'/vendor_by_operator/-1/-1/combo',function(){
+								$('#site').chosen();
+							});
+					}
 			}
 
 

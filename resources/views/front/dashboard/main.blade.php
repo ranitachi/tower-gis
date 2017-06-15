@@ -8,7 +8,7 @@
                 <i class="ace-icon fa fa-align-justify bigger-130"></i>
               </div>
 
-              <div class="ace-settings-box clearfix" id="ace-settings-box" style="min-height:450px;">
+              <div class="ace-settings-box clearfix" id="ace-settings-box" style="min-height:500px;">
                 <div class="pull-left width-100">
                   <div class="ace-settings-item">
                     <!-- <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" /> -->
@@ -33,7 +33,7 @@
                       <label class="lbl col-xs-12" for="ace-settings-navbar">Operator</label>
                       <div class="col-sm-12">
                         <div class="" id="opr">
-                          <select name="operator" id="operator" onchange="setsite(this.value)">
+                          <select name="operator" id="operator" onchange="setsite(-1,this.value)">
                              <option value="">-Pilih Operator-</option>
                               @foreach($operator as $k => $v)
                                 <option value="{{$v->id}}__{{$v->nama_operator}}">{{$v->nama_operator}}</option>
