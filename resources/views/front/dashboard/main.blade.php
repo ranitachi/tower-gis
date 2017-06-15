@@ -108,7 +108,7 @@
     padding: 5px;
     height:25px;
     position:fixed;
-    bottom:55;
+    bottom:62;
     width: 200px;
     text-align: left;
   }
