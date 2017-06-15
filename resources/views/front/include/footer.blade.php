@@ -13,6 +13,7 @@
 			 -->
 
 <div id="footer">
+	Dinas Komunikasi Dan Informatika<br>
 	Copyright &copy; {{date('Y')}}  - <a href="{{URL::to('Login')}}">Login</a>
 </div>
 
@@ -27,7 +28,7 @@
 		background-color: #000;
 		height: 55px;
 		color:white;
-		padding:15px 10px 0 0;
+		padding:5px 10px 0 0;
 		font-size: 15px;
 		/*margin-bottom: -30px !important;*/
 	}

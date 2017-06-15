@@ -19,6 +19,29 @@
 		</div>
 	</div>
 	<div class="form-group">
+		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Icon</label>
+
+
+		<div class="col-xs-12 col-sm-3">
+			<div class="clearfix">
+				<div class="input-group">
+					<input class="form-control" readonly="readonly" type="text" name="logo" id="logo">
+						<span class="input-group-addon" onclick="BrowseServer( 'Image:/', 'logo' );" style="cursor:pointer;">
+							<i class="ace-icon fa fa-search"></i>
+						</span>
+				</div>
+
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-1">
+		@if ($id!=-1)
+			@if ($d->logo!='')
+				<img src="{{asset($d->logo)}}" id="img-logo" style="cursor:pointer;width:24px;height:29px;">
+			@endif
+		@endif
+	</div>
+	</div>
+	<div class="form-group">
 		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Nomor Telepon</label>
 
 		<div class="col-xs-12 col-sm-9">

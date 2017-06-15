@@ -58,6 +58,8 @@
 @endsection
 
 @section('jqueryscript')
+<script src="{{asset('ckfinder/ckfinder.js')}}"></script>
+<script src="{{asset('ckeditor/ckeditor.js')}}"></script>
 <script type="text/javascript">
 // jQuery(function($){
 	$(document).ready(function(){
@@ -100,6 +102,28 @@
 			$('#form').load(APP_URL+'/vendor_form/'+id);
 			$('.nav-tabs a[href="#form"]').tab('show');
 		}
+
+  function BrowseServer( startupPath, functionData )
+	{
+		var finder = new CKFinder();
+		finder.basePath = APP_URL+'/ckfinder/';
+		finder.startupPath = startupPath;
+		finder.selectActionFunction = SetFileField;
+		finder.selectActionData = functionData;
+		finder.removePlugins = 'basket';
+		//finder.selectThumbnailActionFunction = ShowThumbnails;
+		finder.popup();
+	}
+
+	function SetFileField( fileUrl, data )
+	{
+		document.getElementById( data["selectActionData"] ).value = fileUrl;
+		var f=fileUrl.split('/');
+		var x=f.length;
+		// var file = '/'+f[x-2]+'/'+f[x-1];
+		$('input#logo').val(fileUrl);
+    $('img#img-logo').attr({'src':fileUrl});
+	}
 // });
 </script>
 @endsection

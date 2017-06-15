@@ -5,11 +5,11 @@
 
 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-						
+
 					</div>
 
 					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-						
+
 					</div>
 				</div><!-- /.sidebar-shortcuts -->
 
@@ -52,6 +52,14 @@
 							<i class="menu-icon fa fa-users"></i>
 							<span class="menu-text">
 								Manage User
+							</span>
+						</a>
+					</li>
+					<li class="{{Request::path() =='biaya'?'active':''}}">
+						<a href="{{URL::to('biaya')}}" >
+							<i class="menu-icon fa fa-money"></i>
+							<span class="menu-text">
+								Manage Biaya
 							</span>
 						</a>
 					</li>

@@ -2,7 +2,7 @@
 	<thead>
 		<tr>
 			<th class="center">No</th>
-			<th>Logo</th>
+			<th>Icon</th>
 			<th>Nama Vendor</th>
 			<th>Nama Pimpinan</th>
 			<th>Telepon</th>
@@ -13,11 +13,11 @@
 
 </table>
 <style type="text/css">
-	.table-bordered>thead>tr>th, 
-	.table-bordered>tbody>tr>th, 
-	.table-bordered>tfoot>tr>th, 
-	.table-bordered>thead>tr>td, 
-	.table-bordered>tbody>tr>td, 
+	.table-bordered>thead>tr>th,
+	.table-bordered>tbody>tr>th,
+	.table-bordered>tfoot>tr>th,
+	.table-bordered>thead>tr>td,
+	.table-bordered>tbody>tr>td,
 	.table-bordered>tfoot>tr>td {
 		font-size: 13px;
 	}

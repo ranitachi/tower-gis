@@ -186,6 +186,7 @@ class SiteController extends Controller
 			$d[$k]=$v;
 			$d[$k]['no']=$k+1;
 			$d[$k]['koordinat']=$v->lat_koord.' <br> '.$v->long_koord;
+			$d[$k]['showmap']='<button class="btn btn-xs btn-primary" type="button" onclick="showmap(\''.$v->lat_koord.'\',\''.$v->long_koord.'\')"><i class="glyphicon glyphicon-map-marker"></i></button><button class="btn btn-xs btn-danger" type="button" onclick="showstreet(\''.$v->lat_koord.'\',\''.$v->long_koord.'\')"><i class="glyphicon glyphicon-road"></i></button>';
 			$d[$k]['button']='<button class="btn btn-xs btn-primary" type="button" onclick="edit(\''.$v->id.'\')"><i class="fa fa-edit"></i></button><button class="btn btn-xs btn-danger" type="button" onclick="hapus(\''.$v->id.'\')"><i class="fa fa-trash"></i></button>';
 
 			if($v->vendor_id!=null)
@@ -270,6 +271,11 @@ class SiteController extends Controller
 	public function Sitedata()
 	{
 		return view('site.data');
+	}
+	public function Showmap($lat,$long)
+	{
+		$data=array('latt'=>$lat,'long'=>$long);
+		return view('site.showmap',$data);
 	}
 	public function Siteform($id=-1)
 	{

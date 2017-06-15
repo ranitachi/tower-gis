@@ -32,11 +32,12 @@ class VendorController extends Controller
 
 		$dt='{"data":';
 		$d=array();
+		$url=url('/');
 		foreach ($vendor as $k => $v)
 		{
 			$d[$k]=$v;
 			$d[$k]['no']=($k+1);
-			$d[$k]['logo']='';
+			$d[$k]['logo']=($v->logo!='' ? '<img src="'.$url.$v->logo.'">':'');
 			$d[$k]['button']='<button class="btn btn-xs btn-primary" type="button" onclick="edit(\''.$v->id.'\')"><i class="fa fa-edit"></i></button><button class="btn btn-xs btn-danger" type="button" onclick="hapus(\''.$v->id.'\')"><i class="fa fa-trash"></i></button>';
 		}
 		$d=$vendor->toJson();

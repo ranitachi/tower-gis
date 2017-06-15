@@ -15,8 +15,14 @@ Route::get('/', array('as'=>'front','uses'=>'FrontController@index'));
 Route::get('admin', array('as'=>'admin','uses'=>'AdminController@index'));
 Route::get('site',array('as'=>'admin','uses'=>'SiteController@index'));
 Route::get('vendor',array('as'=>'admin','uses'=>'VendorController@index'));
-
+Route::get('biaya',array('as'=>'admin','uses'=>'BiayaController@index'));
 Route::get('operator',array('as'=>'admin','uses'=>'OperatorController@Operator'));
+
+Route::get('biayadata',array('as'=>'admin','uses'=>'BiayaController@Data'));
+Route::get('biayadatajenis/{id}/{jenis}',array('as'=>'admin','uses'=>'BiayaController@DataJenis'));
+Route::get('biayaform/{id}',['as'=>'admin','uses'=>'BiayaController@Form']);
+Route::post('biaya/simpan/{id}', ['as'=>'admin','uses'=>'BiayaController@Proccess']);
+
 Route::get('dataoperator/{id}/{jenis}',['uses'=>'OperatorController@DataOperator']);
 Route::get('json_operator/{id}/{datatable}',['uses'=>'OperatorController@OperatorJson']);
 Route::get('operator_data',array('as'=>'admin','uses'=>'OperatorController@Operatordata'));
@@ -31,6 +37,7 @@ Route::get('site-import',array('as'=>'admin','uses'=>'SiteController@Import'));
 Route::get('site-hapus/{id}',array('as'=>'admin','uses'=>'SiteController@Hapus'));
 Route::get('format-excel',array('as'=>'admin','uses'=>'SiteController@FileFormat'));
 Route::post('format-excel',['as'=>'admin','uses'=>'SiteController@UploadFile']);
+Route::get('showmap/{lat}/{long}',['uses'=>'SiteController@Showmap']);
 
 Route::get('vendor_site/{id}/{jenis}',['uses'=>'SiteController@SiteByVendor']);
 Route::get('vendor_site_operator/{id}/{jenis}',['uses'=>'SiteController@SiteByVendorOperator']);

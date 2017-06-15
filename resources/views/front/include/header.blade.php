@@ -5,17 +5,17 @@
 
       <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
-          <a href="index.html" class="navbar-brand">
+          <a href="{{URL::to('/')}}" class="navbar-brand">
             <small>
-              <i class="fa fa-leaf"></i>
-              Ace Admin
+              {{-- <i class="fa fa-leaf"></i> --}}
+              SITE NAME
             </small>
           </a>
 
 
         </div>
 
-       
+
 
         <!-- <nav role="navigation" class="navbar-menu pull-left collapse navbar-collapse">
           <ul class="nav navbar-nav">

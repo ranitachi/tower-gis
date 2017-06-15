@@ -68,6 +68,7 @@
   }
 </style>
 @section('jqueryscript')
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYzgG72G3M3HVGRdzkvtvO5c4N7lmIuiY"></script>
 <script type="text/javascript">
 // jQuery(function($){
 	$(document).ready(function(){
@@ -102,21 +103,22 @@
 	                    { "data": "vendor" },
 	                    { "data": "alamat" },
 	                    { "data": "koordinat" },
+	                    { "data": "showmap" },
 	                    { "data": "button" }
 	                ],
 					"iDisplayLength": 15
-						
+
 								//,
 								//"sScrollY": "200px",
 								//"bPaginate": false,
-						
+
 								//"sScrollX": "100%",
 								//"sScrollXInner": "120%",
 								//"bScrollCollapse": true,
 								//Note: if you are applying horizontal scrolling (sScrollX) on a ".table-bordered"
 								//you may want to wrap the table inside a "div.dataTables_borderWrap" element
-						
-				});		
+
+				});
 			});
 
 			$('#form').load(APP_URL+'/site_form/-1');
@@ -149,6 +151,37 @@
 			}
 		});
 	}
+
+  function showmap(lat,lng)
+  {
+    if(lat=='')
+    {
+      $('div#body-alert').html('<h2>Koordinat Masih Kosong</h2>');
+      $('div#modal-alert').modal('show');
+    }
+    else
+    {
+      $('#body-info').load(APP_URL+'/showmap/'+lat+'/'+lng,function(){
+        allsite();
+      });
+      $('#modal-info').modal('show');
+    }
+  }
+  function showstreet(terminal,lat,lng)
+  {
+    if(lat=='')
+    {
+      $('div#body-alert').html('<h2>Koordinat Masih Kosong</h2>');
+      $('div#modal-alert').modal('show');
+    }
+    else
+    {
+      $('#body-info').load(APP_URL+'/showmap/'+lat+'/'+lng,function(){
+        allsitestreet();
+      });
+      $('#modal-info').modal('show');
+    }
+  }
 // });
 </script>
 @endsection

@@ -1,9 +1,9 @@
 <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
-          <a href="index.html" class="navbar-brand">
+          <a href="{{URL::to('admin')}}" class="navbar-brand">
             <small>
-              <i class="fa fa-leaf"></i>
-              Ace Admin
+              {{-- <i class="fa fa-leaf"></i> --}}
+              SITE NAME
             </small>
           </a>
         </div>
