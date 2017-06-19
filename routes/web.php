@@ -59,3 +59,5 @@ Route::get('user', 'UserController@manageuser')->name('user.manage');
 Route::post('user', 'UserController@store')->name('user.store');
 Route::get('user/bind/{id}', 'UserController@bind')->name('user.bind');
 Route::post('user/update/{id}', 'UserController@update')->name('user.update');
+Route::get('user/destroy/{id}', 'UserController@destroy')->name('user.destroy');
+Route::get('user/status/{id}', 'UserController@changestatus')->name('user.status');

@@ -67,4 +67,25 @@ class UserController extends Controller
 
       return redirect()->route('user.manage')->with('success', 'Berhasil mengubah data user.');
     }
+
+    public function destroy($id)
+    {
+      $set = User::find($id);
+      $set->delete();
+
+      return redirect()->route('user.manage')->with('success', 'Berhasil menghapus data user.');
+    }
+
+    public function changestatus($id)
+    {
+      $set = User::find($id);
+      if ($set->flag_status==1) {
+        $set->flag_status=0;
+      } else {
+        $set->flag_status=1;
+      }
+      $set->save();
+
+      return redirect()->route('user.manage')->with('success', 'Berhasil mengubah status data user.');
+    }
 }

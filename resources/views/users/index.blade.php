@@ -25,6 +25,27 @@
       </div><!-- /.nav-search -->
     </div>
 
+    <script>
+      window.setTimeout(function() {
+        $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove();
+        });
+      }, 5000);
+
+      window.setTimeout(function() {
+        $(".alert-danger").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove();
+        });
+      }, 5000);
+
+      window.setTimeout(function() {
+        $(".alert-info").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove();
+        });
+      }, 5000);
+    </script>
+
+
     <div class="page-content">
       <div class="row">
         <div class="col-xs-12">
@@ -37,7 +58,26 @@
 							</small>
 						</h1>
 					</div>
-          <div class="row">
+
+          @if (Session::has('success'))
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="alert alert-block alert-success">
+                  <button type="button" class="close" data-dismiss="alert">
+                    <i class="ace-icon fa fa-times"></i>
+                  </button>
+                  <p>
+                    <strong style="font-size:20px;">
+                      <i class="ace-icon fa fa-check"></i>
+                      Berhasil..
+                    </strong>
+                    <br>
+                    {{ Session::get('success') }}
+                  </p>
+                </div>
+              </div>
+          @endif
+
             <div class="col-xs-12 col-sm-4">
 							<div class="widget-box">
 								<div class="widget-header">
@@ -154,10 +194,10 @@
                               <button class="btn btn-xs btn-info edit" data-value="{{$key->id}}">
                                 <i class="ace-icon fa fa-pencil bigger-120"></i>
                               </button>
-                              <button class="btn btn-xs btn-danger">
+                              <button class="btn btn-xs btn-danger bootbox-confirm" data-value="{{$key->id}}">
                                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
                               </button>
-                              <button class="btn btn-xs btn-warning">
+                              <button class="btn btn-xs btn-warning bootbox-changeflag" data-value="{{$key->id}}">
                                 <i class="ace-icon fa fa-flag bigger-120"></i>
                               </button>
                             </div>
@@ -238,6 +278,24 @@
         $('.hr-password').hide();
         $('.password-field').show();
         $(this).hide();
+      });
+
+      $(".bootbox-confirm").on("click", function() {
+        var id = $(this).data("value");
+        bootbox.confirm("<h4>Apakah anda yakin untuk menghapus akun ini?</h4>", function(result) {
+          if(result) {
+            window.location.replace("{{url('/')}}/user/destroy/"+id);
+          }
+        });
+      });
+
+      $(".bootbox-changeflag").on("click", function() {
+        var id = $(this).data("value");
+        bootbox.confirm("<h4>Apakah anda yakin untuk mengubah status akun ini?</h4>", function(result) {
+          if(result) {
+            window.location.replace("{{url('/')}}/user/status/"+id);
+          }
+        });
       });
     });
   </script>
