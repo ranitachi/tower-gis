@@ -43,4 +43,11 @@
         <script src="asset/js/html5shiv.min.js"></script>
         <script src="asset/js/respond.min.js"></script>
         <![endif]-->
+
+        <style media="screen">
+          .pagination {
+            margin-top:0px;
+            margin-right:10px;
+          }
+        </style>
     </head>

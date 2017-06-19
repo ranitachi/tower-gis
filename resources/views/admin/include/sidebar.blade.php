@@ -48,8 +48,8 @@
 						</a>
 					</li>
 					<li class="{{Request::path() =='user'?'active':''}}">
-						{{-- <a href="{{URL::to('user')}}" > --}}
-						<a href="#" >
+						<a href="{{route('user.manage')}}">
+						{{-- <a href="#" > --}}
 							<i class="menu-icon fa fa-users"></i>
 							<span class="menu-text">
 								Manage User

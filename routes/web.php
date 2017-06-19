@@ -56,3 +56,6 @@ Route::post('login/authenticate', 'UserController@authenticate')->name('login.au
 Route::get('logout', 'UserController@logout')->name('logout');
 
 Route::get('user', 'UserController@manageuser')->name('user.manage');
+Route::post('user', 'UserController@store')->name('user.store');
+Route::get('user/bind/{id}', 'UserController@bind')->name('user.bind');
+Route::post('user/update/{id}', 'UserController@update')->name('user.update');
