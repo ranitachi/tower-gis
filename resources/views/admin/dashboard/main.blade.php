@@ -97,7 +97,7 @@
 							<i class="ace-icon fa fa-building"></i>
 						</div>
 						<div class="infobox-data">
-							<span class="infobox-data-number">{{$vendor}}</span>
+							<span class="infobox-data-number">{{count($vendor)}}</span>
 							<div class="infobox-content">Vendor</div>
 						</div>
 					</div>
@@ -117,7 +117,7 @@
 							<i class="ace-icon fa fa-file-text"></i>
 						</div>
 						<div class="infobox-data">
-							<span class="infobox-data-number">7</span>
+							<span class="infobox-data-number">{{count($imbexp)}}</span>
 							<div class="infobox-content">IMB Kadaluarsa</div>
 						</div>
 					</div>
@@ -140,7 +140,7 @@
   					<div class="widget-header widget-header-flat">
   						<h4 class="widget-title lighter">
   							<i class="ace-icon fa fa-map-marker green"></i>
-  							Presentase Site Tower Per Vendor
+  							Presentase Jumlah Site Tower Per Vendor
   						</h4>
   						<div class="widget-toolbar">
   							<a href="#" data-action="collapse">
@@ -161,7 +161,7 @@
   					<div class="widget-header widget-header-flat">
   						<h4 class="widget-title lighter">
   							<i class="ace-icon fa fa-file-text red"></i>
-  							IMB Kadaluarsa
+  							IMB Site Tower Kadaluarsa
   						</h4>
   						<div class="widget-toolbar">
   							<a href="#" data-action="collapse">
@@ -184,21 +184,37 @@
   											<i class="ace-icon fa fa-caret-right blue"></i>Tanggal Kadaluarsa
   										</th>
   										<th class="hidden-480">
-  											<i class="ace-icon fa fa-caret-right blue"></i>Tanggal Kadaluarsa
+  											<i class="ace-icon fa fa-caret-right blue"></i>Keterangan
   										</th>
   									</tr>
   								</thead>
   								<tbody>
-  									<tr>
-  										<td>JK-0192</td>
-  										<td>PT Inti Bangun Persada</td>
-  										<td class="hidden-480">20-01-2014</td>
-  										<td class="hidden-480">
-  											<span class="label label-danger arrowed-right arrowed-in">telah kadaluarsa selama 2890 hari</span>
-  										</td>
-  									</tr>
+                    @php
+                      $limit = 1;
+                    @endphp
+                    @foreach ($imbexp as $key)
+                      <tr>
+                        <td>{{$key['site_tower']}}</td>
+                        <td>{{$key['vendor']}}</td>
+                        @php
+                          $date = explode(" ", $key['tanggal_kadaluarsa']);
+                          $expdate = explode("-", $date[0]);
+                        @endphp
+                        <td class="hidden-480">{{$expdate[2]}}-{{$expdate[1]}}-{{$expdate[0]}}</td>
+                        <td class="hidden-480">
+                          <span class="label label-danger arrowed-right arrowed-in">{{$key['status']}}</span>
+                        </td>
+                      </tr>
+                      @php
+                        if ($limit>=6) {
+                          break;
+                        }
+                        $limit++;
+                      @endphp
+                    @endforeach
   								</tbody>
   							</table>
+                <a href="#" class="btn btn-xs btn-success pull-right">Lihat Selengkapnya</a>
   						</div><!-- /.widget-main -->
   					</div><!-- /.widget-body -->
   				</div><!-- /.widget-box -->
