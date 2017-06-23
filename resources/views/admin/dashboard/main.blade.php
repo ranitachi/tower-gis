@@ -140,7 +140,7 @@
   					<div class="widget-header widget-header-flat">
   						<h4 class="widget-title lighter">
   							<i class="ace-icon fa fa-map-marker green"></i>
-  							Jumlah Site Tower Per Vendor
+  							Presentase Site Tower Per Vendor
   						</h4>
   						<div class="widget-toolbar">
   							<a href="#" data-action="collapse">
@@ -250,7 +250,7 @@
               cursor: 'pointer',
               dataLabels: {
                   enabled: true,
-                  format: '<b>{point.name}</b>: {point.percentage:.1f}',
+                  format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                   style: {
                       color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                   },
@@ -259,13 +259,8 @@
           }
       },
       series: [{
-          name: 'Brands',
-          data: [
-              { name: 'Internet Explorer', y: 56.33 },
-              { name: 'Chrome', y: 24.03 },
-              { name: 'Firefox', y: 10.38 },
-              { name: 'Safari', y: 4.77 }, { name: 'Opera', y: 0.91 }
-          ]
+          name: 'Site Tower',
+          data: @php echo $chart; @endphp
       }]
     });
   </script>
