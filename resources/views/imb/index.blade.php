@@ -164,6 +164,17 @@
   <script type="text/javascript">
     $(function(){
       $('#dynamic-table').dataTable();
+
+      $(".edit").on("click", function() {
+        var id = $(this).data("value");
+        bootbox.prompt({
+            title: "Silahkan update tanggal IMB site terkait",
+            inputType: 'date',
+            callback: function (date) {
+                window.location.replace("{{url('/')}}/imb-update/"+id+"/"+date);
+            }
+        });
+      });
     });
   </script>
 @endsection

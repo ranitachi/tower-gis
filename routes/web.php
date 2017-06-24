@@ -63,3 +63,4 @@ Route::get('user/destroy/{id}', 'UserController@destroy')->name('user.destroy');
 Route::get('user/status/{id}', 'UserController@changestatus')->name('user.status');
 
 Route::get('imb-expired', 'IMBExpController@index')->name('imb.index');
+Route::get('imb-update/{id}/{tanggal}', 'IMBExpController@update')->name('imb.update');
