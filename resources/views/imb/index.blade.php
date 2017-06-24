@@ -171,7 +171,16 @@
             title: "Silahkan update tanggal IMB site terkait",
             inputType: 'date',
             callback: function (date) {
-                window.location.replace("{{url('/')}}/imb-update/"+id+"/"+date);
+              if (date!=null) {
+                if (date.length!=0) {
+                  console.log("process");
+                  window.location.replace("{{url('/')}}/imb-update/"+id+"/"+date);
+                } else {
+                  console.log('not processed because its 0.');
+                }
+              } else {
+                console.log('not processed because its null.');
+              }
             }
         });
       });
