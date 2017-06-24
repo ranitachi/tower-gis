@@ -38,7 +38,7 @@ class AdminController extends Controller
         }
         $imbdate = new Carbon($key->tanggal);
         $arr_imb["tanggal_kadaluarsa"] = $imbdate->addYears(3);
-        if ($key->tanggal!="0000-00-00") {
+        if ($key->tanggal!="0000-00-00" && $today->diffInDays($imbdate)>1095) {
           if ($today->diffInDays($imbdate)>365) {
             $arr_imb["status"] = "telah kadaluarsa lebih dari ".$today->diffInYears($imbdate)." tahun";
             $row_imb[] = $arr_imb;
