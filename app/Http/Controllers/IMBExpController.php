@@ -11,10 +11,9 @@ class IMBExpController extends Controller
 {
     public function index()
     {
-      $get = Site::select('site.id', 'site_id', 'site.alamat', 'tanggal', DB::RAW('DATEDIFF(NOW(), tanggal) as days'), 'nama_vendor')
+      $get = Site::select('site.id', 'site_id', 'site.alamat', 'tanggal', DB::RAW('DATEDIFF(NOW(), DATE_ADD(tanggal, INTERVAL 3 YEAR)) as days'), 'nama_vendor')
         ->join('vendor', 'vendor.id', '=', 'site.vendor_id')
         ->get();
-
       return view('imb.index')->with('data', $get);
     }
 
