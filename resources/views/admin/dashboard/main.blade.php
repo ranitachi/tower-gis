@@ -214,7 +214,7 @@
                     @endforeach
   								</tbody>
   							</table>
-                <a href="#" class="btn btn-xs btn-success pull-right">Lihat Selengkapnya</a>
+                <a href="{{route('imb.index')}}" class="btn btn-xs btn-success pull-right">Lihat Selengkapnya</a>
   						</div><!-- /.widget-main -->
   					</div><!-- /.widget-body -->
   				</div><!-- /.widget-box -->
