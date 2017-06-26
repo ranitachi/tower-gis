@@ -138,6 +138,7 @@
 			});
 
 			</script>
+
 			<script type="text/javascript">
 				var APP_URL = {!! json_encode(url('/')) !!}
         var markers = new Array();
@@ -167,7 +168,7 @@
 </html>
 <style type="text/css">
 	#map_wrapper {
-    	height: 700px;
+    	height: 650px;
 	}
 
 	#map_canvas {

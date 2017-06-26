@@ -68,11 +68,14 @@
   }
 </style>
 @section('jqueryscript')
+<script src="{{asset('ckfinder/ckfinder.js')}}"></script>
+<script src="{{asset('ckeditor/ckeditor.js')}}"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYzgG72G3M3HVGRdzkvtvO5c4N7lmIuiY"></script>
 <script type="text/javascript">
 // jQuery(function($){
 	$(document).ready(function(){
 		datasite();
+    $('#form').load(APP_URL+'/site_form/-1');
 		$('div#import').load(APP_URL+'/site-import',function(){
 
 			var whitelist_mime = ["application/csv"];
@@ -86,6 +89,27 @@
 				});
 		});
 	});
+  function BrowseServer( startupPath, functionData )
+	{
+		var finder = new CKFinder();
+		finder.basePath = "{{asset('ckfinder/')}}";
+		finder.startupPath = startupPath;
+		finder.selectActionFunction = SetFileField;
+		finder.selectActionData = functionData;
+		finder.removePlugins = 'basket';
+		//finder.selectThumbnailActionFunction = ShowThumbnails;
+		finder.popup();
+	}
+
+	function SetFileField( fileUrl, data )
+	{
+		document.getElementById( data["selectActionData"] ).value = fileUrl;
+		var f=fileUrl.split('/');
+		var x=f.length;
+		var file = f[x-1];
+		$('input#gambar').val(fileUrl);
+    $('img#gambar_site').attr({'src':fileUrl});
+	}
 	function edit(id)
     {
       $('#form').load(APP_URL+'/site_form/'+id);
@@ -121,7 +145,7 @@
 				});
 			});
 
-			$('#form').load(APP_URL+'/site_form/-1');
+
 		}
 
 	function hapus(id)
@@ -148,6 +172,7 @@
   					success : function(a){
   						pesan(a);
   						datasite();
+              $('#form').load(APP_URL+'/site_form/-1');
   						$('.nav-tabs a[href="#home4"]').tab('show');
   					}
           })

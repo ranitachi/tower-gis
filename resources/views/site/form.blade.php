@@ -1,5 +1,15 @@
 <form class="form-horizontal" id="validation-form" method="get">
 	<div class="form-group">
+		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Gambar</label>
+
+		<div class="col-xs-12 col-sm-9">
+				<img src="{{$id!=-1 ? $d->gambar : URL::to('/').'/img/16717-200.png'}}" alt="" id="gambar_site" style="border:1px solid #ddd;padding:3px;width:200px;height:200px;cursor:pointer" onclick="BrowseServer( 'Image:/', 'gambar' );"/>
+				<br>
+				<small><i>Click Dalam Kotak Untuk Memilih Gambar</i></small>
+				<input type="hidden" id="gambar" name="gambar" readonly="readonly" class="col-xs-12 col-sm-12" value="{{$id!=-1 ? $d->gambar : ''}}"/>
+		</div>
+	</div>
+	<div class="form-group">
 		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Site ID</label>
 
 		<div class="col-xs-12 col-sm-9">
@@ -33,7 +43,7 @@
 								<option value="{{$v->id}}-{{$v->nama_operator}}" selected="selected">{{$v->nama_operator}}</option>
 							@else
 								<option value="{{$v->id}}-{{$v->nama_operator}}">{{$v->nama_operator}}</option>
-							@endif	
+							@endif
 
 					@else
 						<option value="{{$v->id}}-{{$v->nama_operator}}">{{$v->nama_operator}}</option>
@@ -56,7 +66,7 @@
 							<option value="{{$v->id}}" selected="selected">{{$v->nama_vendor}}</option>
 						@else
 							<option value="{{$v->id}}">{{$v->nama_vendor}}</option>
-						@endif	
+						@endif
 
 					@else
 						<option value="{{$v->id}}">{{$v->nama_vendor}}</option>
@@ -75,6 +85,7 @@
 			</div>
 		</div>
 	</div>
+
 	<div class="hr hr-dotted"></div>
 	<div class="form-group">
 		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">Koordinat Latitude</label>
@@ -228,9 +239,7 @@
 						luas_tanah: {
 							required: true,
 						},
-						lokasi_kode: {
-							required: true,
-						},
+
 						long_koord: {
 							required: true
 						},
@@ -254,7 +263,7 @@
 					messages: {
 						njop_m:  "Nilai NJOP belum Diisi",
 						luas_tanah: "Luas Tanah Masih Kosong",
-						lokasi_kode: "Kode Lokasi Masih Kosong",
+
 						long_koord: "Koordinat Longitude Masih Kosong",
 						lat_koord: "Koordinat Latitude Masih Kosong",
 						alamat: "Alamat Masih Kosong",
@@ -315,6 +324,7 @@
 										success : function(a){
 											// alert(a);
 											datasite();
+											$('#form').load(APP_URL+'/site_form/-1');
 											$('.nav-tabs a[href="#home4"]').tab('show');
 										}
 									})

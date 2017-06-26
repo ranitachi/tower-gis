@@ -333,9 +333,8 @@ class SiteController extends Controller
 		return view('site.form',$data);
 	}
 
-	public function Proccess()
+	public function Proccess($id=-1)
 	{
-
 	      $data = Input::all();
 	      $d=$data;
 	      $o_id=$o_name='';
@@ -352,7 +351,17 @@ class SiteController extends Controller
 	      $d['operator_name']=$o_name;
 	      unset($d['operator']);
 	      // print_r($d);
-	      $store = Site::insert($d);
+				if($id==-1)
+				{
+	      	$store = Site::insert($d);
+					echo 'Data Site Berhasil Di Simpan';
+				}
+				else
+				{
+					$store = Site::find($id);
+	      	$store->update($d);
+					echo 'Data Site Berhasil Di Edit';
+				}
 
     }
 
