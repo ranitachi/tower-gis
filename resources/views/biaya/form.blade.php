@@ -49,8 +49,31 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="form-group">
+
+		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Biaya</label>
+
+		<div class="col-xs-12 col-sm-9">
+			<div class="clearfix">
+
+				<select name="biaya" id="biaya" onchange="distribusibiaya()" class="chosen-select form-control" data-placeholder="Biaya">
+          <option value=""></option>
+					@foreach ($n as $k => $v)
+						@if ($id!=-1)
+							@if ($v->nilai==$d->biaya)
+								<option value="{{$d->biaya}}" selected="selected">Tahun : {{$v->tahun}} - {{number_format($d->biaya,0,',','.')}}</option>
+							@else
+								<option value="{{$v->nilai}}">Tahun : {{$v->tahun}} - {{number_format($v->nilai,0,',','.')}}</option>
+							@endif
+						@else
+							<option value="{{$v->nilai}}">Tahun : {{$v->tahun}} - {{number_format($v->nilai,0,',','.')}}</option>
+						@endif
+					@endforeach
+        </select>
+			</div>
+		</div>
+	</div>
+	{{-- <div class="form-group">
 		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="password2">Biaya</label>
 
 		<div class="col-xs-12 col-sm-9">
@@ -58,7 +81,7 @@
 				<input type="text" onkeyup="distribusibiaya()" name="biaya" id="biaya" class="col-xs-12 col-sm-4" value="{{$id!=-1 ? $d->biaya : 0}}"/>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 	<div class="form-group">
 		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="password2">Distribusi Biaya</label>
 
@@ -179,7 +202,7 @@
 	});
 </script>
 <style type="text/css">
-	#zona_chosen
+	#zona_chosen,#biaya_chosen
 	{
 		width:200px !important;
 	}

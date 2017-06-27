@@ -128,6 +128,7 @@
 	                    { "data": "alamat" },
 	                    { "data": "koordinat" },
 	                    { "data": "showmap" },
+	                    { "data": "akurat" },
 	                    { "data": "button" }
 	                ],
 					"iDisplayLength": 15

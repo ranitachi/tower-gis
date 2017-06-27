@@ -23,6 +23,7 @@
 		@endforeach
 	</tbody>
 </table>
+<hr />
 <style type="text/css">
 	.table-bordered>thead>tr>th,
 	.table-bordered>tbody>tr>th,

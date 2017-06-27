@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Site as Site;
 use App\Operator as Operator;
 use App\Vendor as Vendor;
+use App\Biaya as Biaya;
 use Illuminate\Support\Facades\Input;
 class SiteController extends Controller
 {
@@ -188,7 +189,14 @@ class SiteController extends Controller
 			$d[$k]['koordinat']=$v->lat_koord.' <br> '.$v->long_koord;
 			$d[$k]['showmap']='<button class="btn btn-xs btn-primary" type="button" onclick="showmap('.$v->lat_koord.','.$v->long_koord.')"><i class="glyphicon glyphicon-map-marker"></i></button><button class="btn btn-xs btn-danger" type="button" onclick="showstreet('.$v->lat_koord.','.$v->long_koord.')"><i class="glyphicon glyphicon-road"></i></button>';
 			$d[$k]['button']='<button class="btn btn-xs btn-primary" type="button" onclick="edit(\''.$v->id.'\')"><i class="fa fa-edit"></i></button><button class="btn btn-xs btn-danger" type="button" onclick="hapus(\''.$v->id.'\')"><i class="fa fa-trash"></i></button>';
+			if($v->akurat==1)
+			{
+				$akurat='<span class="label label-success arrowed-right arrowed-in">Akurat</span>';
+			}
+			else
+				$akurat='<span class="label label-danger arrowed-right arrowed-in">Tidak Akurat</span>';
 
+			$d[$k]['akurat']=$akurat;
 			if($v->vendor_id!=null)
 			{
 				$ven=Vendor::find($v->vendor_id);
@@ -326,7 +334,14 @@ class SiteController extends Controller
 
 		$operator=Operator::all();
 		$vendor=Vendor::all();
-		$data=array('operator'=>$operator,'vendor'=>$vendor,'id'=>$id,'d'=>$d);
+		$b=Biaya::where('status_tampil','1')->orderBy('zona','asc')->get();
+		$biaya=array();
+		foreach ($b as $k => $v)
+		{
+				if($v->zona!=$v->variabel)
+					$biaya[$v->zona][]=$v;
+		}
+		$data=array('operator'=>$operator,'vendor'=>$vendor,'id'=>$id,'d'=>$d,'biaya'=>$biaya);
 		// echo '<pre>';
 		// print_r($d);
 		// echo '</pre>';

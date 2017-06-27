@@ -6,7 +6,7 @@
 				<img src="{{$id!=-1 ? $d->gambar : URL::to('/').'/img/16717-200.png'}}" alt="" id="gambar_site" style="border:1px solid #ddd;padding:3px;width:200px;height:200px;cursor:pointer" onclick="BrowseServer( 'Image:/', 'gambar' );"/>
 				<br>
 				<small><i>Click Dalam Kotak Untuk Memilih Gambar</i></small>
-				<input type="hidden" id="gambar" name="gambar" readonly="readonly" class="col-xs-12 col-sm-12" value="{{$id!=-1 ? $d->gambar : ''}}"/>
+				<input type="hidden" id="gambar" name="gambar" readonly="readonly" class="col-xs-12 col-sm-12" value="{{$id!=-1 ? $d->gambar : URL::to('/').'/img/16717-200.png'}}"/>
 		</div>
 	</div>
 	<div class="form-group">
@@ -162,6 +162,32 @@
 		</div>
 	</div>
 	<div class="form-group">
+		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="password">Type Tower</label>
+
+		<div class="col-xs-12 col-sm-9">
+			<div class="clearfix">
+				<select name="type_power" class="chosen-select form-control" id="type_power" data-placeholder="Pilih Type Tower">
+				<option value="">&nbsp;</option>
+				@foreach($biaya as $k => $v)
+							<optgroup label="{{$k}}">
+								@foreach ($v as $kk => $vv)
+									@if ($id!=-1)
+										@if ($vv->zona.' -- '.$vv->variabel==$d->type_power)
+											<option selected="selected" value="{{$d->type_power}}">{{$d->type_power}}</option>
+										@else
+											<option value="{{$vv->zona}} -- {{$vv->variabel}}">{{$vv->zona}} -- {{$vv->variabel}}</option>
+										@endif
+									@else
+										<option value="{{$vv->zona}} -- {{$vv->variabel}}">{{$vv->zona}} -- {{$vv->variabel}}</option>
+									@endif
+								@endforeach
+							</optgroup>
+				@endforeach
+			</select>
+			</div>
+		</div>
+	</div>
+	{{-- <div class="form-group">
 		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="url">Type Tower</label>
 
 		<div class="col-xs-12 col-sm-9">
@@ -169,7 +195,7 @@
 				<input type="text" id="type_power" name="type_power" class="col-xs-12 col-sm-8" value="{{$id!=-1 ? $d->type_power : ''}}"/>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 	<div class="form-group">
 		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="url">Nomor IMB</label>
 
@@ -255,6 +281,9 @@
 						operator: {
 							required: true
 						},
+						type_power: {
+							required: true
+						},
 						vendor_id: {
 							required: true
 						}
@@ -269,6 +298,7 @@
 						alamat: "Alamat Masih Kosong",
 						site_id: "Site ID Masih Koosong",
 						vendor_id: "Vendor ID Masih Koosong",
+						type_power: "Type Tower Belum Dipilih",
 						operator: "Operator Belum Dipilih"
 					},
 
@@ -338,7 +368,7 @@
 	});
 </script>
 <style type="text/css">
-	#operator_chosen,#vendor_id_chosen
+	#operator_chosen,#vendor_id_chosen,#type_power_chosen
 	{
 		width:300px !important;
 	}

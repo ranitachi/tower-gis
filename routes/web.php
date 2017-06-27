@@ -23,6 +23,10 @@ Route::get('biayadatajenis/{id}/{jenis}',array('as'=>'admin','uses'=>'BiayaContr
 Route::get('biayaform/{id}',['as'=>'admin','uses'=>'BiayaController@Form']);
 Route::post('biaya/simpan/{id}', ['as'=>'admin','uses'=>'BiayaController@Proccess']);
 Route::get('biaya_hapus/{id}', ['as'=>'admin','uses'=>'BiayaController@Hapus']);
+Route::get('biayaform/{id}', ['as'=>'admin','uses'=>'BiayaController@Form']);
+Route::get('nilaiform/{id}', ['as'=>'admin','uses'=>'BiayaController@FormNilai']);
+Route::get('nilaidata', ['as'=>'admin','uses'=>'BiayaController@DataNilai']);
+Route::post('biaya/nilaisimpan/{id}', ['as'=>'admin','uses'=>'BiayaController@ProccessNilai']);
 
 Route::get('dataoperator/{id}/{jenis}',['uses'=>'OperatorController@DataOperator']);
 Route::get('json_operator/{id}/{datatable}',['uses'=>'OperatorController@OperatorJson']);

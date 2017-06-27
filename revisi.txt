@@ -4,8 +4,8 @@ Menara 16/06/17
 - Perubahan nilai retribusi harus bisa di apply per tahun.
 - Buat history perpindahan tower (kalo sekarang hanya di keterangan saja)
 - Print retribusi per vendor. Di tagih per tahun, Bisa di ceklis site mana aja yang ingin di print retribusinya.
-- Tipe tower ambil dari fitur manage biaya (kolom variable). di bikin select2 aja.
-- Flag untuk nandain data site itu akurat atau tidak (ya/tidak).
+[OK] - Tipe tower ambil dari fitur manage biaya (kolom variable). di bikin select2 aja.
+[OK] - Flag untuk nandain data site itu akurat atau tidak (ya/tidak).
 - Flag untuk rekomendasi site. (ya/tidak)
-- Di dashboard ada jumlah total proyeksi pendapatan dari retribusi, realisasi pendapatan, dan target pendapatan.
-- Di dashboard ada tabel/list untuk tampilin site mana aja yang IMB nya sudah kadaluarsa. (IMB = 3 tahun dari tanggal pembuatan)
+[OK] - Di dashboard ada jumlah total proyeksi pendapatan dari retribusi, realisasi pendapatan, dan target pendapatan.
+[OK] - Di dashboard ada tabel/list untuk tampilin site mana aja yang IMB nya sudah kadaluarsa. (IMB = 3 tahun dari tanggal pembuatan)

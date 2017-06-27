@@ -31,23 +31,31 @@
                 <!-- PAGE CONTENT BEGINS -->
                 	<div class="row">
 	                	<div class="col-sm-12">
-							<div class="tabbable">
-								<ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
-									<li class="active">
-										<a data-toggle="tab" href="#home4">Tabel Retribusi Menara</a>
-									</li>
-									<li>
-										<a data-toggle="tab" href="#form">Form</a>
-									</li>
-								</ul>
+        							<div class="tabbable">
+        								<ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
+        									<li class="active">
+        										<a data-toggle="tab" href="#home4">Tabel Retribusi Menara</a>
+        									</li>
+        									<li>
+        										<a data-toggle="tab" href="#form">Form</a>
+        									</li>
+                          <li  class="pull-right">
+        										<a data-toggle="tab" href="#formnilai">Form Nilai Retribusi</a>
+        									</li>
+                          <li class="pull-right">
+        										<a data-toggle="tab" href="#nilai">Tabel Nilai Retirbusi</a>
+        									</li>
+        								</ul>
 
-								<div class="tab-content">
-									<div id="home4" class="tab-pane in active"></div>
-									<div id="form" class="tab-pane"></div>
-								</div>
-							</div>
-						</div>
-					</div>
+        								<div class="tab-content">
+        									<div id="home4" class="tab-pane in active"></div>
+        									<div id="form" class="tab-pane"></div>
+        									<div id="nilai" class="tab-pane in"></div>
+        									<div id="formnilai" class="tab-pane"></div>
+        								</div>
+        							</div>
+        						</div>
+        					</div>
                 <!-- PAGE CONTENT ENDS -->
               </div><!-- /.col -->
             </div>
@@ -63,40 +71,23 @@
 	$(document).ready(function(){
 		datavendor();
 	});
-	function datavendor()
+	 function datavendor()
 		{
-			$('#home4').load(APP_URL+'/biayadata',function(){
-				var oTable1 = $('#datavendor').dataTable({
-					"ajax": APP_URL+'/jsonbiaya/-1/1',
-					"columns": [
-	                    { "data": "variabel" },
-	                    { "data": "indeks" },
-	                    { "data": "biaya" },
-	                    { "data": "distribusi_biaya" },
-	                    { "data": "button" }
-	                ],
-					"iDisplayLength": 15
-
-								//,
-								//"sScrollY": "200px",
-								//"bPaginate": false,
-
-								//"sScrollX": "100%",
-								//"sScrollXInner": "120%",
-								//"bScrollCollapse": true,
-								//Note: if you are applying horizontal scrolling (sScrollX) on a ".table-bordered"
-								//you may want to wrap the table inside a "div.dataTables_borderWrap" element
-
-				});
-			});
-
+			$('#home4').load(APP_URL+'/biayadata');
+      $('#nilai').load(APP_URL+'/nilaidata');
 			$('#form').load(APP_URL+'/biayaform/-1');
+			$('#formnilai').load(APP_URL+'/nilaiform/-1');
 		}
 
 		function edit(id)
 		{
 			$('#form').load(APP_URL+'/biayaform/'+id);
 			$('.nav-tabs a[href="#form"]').tab('show');
+		}
+		function editnilai(id)
+		{
+			$('#formnilai').load(APP_URL+'/nilaiform/'+id);
+			$('.nav-tabs a[href="#formnilai"]').tab('show');
 		}
     function distribusibiaya()
     {
