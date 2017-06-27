@@ -1,4 +1,6 @@
-
+<div class="table-header">
+	Berikut adalah seluruh data Site yang telah terdaftar dalam database.
+</div>
 <table id="datasite" class="table table-striped table-bordered table-hover">
 	<thead>
 		<tr>

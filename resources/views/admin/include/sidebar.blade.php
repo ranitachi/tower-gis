@@ -74,8 +74,8 @@
 						</a>
 					</li>
 					<li class="{{Request::path() =='kepaladinas'?'active':''}}">
-						{{-- <a href="{{URL::to('kepaladinas')}}" > --}}
-						<a href="#" >
+						<a href="{{URL::to('kepaladinas')}}" >
+						{{-- <a href="#" > --}}
 							<i class="menu-icon fa fa-book"></i>
 							<span class="menu-text">
 								Data Kepala Dinas

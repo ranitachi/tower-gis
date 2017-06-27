@@ -68,3 +68,9 @@ Route::get('user/status/{id}', 'UserController@changestatus')->name('user.status
 
 Route::get('imb-expired', 'IMBExpController@index')->name('imb.index');
 Route::get('imb-update/{id}/{tanggal}', 'IMBExpController@update')->name('imb.update');
+
+Route::get('kepaladinas', 'KepaladinasController@index')->name('kepaladinas.main');
+Route::get('kepaladinas-form/{id}', 'KepaladinasController@form')->name('kepaladinas.form');
+Route::get('kepaladinas-data', 'KepaladinasController@data')->name('kepaladinas.data');
+Route::get('kepaladinas-hapus/{id}', ['uses'=>'KepaladinasController@hapus']);
+Route::post('kepaladinas-simpan/{id}', ['uses'=>'KepaladinasController@process']);

@@ -10,7 +10,7 @@
             <ul class="breadcrumb">
               <li>
                 <i class="ace-icon fa fa-home home-icon"></i>
-                <a href="{{URL::to('/')}}">Home</a>
+                <a href="{{URL::to('admin')}}">Home</a>
               </li>
               <li class="active">Site Tower</li>
             </ul><!-- /.breadcrumb -->
