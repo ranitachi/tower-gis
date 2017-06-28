@@ -11,6 +11,7 @@ return array(
     'AddGambarToSite' => $baseDir . '/database/migrations/2017_06_26_223908_add_gambar_to_site.php',
     'CreateKepalaDinasTable' => $baseDir . '/database/migrations/2017_06_27_063455_create_kepala_dinas_table.php',
     'CreateNilaiTable' => $baseDir . '/database/migrations/2017_06_26_224527_create_nilai_table.php',
+    'CreateNoRekeningTable' => $baseDir . '/database/migrations/2017_06_28_010546_create_no_rekening_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',

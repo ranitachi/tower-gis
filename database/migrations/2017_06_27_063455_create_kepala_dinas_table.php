@@ -19,6 +19,7 @@ class CreateKepalaDinasTable extends Migration
             $table->string('nip');
             $table->string('pangkat')->nullable();
             $table->string('golongan')->nullable();
+            $table->string('jabatan')->nullable();
             $table->string('foto')->nullable();
             $table->char('status_tampil',1)->default('1');
             $table->timestamps();

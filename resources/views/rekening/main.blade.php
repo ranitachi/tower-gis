@@ -34,7 +34,7 @@
 							<div class="tabbable">
 								<ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
 									<li class="active">
-										<a data-toggle="tab" href="#home4">Data Pejabat</a>
+										<a data-toggle="tab" href="#home4">Data Rekening</a>
 									</li>
 									<li>
 										<a data-toggle="tab" href="#form">Form</a>
@@ -58,33 +58,12 @@
 @endsection
 
 @section('jqueryscript')
-<script src="{{asset('ckfinder/ckfinder.js')}}"></script>
+
 <script type="text/javascript">
   	$(document).ready(function(){
   		datasite();
       formm(-1);
     });
-    function BrowseServer( startupPath, functionData )
-  	{
-  		var finder = new CKFinder();
-  		finder.basePath = "{{asset('ckfinder/')}}";
-  		finder.startupPath = startupPath;
-  		finder.selectActionFunction = SetFileField;
-  		finder.selectActionData = functionData;
-  		finder.removePlugins = 'basket';
-  		//finder.selectThumbnailActionFunction = ShowThumbnails;
-  		finder.popup();
-  	}
-
-  	function SetFileField( fileUrl, data )
-  	{
-  		document.getElementById( data["selectActionData"] ).value = fileUrl;
-  		var f=fileUrl.split('/');
-  		var x=f.length;
-  		var file = f[x-1];
-  		$('input#foto').val(fileUrl);
-      $('img#gambar_site').attr({'src':fileUrl});
-  	}
   	function edit(id)
     {
       formm(id);
@@ -93,12 +72,12 @@
 
     function datasite()
   	{
-  		$('#home4').load(APP_URL+'/kepaladinas-data');
+  		$('#home4').load(APP_URL+'/rekening-data');
   	}
 
     function formm(id)
     {
-      $('#form').load(APP_URL+'/kepaladinas-form/'+id);
+      $('#form').load(APP_URL+'/rekening-form/'+id);
     }
 
   	function hapus(id)
@@ -119,7 +98,7 @@
           if(result)
           {
 
-    				var urll=APP_URL+'/kepaladinas-hapus/'+id;
+    				var urll=APP_URL+'/rekening-hapus/'+id;
     				$.ajax({
     					url : urll,
     					success : function(a){

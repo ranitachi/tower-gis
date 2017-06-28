@@ -76,9 +76,18 @@
 					<li class="{{Request::path() =='kepaladinas'?'active':''}}">
 						<a href="{{URL::to('kepaladinas')}}" >
 						{{-- <a href="#" > --}}
-							<i class="menu-icon fa fa-book"></i>
+							<i class="menu-icon fa fa-users"></i>
 							<span class="menu-text">
-								Data Kepala Dinas
+								Manage Pejabat
+							</span>
+						</a>
+					</li>
+					<li class="{{Request::path() =='rekening'?'active':''}}">
+						<a href="{{URL::to('rekening')}}" >
+						{{-- <a href="#" > --}}
+							<i class="menu-icon fa fa-list"></i>
+							<span class="menu-text">
+								Manage Rekening
 							</span>
 						</a>
 					</li>

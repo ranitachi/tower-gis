@@ -74,3 +74,9 @@ Route::get('kepaladinas-form/{id}', 'KepaladinasController@form')->name('kepalad
 Route::get('kepaladinas-data', 'KepaladinasController@data')->name('kepaladinas.data');
 Route::get('kepaladinas-hapus/{id}', ['uses'=>'KepaladinasController@hapus']);
 Route::post('kepaladinas-simpan/{id}', ['uses'=>'KepaladinasController@process']);
+
+Route::get('rekening', 'RekeningController@index')->name('rekening.main');
+Route::get('rekening-form/{id}', 'RekeningController@form')->name('rekening.form');
+Route::get('rekening-data', 'RekeningController@data')->name('rekening.data');
+Route::get('rekening-hapus/{id}', ['uses'=>'RekeningController@hapus']);
+Route::post('rekening-simpan/{id}', ['uses'=>'RekeningController@process']);

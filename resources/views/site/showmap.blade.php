@@ -3,7 +3,7 @@
 </div>
 
 <script type="text/javascript">
-
+    var panorama;
     function allsite()
     {
         var latt={{$latt}};
@@ -41,15 +41,34 @@
       var latt={{$latt}};
       var longg={{$long}};
       var fenway = {lat: latt, lng: longg};
-      var panorama = new google.maps.StreetViewPanorama(
-            document.getElementById('map_canvas'), {
-              position: fenway,
-              pov: {
-                heading: 165,
-                pitch: 0,
-                zoom:1
-              }
-            });
+      var sv = new google.maps.StreetViewService();
+
+      panorama = new google.maps.StreetViewPanorama(document.getElementById('map_canvas'));
+      sv.getPanorama({location: fenway, radius: 50}, processSVData);
+      // var panorama = new google.maps.StreetViewPanorama(
+      //       document.getElementById('map_canvas'), {
+      //         position: fenway,
+      //         pov: {
+      //           heading: 34,
+      //           pitch: 0,
+      //           zoom:1
+      //         },
+      //         radius: 150
+      //       });
+    }
+    function processSVData(data, status) {
+      if (status === 'OK') {
+          panorama.setPano(data.location.pano);
+              panorama.setPov({
+            heading: 270,
+            pitch: 0
+          });
+          panorama.setVisible(true);
+        }
+        else
+        {
+          $('#body-info').html('<h2>Google Street Service Not Avaliable</h2>');
+        }
     }
 </script>
 <style>

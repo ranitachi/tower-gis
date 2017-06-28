@@ -1,56 +1,29 @@
 <form class="form-horizontal" id="validation-form" method="get">
-	<div class="form-group">
-		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Foto</label>
 
-		<div class="col-xs-12 col-sm-9">
-				<img src="{{$id!=-1 ? $d->foto : URL::to('/').'/img/student1.png'}}" alt="" id="gambar_site" style="border:1px solid #ddd;padding:3px;width:200px;height:200px;cursor:pointer" onclick="BrowseServer( 'Image:/', 'foto' );"/>
-				<br>
-				<small><i>Click Dalam Kotak Untuk Memilih Foto</i></small>
-				<input type="hidden" id="foto" name="foto" readonly="readonly" class="col-xs-12 col-sm-12" value="{{$id!=-1 ? $d->foto : URL::to('/').'/img/student1.png'}}"/>
-		</div>
-	</div>
 	<div class="form-group">
-		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Nama</label>
+		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">No Rekening</label>
 
 		<div class="col-xs-12 col-sm-9">
 			<div class="clearfix">
-				<input type="text" name="nama" id="nama" class="col-xs-12 col-sm-4" value="{{$id!=-1 ? $d->nama : ''}}"/>
+				<input type="text" name="no_rekening" id="no_rekening" class="col-xs-12 col-sm-4" value="{{$id!=-1 ? $d->no_rekening : ''}}"/>
 			</div>
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">NIP</label>
+		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Kode Rekening</label>
 
 		<div class="col-xs-12 col-sm-9">
 			<div class="clearfix">
-				<input type="text" name="nip" id="nip" class="col-xs-12 col-sm-4" value="{{$id!=-1 ? $d->nip : ''}}"/>
+				<input type="text" name="kode_rekening" id="kode_rekening" class="col-xs-12 col-sm-4" value="{{$id!=-1 ? $d->kode_rekening : ''}}"/>
 			</div>
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Jabatan</label>
+		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Nama Rekening</label>
 
 		<div class="col-xs-12 col-sm-9">
 			<div class="clearfix">
-				<input type="text" name="jabatan" id="jabatan" class="col-xs-12 col-sm-7" value="{{$id!=-1 ? $d->jabatan : ''}}"/>
-			</div>
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Pangkat</label>
-
-		<div class="col-xs-12 col-sm-9">
-			<div class="clearfix">
-				<input type="text" name="pangkat" id="pangkat" class="col-xs-12 col-sm-4" value="{{$id!=-1 ? $d->pangkat : ''}}"/>
-			</div>
-		</div>
-	</div>
-	<div class="form-group">
-		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Golongan</label>
-
-		<div class="col-xs-12 col-sm-9">
-			<div class="clearfix">
-				<input type="text" name="golongan" id="golongan" class="col-xs-12 col-sm-2" value="{{$id!=-1 ? $d->golongan : ''}}"/>
+				<input type="text" name="nama_rekening" id="nama_rekening" class="col-xs-12 col-sm-7" value="{{$id!=-1 ? $d->nama_rekening : ''}}"/>
 			</div>
 		</div>
 	</div>
@@ -71,21 +44,17 @@
 					focusInvalid: false,
 					ignore: "",
 					rules: {
-						nama: {
+						no_rekening: {
 							required: true,
 						},
-						nip: {
-							required: true,
-						},
-						jabatan: {
+						kode_rekening: {
 							required: true,
 						}
 					},
 
 					messages: {
-						nama:  "Nama belum Diisi",
-						jabatan:  "Jabatan belum Diisi",
-						nip: "NIP belum Diisi"
+						no_rekening:  "Nomor Rekening Diisi",
+						kode_rekening:  "Kode Rekening belum Diisi"
 					},
 
 
@@ -134,7 +103,7 @@
 								},
 								callback: function(result) {
 									$.ajax({
-										url : APP_URL+'/kepaladinas-simpan/{{$id}}',
+										url : APP_URL+'/rekening-simpan/{{$id}}',
 										type : 'POST',
 										data : $('#validation-form').serialize(),
 										success : function(a){

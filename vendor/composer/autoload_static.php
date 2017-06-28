@@ -277,6 +277,7 @@ class ComposerStaticInit8d8c11e4d491d90a1d18a683d078e881
         'AddGambarToSite' => __DIR__ . '/../..' . '/database/migrations/2017_06_26_223908_add_gambar_to_site.php',
         'CreateKepalaDinasTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_27_063455_create_kepala_dinas_table.php',
         'CreateNilaiTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_26_224527_create_nilai_table.php',
+        'CreateNoRekeningTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_28_010546_create_no_rekening_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
