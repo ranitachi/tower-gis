@@ -80,3 +80,9 @@ Route::get('rekening-form/{id}', 'RekeningController@form')->name('rekening.form
 Route::get('rekening-data', 'RekeningController@data')->name('rekening.data');
 Route::get('rekening-hapus/{id}', ['uses'=>'RekeningController@hapus']);
 Route::post('rekening-simpan/{id}', ['uses'=>'RekeningController@process']);
+
+Route::get('skrd', 'SkrdController@index')->name('skrd.main');
+Route::get('skrd-form/{id}', 'SkrdController@form')->name('skrd.form');
+Route::get('skrd-data', 'SkrdController@data')->name('skrd.data');
+Route::get('skrd-hapus/{id}', ['uses'=>'SkrdController@hapus']);
+Route::post('skrd-simpan/{id}', ['uses'=>'SkrdController@process']);

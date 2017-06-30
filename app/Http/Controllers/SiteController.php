@@ -230,11 +230,22 @@ class SiteController extends Controller
 	}
 	public function SiteByVendor($vendor_id,$jenis)
 	{
-		$site=Site::join('vendor','site.vendor_id','vendor.id')
-								->where('vendor_id', '=', $vendor_id)->where('status_tampil','=','1')->get();
+		$site=Site::select('*','site.alamat as al')->join('vendor','site.vendor_id','vendor.id')
+								->where('vendor_id', '=', $vendor_id)->where('vendor.status_tampil','=','1')->get();
 
 		if($jenis=='json')
 			return response()->json($site);
+		else if($jenis=='combo')
+		{
+				$cmb= '<select name="site_id" id="site_id" class="chosen-select form-control" data-placeholder="Pilih Data Site">
+                <option value="">&nbsp;</option>';
+                foreach ($site as $ke => $va)
+                {
+                	$cmb.= '<option value="'.$va->id.'">'.$va->site_id.' - ['.$va->operator_name.'] - '.$va->al.'</option>';
+                }
+            $cmb.='</select>';
+            return $cmb;
+		}
 		else
 		{
 			return $site;
