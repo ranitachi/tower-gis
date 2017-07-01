@@ -85,4 +85,6 @@ Route::get('skrd', 'SkrdController@index')->name('skrd.main');
 Route::get('skrd-form/{id}', 'SkrdController@form')->name('skrd.form');
 Route::get('skrd-data', 'SkrdController@data')->name('skrd.data');
 Route::get('skrd-hapus/{id}', ['uses'=>'SkrdController@hapus']);
-Route::post('skrd-simpan/{id}', ['uses'=>'SkrdController@process']);
+Route::post('skrd-sum', ['uses'=>'SkrdController@skrdsum']);
+Route::get('skrd-cetak/{id}', ['uses'=>'SkrdController@skrdcetak']);
+Route::post('skrd-simpan', ['uses'=>'SkrdController@process']);

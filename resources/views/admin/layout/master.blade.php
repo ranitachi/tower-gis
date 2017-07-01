@@ -49,6 +49,9 @@
 		<script src="{{asset('js/ace.min.js')}}"></script>
 		<script src="{{asset('js/fungsi_peta.js')}}"></script>
 	  	<script src="{{asset('js/chosen.jquery.min.js')}}"></script>
+      <script src="{{asset('js/jquery.raty.min.js')}}"></script>
+		<script src="{{asset('js/bootstrap-multiselect.min.js')}}"></script>
+		<script src="{{asset('js/select2.min.js')}}"></script>
 
 		@yield('jqueryscript')
 
@@ -180,3 +183,23 @@
       </div>
       <!-- /.modal-dialog -->
     </div>
+
+    <div class="modal fade" id="modal-skrd">
+        <div class="modal-dialog modal-lg" id="modal-skrd-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="title-info-skrd">SURAT KETETAPAN RETRIBUSI DAERAH</h4>
+            </div>
+            <div class="modal-body" id="body-info-skrd">
+            </div>
+            <div class="modal-footer" id="footer-info-skrd">
+              <button type="button" class="btn btn-warning" data-dismiss="modal">Batal</button>
+              <button type="button" class="btn btn-primary" id="simpanskrd">Simpan dan Cetak</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>

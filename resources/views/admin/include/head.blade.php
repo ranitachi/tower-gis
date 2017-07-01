@@ -24,6 +24,8 @@
         <link rel="stylesheet" href="{{asset('css/daterangepicker.min.css')}}" />
         <link rel="stylesheet" href="{{asset('css/bootstrap-datetimepicker.min.css')}}" />
         <link rel="stylesheet" href="{{asset('css/colorpicker.min.css')}}" />
+        <link rel="stylesheet" href="{{asset('css/bootstrap-multiselect.min.css')}}" />
+		    <link rel="stylesheet" href="{{asset('css/select2.min.css')}}" />
         <!--[if lte IE 9]>
             <link rel="stylesheet" href="asset/css/ace-part2.min.css" class="ace-main-stylesheet" />
         <![endif]-->

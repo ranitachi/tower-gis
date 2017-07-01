@@ -9,6 +9,7 @@ return array(
     'AddAkuratToSite' => $baseDir . '/database/migrations/2017_06_27_042651_add_akurat_to_site.php',
     'AddFlagStatusToUsers' => $baseDir . '/database/migrations/2017_06_19_131409_add_flag_status_to_users.php',
     'AddGambarToSite' => $baseDir . '/database/migrations/2017_06_26_223908_add_gambar_to_site.php',
+    'AddJumlahRetribusi' => $baseDir . '/database/migrations/2017_07_01_123029_add_jumlah_retribusi.php',
     'CreateKepalaDinasTable' => $baseDir . '/database/migrations/2017_06_27_063455_create_kepala_dinas_table.php',
     'CreateNilaiTable' => $baseDir . '/database/migrations/2017_06_26_224527_create_nilai_table.php',
     'CreateNoRekeningTable' => $baseDir . '/database/migrations/2017_06_28_010546_create_no_rekening_table.php',

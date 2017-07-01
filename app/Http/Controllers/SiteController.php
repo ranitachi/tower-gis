@@ -230,18 +230,29 @@ class SiteController extends Controller
 	}
 	public function SiteByVendor($vendor_id,$jenis)
 	{
-		$site=Site::select('*','site.alamat as al')->join('vendor','site.vendor_id','vendor.id')
+		$site=Site::select('*','site.alamat as al','site.id as s_id')->join('vendor','site.vendor_id','vendor.id')
 								->where('vendor_id', '=', $vendor_id)->where('vendor.status_tampil','=','1')->get();
 
 		if($jenis=='json')
-			return response()->json($site);
+		{
+			$dt='{"data":';
+			$d=array();
+			foreach ($site as $k => $v)
+			{
+				$d[$k]=$v;
+				$d[$k]['pilih']='<input type="checkbox" name="pilih['.$v->s_id.']" id="pilih">';
+			}
+			$d=$site->toJson();
+			$dt=$dt.$d.'}';
+			return $dt;
+			// print_
+		}
 		else if($jenis=='combo')
 		{
-				$cmb= '<select name="site_id" id="site_id" class="chosen-select form-control" data-placeholder="Pilih Data Site">
-                <option value="">&nbsp;</option>';
+				$cmb= '<select name="site_id" id="site_id" class="multiselect" multiple="">';
                 foreach ($site as $ke => $va)
                 {
-                	$cmb.= '<option value="'.$va->id.'">'.$va->site_id.' - ['.$va->operator_name.'] - '.$va->al.'</option>';
+                	$cmb.= '<option value="'.$va->site_id.' - ['.$va->operator_name.'] - '.$va->al.'">'.$va->site_id.' - ['.$va->operator_name.'] - '.$va->al.'</option>';
                 }
             $cmb.='</select>';
             return $cmb;

@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Skrd as Skrd;
+use App\Site as Site;
 use App\Vendor as Vendor;
+use App\Rekening as Rekening;
+use App\Kepaladinas as Kepaladinas;
+use App\Biaya as Biaya;
 use Illuminate\Support\Facades\Input;
 class SkrdController extends Controller
 {
@@ -27,35 +31,42 @@ class SkrdController extends Controller
       $d=Skrd::findOrFail($id);
     }
     $vendor=vendor::where('status_tampil','=','1')->orderBy('nama_vendor','asc')->get();
-    $data=array('d'=>$d,'id'=>$id,'vendor'=>$vendor);
+    $rek=Rekening::where('status_tampil','=','1')->orderBy('kode_rekening','asc')->get();
+    $pejabat=Kepaladinas::where('status_tampil','=','1')->orderBy('nama','asc')->get();
+    $data=array('d'=>$d,'id'=>$id,'vendor'=>$vendor,'rek'=>$rek,'pejabat'=>$pejabat);
     return view('skrd.form',$data);
   }
 
-  public function process($id=-1)
+  public function process()
   {
     $d=Input::all();
-    // print_r($d);
-    $d['updated_at']=date('Y-m-d H:i:s');
-    if($id!=-1)
+    $vendor=Vendor::findOrFail($d['vendor_id']);
+    $rekening=Rekening::where('kode_rekening','like','%'.$d['kode_rekening'].'%')->get();
+    $pejabat=Kepaladinas::where('nama','like','%'.$d['penandatangan'].'%')->get();
+    $site=Site::where('status_tampil','=','1')->get();
+    $biaya=Biaya::where('status_tampil','=','1')->get();
+
+    $save=new Skrd;
+    $save->vendor_id = $d['vendor_id'];
+    $save->nama_vendor = $vendor->nama_vendor;
+    $save->tahun = $d['tahun'];
+    $save->no_skrd = $d['nomor_skrd'];
+    $save->no_rekening = $rekening[0]->no_rekening;
+    $save->kode_rekening = $d['kode_rekening'];
+    $save->status_tampil = '1';
+    $save->kepala_dinas = $d['penandatangan'];
+    $save->nip = $pejabat[0]->nip;
+    foreach ($d['site'] as $k => $v)
     {
-        $save=Skrd::find($id);
-        $ss=$save->update($d);
-        if($ss)
-          echo 'Data SKRD Sudah Di Edit';
-        else
-          echo 'Data SKRD Gagal Di Edit';
+      $save->retribusi = $d['retribusi'][$k];
+      $save->uraian = $d['uraian'][$k];
+      $save->site_id = $k;
+      $save->save();
     }
-    else
-    {
-        $d['created_at']=date('Y-m-d H:i:s');
-        $save = Skrd::insert($d);
-        if($save)
-          echo 'Data SKRD Sudah Di Simpan';
-        else
-          echo 'Data SKRD Gagal Di Simpan';
-    }
+
+    return $d['nomor_skrd'];
   }
-  function hapus($id)
+  public function hapus($id)
   {
     $d=Skrd::find($id);
     $d->status_tampil='0';
@@ -64,5 +75,48 @@ class SkrdController extends Controller
       return 'Data SKRD Berhasil Di Hapus';
     else
       return 'Data SKRD Gagal Di Hapus';
+  }
+
+  public function skrdcetak($id)
+  {
+    $skrd=Skrd::where('no_skrd','=',$id)->get();
+    if($skrd)
+    {
+      // $rekening=Rekening::where('kode_rekening','like','%'.$skrd[0]->kode_rekening.'%')->get();
+      $pejabat=Kepaladinas::where('nama','like','%'.$skrd[0]->kepala_dinas.'%')->get();
+      $data=array('id'=>$id,'skrd'=>$skrd,'pejabat'=>$pejabat);
+      return view('skrd.cetak',$data);
+    }
+  }
+
+  public function skrdsum()
+  {
+    $d=Input::all();
+    $vendor=Vendor::findOrFail($d['vendor_id']);
+    $rekening=Rekening::where('kode_rekening','like','%'.$d['kode_rekening'].'%')->get();
+    $pejabat=Kepaladinas::where('nama','like','%'.$d['penandatangan'].'%')->get();
+    $site=Site::where('status_tampil','=','1')->get();
+    $biaya=Biaya::where('status_tampil','=','1')->get();
+    $s=$b=array();
+    foreach ($site as $k => $v)
+    {
+      $s[$v->id]=$v;
+    }
+    foreach ($biaya as $k => $v)
+    {
+      $b[$v->zona.' -- '.$v->variabel]=$v;
+    }
+
+    $data=array(
+        'vendor'=>$vendor,
+        'rekening'=>$rekening,
+        'pejabat'=>$pejabat,
+        'site'=>$d['pilih'],
+        'd'=>$d,
+        'b'=>$b,
+        'biaya'=>$biaya,
+        's'=>$s
+      );
+    return view('skrd.skrd',$data);
   }
 }

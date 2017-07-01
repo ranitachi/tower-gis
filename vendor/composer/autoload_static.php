@@ -15,6 +15,7 @@ class ComposerStaticInit8d8c11e4d491d90a1d18a683d078e881
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        'b4e3f29b106af37a2bb239f73cdf68c7' => __DIR__ . '/../..' . '/app/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -275,6 +276,7 @@ class ComposerStaticInit8d8c11e4d491d90a1d18a683d078e881
         'AddAkuratToSite' => __DIR__ . '/../..' . '/database/migrations/2017_06_27_042651_add_akurat_to_site.php',
         'AddFlagStatusToUsers' => __DIR__ . '/../..' . '/database/migrations/2017_06_19_131409_add_flag_status_to_users.php',
         'AddGambarToSite' => __DIR__ . '/../..' . '/database/migrations/2017_06_26_223908_add_gambar_to_site.php',
+        'AddJumlahRetribusi' => __DIR__ . '/../..' . '/database/migrations/2017_07_01_123029_add_jumlah_retribusi.php',
         'CreateKepalaDinasTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_27_063455_create_kepala_dinas_table.php',
         'CreateNilaiTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_26_224527_create_nilai_table.php',
         'CreateNoRekeningTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_28_010546_create_no_rekening_table.php',
