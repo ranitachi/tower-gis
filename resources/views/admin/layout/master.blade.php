@@ -61,7 +61,6 @@
 		<script type="text/javascript">
 			jQuery(function($) {
 
-
 				/////////////////////////////////////
 				$(document).one('ajaxloadstart.page', function(e) {
 					$tooltip.remove();
@@ -135,6 +134,7 @@
 </html>
 			<script type="text/javascript">
 				var APP_URL = {!! json_encode(url('/')) !!}
+
 				// alert(APP_URL);
 			</script>
 <style type="text/css">
