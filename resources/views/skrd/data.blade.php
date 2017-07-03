@@ -48,7 +48,7 @@
   <thead>
 		<tr>
 			<th class="" style="text-align:right" colspan="7">T o t a l</th>
-			<th class="" style="text-align:right">{{number_format($v->retribusi,0,',','.')}}</th>
+			<th class="" style="text-align:right">{{number_format($total,0,',','.')}}</th>
 			<th style="width:100px;"></th>
 		</tr>
 	</thead>
