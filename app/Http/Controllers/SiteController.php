@@ -191,11 +191,34 @@ class SiteController extends Controller
 			$d[$k]['button']='<button class="btn btn-xs btn-primary" type="button" onclick="edit(\''.$v->id.'\')"><i class="fa fa-edit"></i></button><button class="btn btn-xs btn-danger" type="button" onclick="hapus(\''.$v->id.'\')"><i class="fa fa-trash"></i></button>';
 			if($v->akurat==1)
 			{
-				$akurat='<span class="label label-success arrowed-right arrowed-in">Akurat</span>';
+				// $akurat='<span class="label label-success arrowed-right arrowed-in">Akurat</span>';
+				$akurat='<label>
+					<input name="switch-field-1" class="ace ace-switch ace-switch-6" type="checkbox" onchange="gantistatus(\''.$v->id.'\',\'0\',\'akurat\')" checked="checked"/>
+					<span class="lbl"></span>
+				</label>';
 			}
 			else
-				$akurat='<span class="label label-danger arrowed-right arrowed-in">Tidak Akurat</span>';
+				$akurat='<label>
+					<input name="switch-field-1" class="ace ace-switch ace-switch-6" type="checkbox" onchange="gantistatus(\''.$v->id.'\',\'1\',\'akurat\')"/>
+					<span class="lbl"></span>
+				</label>';
 
+			if($v->rekomendasi==1)
+			{
+				// $akurat='<span class="label label-success arrowed-right arrowed-in">Akurat</span>';
+				$rekomendasi='<label>
+					<input name="switch-field-1" class="ace ace-switch ace-switch-6" type="checkbox" onchange="gantistatus(\''.$v->id.'\',\'0\',\'rekomendasi\')" checked="checked"/>
+					<span class="lbl"></span>
+				</label>';
+			}
+			else
+				$rekomendasi='<label>
+					<input name="switch-field-1" class="ace ace-switch ace-switch-6" type="checkbox" onchange="gantistatus(\''.$v->id.'\',\'1\',\'rekomendasi\')"/>
+					<span class="lbl"></span>
+				</label>';
+				// $akurat='<span class="label label-danger arrowed-right arrowed-in">Tidak Akurat</span>';
+
+			$d[$k]['rekomendasi']=$rekomendasi;
 			$d[$k]['akurat']=$akurat;
 			if($v->vendor_id!=null)
 			{
@@ -413,6 +436,19 @@ class SiteController extends Controller
 			else
 				return "Data Site Gagal Di Hapus";
     }
+		public function EditAkurat($id,$status,$kolom)
+		{
+			$site=Site::find($id);
+			if($kolom=='akurat')
+				$site->akurat=$status;
+			else
+				$site->rekomendasi=$status;
 
+			$s=$site->save();
+			if($s)
+				echo 'Data '.ucwords($kolom).' Berhasil Di Edit';
+			else
+				echo 'Data '.ucwords($kolom).' Gagal Di Edit';
+		}
     //
 }

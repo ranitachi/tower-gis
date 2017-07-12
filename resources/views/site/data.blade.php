@@ -1,6 +1,7 @@
 <div class="table-header">
 	Berikut adalah seluruh data Site yang telah terdaftar dalam database.
 </div>
+
 <table id="datasite" class="table table-striped table-bordered table-hover">
 	<thead>
 		<tr>
@@ -12,6 +13,7 @@
 			<th style="width:120px;">Koordinat</th>
 			<th style="width:100px;text-align:center">Show Map</th>
 			<th style="text-align:center">Akurasi Data</th>
+			<th style="text-align:center">Rekomendasi Site</th>
 			<th style="width:100px;"></th>
 		</tr>
 	</thead>

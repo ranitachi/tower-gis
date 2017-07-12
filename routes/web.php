@@ -44,6 +44,7 @@ Route::get('site-hapus/{id}',array('as'=>'admin','uses'=>'SiteController@Hapus')
 Route::get('format-excel',array('as'=>'admin','uses'=>'SiteController@FileFormat'));
 Route::post('format-excel',['as'=>'admin','uses'=>'SiteController@UploadFile']);
 Route::get('showmap/{lat}/{long}',['uses'=>'SiteController@Showmap']);
+Route::get('site-akurat/{id}/{status}/{kolom}',array('as'=>'admin','uses'=>'SiteController@EditAkurat'));
 
 Route::get('vendor_site/{id}/{jenis}',['uses'=>'SiteController@SiteByVendor']);
 Route::get('vendor_site_operator/{id}/{jenis}',['uses'=>'SiteController@SiteByVendorOperator']);

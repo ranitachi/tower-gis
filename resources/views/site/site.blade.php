@@ -129,6 +129,7 @@
 	                    { "data": "koordinat" },
 	                    { "data": "showmap" },
 	                    { "data": "akurat" },
+	                    { "data": "rekomendasi" },
 	                    { "data": "button" }
 	                ],
 					"iDisplayLength": 15
@@ -148,7 +149,16 @@
 
 
 		}
-
+  function gantistatus(id,status,kolom)
+  {
+    $.ajax({
+      url : APP_URL+'/site-akurat/'+id+'/'+status+'/'+kolom,
+      success : function(a)
+      {
+        pesan(a);
+      }
+    });
+  }
 	function hapus(id)
 	{
 		bootbox.confirm({
