@@ -40,8 +40,8 @@
 				</tr>
 				<tr>
 					<td>
-            SKRD NOMOR  :  {{$skrd[0]->no_skrd}}<br>
-            NOMOR REKENING  :  {{$skrd[0]->no_rekening}}</h5>
+            SKRD NOMOR  :  {{$v->no_skrd}}<br>
+            NOMOR REKENING  :  {{$v->no_rekening}}</h5>
 					</td>
 				</tr>
 

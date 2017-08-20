@@ -15,6 +15,7 @@ class SkrdController extends Controller
 {
   public function index()
   {
+    // echo Skrd::count();
     return view('skrd.main');
   }
   public function data()
@@ -47,13 +48,30 @@ class SkrdController extends Controller
     $biaya=Biaya::where('status_tampil','=','1')->get();
 
 
+    $nosk='';
     foreach ($d['site'] as $k => $v)
     {
+      $count_id=Skrd::where('status_tampil','=','1')->count();
+      if($count_id==0)
+        $no_skrd='0001';
+      else
+      {
+        if($count_id<10)
+          $no_skrd='000'.($count_id+1);
+        else if($count_id>=10 && $count_id<100)
+          $no_skrd='00'.($count_id+1);
+        else if($count_id>=100 && $count_id<1000)
+          $no_skrd='0'.($count_id+1);
+        else
+          $no_skrd=($count_id+1);
+      }
+
       $save=new Skrd;
       $save->vendor_id = $d['vendor_id'];
       $save->nama_vendor = $vendor->nama_vendor;
       $save->tahun = $d['tahun'];
-      $save->no_skrd = $d['nomor_skrd'];
+      // $save->no_skrd = $d['nomor_skrd'];
+      $save->no_skrd = $no_skrd;
       $save->no_rekening = $rekening[0]->no_rekening;
       $save->kode_rekening = $d['kode_rekening'];
       $save->status_tampil = '1';
@@ -63,9 +81,12 @@ class SkrdController extends Controller
       $save->uraian = $d['uraian'][$k];
       $save->site_id = $k;
       $save->save();
+
+      $nosk.=$no_skrd.',';
     }
 
-    return $d['nomor_skrd'];
+    return substr($nosk,0,-1);
+    // return $d['nomor_skrd'];
   }
   public function hapus($id)
   {
@@ -80,7 +101,15 @@ class SkrdController extends Controller
 
   public function skrdcetak($id)
   {
-    $skrd=Skrd::where('no_skrd','=',$id)->orWhere('id','=', $id)->where('status_tampil','=','1')->get();
+    $n=explode(',',$id);
+
+    if(count($n)>1)
+      $skrd=Skrd::whereIn('no_skrd',$n)->where('status_tampil','=','1')->get();
+    else
+      $skrd=Skrd::where('id',$id)->where('status_tampil','=','1')->get();
+
+    // $skrd=DB::selectRaw("select * from skrd where (no_skrd = :noskrd or id='".$id."') and status_tampil=1",$n)->get();
+    // echo count($skrd);
     if($skrd)
     {
       // $rekening=Rekening::where('kode_rekening','like','%'.$skrd[0]->kode_rekening.'%')->get();

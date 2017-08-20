@@ -34,6 +34,60 @@
     </div>
     <div class="col-xs-12 col-sm-1">&nbsp;</div>
   </div>
+  @php
+    if(count($site)>1)
+    {
+      echo '<table border="1" cellpadding="3" cellspacing="2">';
+      echo '<tr>
+        <th class="center">No.</th><th class="center">Kode Rekening</th><th class="center">Uraian Objek Retrbusi</th><th class="center">Jumlah (Rp)</th>
+      </tr>';
+      $no=1;
+      $tot=0;
+      foreach ($site as $ks => $vs)
+      {
+        if(isset($s[$ks]))
+        {
+          $st=$s[$ks];
+          $retr=0;
+          if(isset($b[$st->type_power]))
+          {
+            $by=$b[$st->type_power]->distribusi_biaya;
+            $retr=(date('n') / 12) * $by;
+          }
+          @endphp
+              <tr>
+                <td class="center" style="padding:3px;">{{$no}}</td>
+                {{-- <td class="center" style="padding:3px;">{{$d['nomor_skrd']}}</td> --}}
+                <td class="center" style="width:150px;padding:5px;">{{$rekening[0]->kode_rekening}}</td>
+                <td class="left" style="padding:3px;">{{$rekening[0]->nama_rekening}} {{$vendor->nama_vendor}}, {{$st->alamat}}, {{getBulan(1)}} s/d {{getBulan(date('n'))}} {{$d['tahun']}} (Rincian Terlampir)</td>
+                <td class="center" style="text-align:right;width:250px;padding:5px;">{{number_format($retr,0,',','.')}}</td>
+              </tr>
+              <input type="hidden" name="site[{{$ks}}]" value="{{$ks}}">
+              <input type="hidden" name="retribusi[{{$ks}}]" value="{{$retr}}">
+              <input type="hidden" name="uraian[{{$ks}}]" value="{{$rekening[0]->nama_rekening}} {{$vendor->nama_vendor}}, {{$st->alamat}}, {{getBulan(1)}} s/d {{getBulan(date('n'))}} {{$d['tahun']}}">
+              <input type="hidden" name="site[{{$ks}}]" value="{{$ks}}">
+              <input type="hidden" name="retribusi[{{$ks}}]" value="{{$retr}}">
+              <input type="hidden" name="uraian[{{$ks}}]" value="{{$rekening[0]->nama_rekening}} {{$vendor->nama_vendor}}, {{$st->alamat}}, {{getBulan(1)}} s/d {{getBulan(date('n'))}} {{$d['tahun']}}">
+          @php
+          $tot+=$retr;
+
+        }
+        $no++;
+      }
+  @endphp
+    <tr>
+      <th colspan="3" class="right" style="text-align:right;padding:5px;">Jumlah (Rp)</th>
+      <th class="center" style="text-align:right;padding:5px;">{{number_format($tot,0,',','.')}}</th>
+    </tr>
+
+  </table>
+  <div>TERBILANG : <span id="terbilang">{{ucwords(Terbilang($tot))}} Rupiah</span></div>
+  @php
+    }
+    else
+    {
+      # code...
+  @endphp
   <div class="row">
     <div class="col-xs-12 col-sm-1">&nbsp;</div>
     <div class="col-xs-12 col-sm-10">
@@ -124,6 +178,9 @@
       </h6>
     </div>
   </div>
+  @php
+  }
+  @endphp
   <input type="hidden" name="vendor_id" value="{{$vendor->id}}">
   <input type="hidden" name="nomor_skrd" value="{{$d['nomor_skrd']}}">
   <input type="hidden" name="kode_rekening" value="{{$rekening[0]->kode_rekening}}">
