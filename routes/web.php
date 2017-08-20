@@ -45,6 +45,8 @@ Route::get('format-excel',array('as'=>'admin','uses'=>'SiteController@FileFormat
 Route::post('format-excel',['as'=>'admin','uses'=>'SiteController@UploadFile']);
 Route::get('showmap/{lat}/{long}',['uses'=>'SiteController@Showmap']);
 Route::get('site-akurat/{id}/{status}/{kolom}',array('as'=>'admin','uses'=>'SiteController@EditAkurat'));
+Route::get('site/cetaksite',array('as'=>'admin','uses'=>'SiteController@CetakSite'));
+Route::post('site/cetak',array('as'=>'admin','uses'=>'SiteController@Cetak'));
 
 Route::get('vendor_site/{id}/{jenis}',['uses'=>'SiteController@SiteByVendor']);
 Route::get('vendor_site_operator/{id}/{jenis}',['uses'=>'SiteController@SiteByVendorOperator']);
@@ -88,4 +90,7 @@ Route::get('skrd-data', 'SkrdController@data')->name('skrd.data');
 Route::get('skrd-hapus/{id}', ['uses'=>'SkrdController@hapus']);
 Route::post('skrd-sum', ['uses'=>'SkrdController@skrdsum']);
 Route::get('skrd-cetak/{id}', ['uses'=>'SkrdController@skrdcetak']);
+Route::get('skrd-laporan/{tahun}', ['uses'=>'SkrdController@skrdlaporan']);
+Route::get('skrd-laporan-cetak/{tahun}', ['uses'=>'SkrdController@skrdlaporancetak']);
+Route::get('skrd-laporan-data/{tahun}', ['uses'=>'SkrdController@skrdlaporandata']);
 Route::post('skrd-simpan', ['uses'=>'SkrdController@process']);

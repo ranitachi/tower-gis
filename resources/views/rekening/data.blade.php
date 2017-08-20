@@ -6,6 +6,7 @@
 		<tr>
 			<th class="center">No</th>
 			<th class="center">No. Rekening</th>
+			<th class="center">Nama Bank</th>
 			<th class="center">Kode Rekening</th>
 			<th class="center">Nama Rekening</th>
 			<th style="width:100px;"></th>
@@ -19,6 +20,7 @@
       <tr>
         <td class="center">{{$no}}</td>
         <td class="center">{{$v->no_rekening}}</td>
+        <td class="center">{{$v->nama_bank}}</td>
         <td class="center">{{$v->kode_rekening}}</td>
         <td class="center">{{$v->nama_rekening}}</td>
         <td class="center">

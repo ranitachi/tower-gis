@@ -27,6 +27,15 @@
 			</div>
 		</div>
 	</div>
+	<div class="form-group">
+		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Nama Bank</label>
+
+		<div class="col-xs-12 col-sm-9">
+			<div class="clearfix">
+				<input type="text" name="nama_bank" id="nama_bank" class="col-xs-12 col-sm-7" value="{{$id!=-1 ? $d->nama_bank : ''}}"/>
+			</div>
+		</div>
+	</div>
   <div class="wizard-actions">
 		<button class="btn btn-success btn-next" data-last="Finish">
 			Save

@@ -39,11 +39,15 @@
 									<li>
 										<a data-toggle="tab" href="#form">Form</a>
 									</li>
+									<li>
+										<a data-toggle="tab" href="#laporan">Laporan Tahunan SKRD</a>
+									</li>
 								</ul>
 
 								<div class="tab-content">
 									<div id="home4" class="tab-pane in active"></div>
 									<div id="form" class="tab-pane"></div>
+									<div id="laporan" class="tab-pane"></div>
 								</div>
 							</div>
 						</div>
@@ -74,11 +78,19 @@
     function datasite()
   	{
   		$('#home4').load(APP_URL+'/skrd-data');
+  		$('#laporan').load(APP_URL+'/skrd-laporan/-1',function(){
+        $('#data').load(APP_URL+'/skrd-laporan-data/-1');
+      });
   	}
 
     function formm(id)
     {
       $('#form').load(APP_URL+'/skrd-form/'+id);
+    }
+
+    function cetakulang(no_skrd)
+    {
+      window.open(APP_URL+'/skrd-cetak/'+no_skrd,'_blank');
     }
 
   	function hapus(id)

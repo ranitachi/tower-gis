@@ -36,6 +36,7 @@
         <td class="" style="text-align:right">{{number_format($v->retribusi,0,',','.')}}</td>
         <td class="center">
           {{-- <button class="btn btn-primary btn-xs" type="button" onclick="edit('{{$v->id}}')"><i class="fa fa-edit"></i></button> --}}
+          <button class="btn btn-primary btn-xs" type="button" onclick="cetakulang('{{$v->id}}')"><i class="fa fa-print"></i></button>
           <button class="btn btn-danger btn-xs" type="button" onclick="hapus('{{$v->id}}')"><i class="fa fa-trash"></i></button>
         </td>
       </tr>

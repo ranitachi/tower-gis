@@ -6,6 +6,21 @@ Menara 16/06/17
 - Print retribusi per vendor. Di tagih per tahun, Bisa di ceklis site mana aja yang ingin di print retribusinya.
 [OK] - Tipe tower ambil dari fitur manage biaya (kolom variable). di bikin select2 aja.
 [OK] - Flag untuk nandain data site itu akurat atau tidak (ya/tidak).
-- Flag untuk rekomendasi site. (ya/tidak)
+[OK] - Flag untuk rekomendasi site. (ya/tidak)
 [OK] - Di dashboard ada jumlah total proyeksi pendapatan dari retribusi, realisasi pendapatan, dan target pendapatan.
 [OK] - Di dashboard ada tabel/list untuk tampilin site mana aja yang IMB nya sudah kadaluarsa. (IMB = 3 tahun dari tanggal pembuatan)
+
+
+SIM Menara (Final Revision)
+
+MANAGE SKRD:
+[OK] - Print SKRD harus bisa dilakukan per site tower (sesuai permintaan vendor, satu site tower, satu kertas skrd) walaupun dalam prakteknya sering kali di print dalam satu waktu.
+[OK] - SKRD yang telah di cetak, dapat di cetak kembali.
+[OK] - SKRD yang telah di cetak dapat dibuatkan laporan SKRD per tahun (sejenis summary skrd per tahun, dibuat satu file saja)
+
+MANAGE SITE TOWER
+[OK] - Akurasi data dan rekomendasi dapat di print per vendor (lakukan pencarian dulu per vendor, baru print sesuai result)
+[OK] - Print by kolom apapun untuk data tower (by operator, vendor, dan alamat)
+
+MANAGE REKENING
+[OK] - Manage rekening tambahin textbox input untuk 'Nama Bank'

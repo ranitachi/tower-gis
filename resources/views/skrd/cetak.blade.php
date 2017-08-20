@@ -5,7 +5,7 @@
 	</head>
 	<body onLoad="window.print()">
 
-
+@foreach ($skrd as $k => $v)
 		<div style="padding:20px;border:1px solid #111" class="body">
 			<table border="0" style="width:100%" cellpadding="0" cellspacing="0">
 				<tr>
@@ -57,25 +57,25 @@
             $no=1;
             $tot=0;
           @endphp
-          @foreach ($skrd as $k => $v)
-          @php
 
-                // $st=$s[$k];
-                $retr=$v->retribusi;
+            @php
 
-          @endphp
-              <tr>
-                <td class="center" style="text-align:center">{{$no}}</td>
-                <td class="center" style="width:150px;text-align:center">{{$v->kode_rekening}}</td>
-                <td class="left">{{$v->uraian}} (Rincian Terlampir)</td>
-                <td class="center" style="text-align:right;width:250px">{{number_format($retr,0,',','.')}}</td>
-              </tr>
-          @php
-                $tot+=$retr;
+                  // $st=$s[$k];
+                  $retr=$v->retribusi;
 
-            $no++;
-          @endphp
-          @endforeach
+            @endphp
+                <tr>
+                  <td class="center" style="text-align:center">{{$no}}</td>
+                  <td class="center" style="width:150px;text-align:center">{{$v->kode_rekening}}</td>
+                  <td class="left">{{$v->uraian}} (Rincian Terlampir)</td>
+                  <td class="center" style="text-align:right;width:250px">{{number_format($retr,0,',','.')}}</td>
+                </tr>
+            @php
+                  $tot+=$retr;
+
+              $no++;
+            @endphp
+          {{-- @endforeach --}}
         </tbody>
         <thead>
           <tr>
@@ -119,19 +119,26 @@
         </tr>
 			</table>
 		</div>
+    <div class="pagebreak"> </div>
+  @endforeach
 	</body>
 </html>
 <style type="text/css" media="print">
   @page {
   	size: A4;
   }
-  @media print {
-  html, body {
-    width: 210mm;
-    height: 297mm;
-  }
+  @media print
+  {
+    html, body {
+      width: 210mm;
+      height: 297mm;
+      /*page-break-before: always;*/
+      page-break-after: always;
+
+    }
   /* ... the rest of the rules ... */
-}
+  }
+  .pagebreak { page-break-before: always; }
 </style>
 <style type="text/css">
 *
