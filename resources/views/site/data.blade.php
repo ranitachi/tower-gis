@@ -67,7 +67,6 @@
 			// 						'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
 			// 				}
 			// 		});
-			// var length = $('input#pilih').length;
 			var check = $('#datasite').find('input#pilihsite:checked').length;
 			var klm = $('#food :selected').length;
 
