@@ -15,6 +15,7 @@ class SkrdController extends Controller
 {
   public function index()
   {
+    // echo Skrd::count();
     return view('skrd.main');
   }
   public function data()
@@ -46,25 +47,46 @@ class SkrdController extends Controller
     $site=Site::where('status_tampil','=','1')->get();
     $biaya=Biaya::where('status_tampil','=','1')->get();
 
-    $save=new Skrd;
-    $save->vendor_id = $d['vendor_id'];
-    $save->nama_vendor = $vendor->nama_vendor;
-    $save->tahun = $d['tahun'];
-    $save->no_skrd = $d['nomor_skrd'];
-    $save->no_rekening = $rekening[0]->no_rekening;
-    $save->kode_rekening = $d['kode_rekening'];
-    $save->status_tampil = '1';
-    $save->kepala_dinas = $d['penandatangan'];
-    $save->nip = $pejabat[0]->nip;
+
+    $nosk='';
     foreach ($d['site'] as $k => $v)
     {
+      $count_id=Skrd::where('status_tampil','=','1')->count();
+      if($count_id==0)
+        $no_skrd='0001';
+      else
+      {
+        if($count_id<10)
+          $no_skrd='000'.($count_id+1);
+        else if($count_id>=10 && $count_id<100)
+          $no_skrd='00'.($count_id+1);
+        else if($count_id>=100 && $count_id<1000)
+          $no_skrd='0'.($count_id+1);
+        else
+          $no_skrd=($count_id+1);
+      }
+
+      $save=new Skrd;
+      $save->vendor_id = $d['vendor_id'];
+      $save->nama_vendor = $vendor->nama_vendor;
+      $save->tahun = $d['tahun'];
+      // $save->no_skrd = $d['nomor_skrd'];
+      $save->no_skrd = $no_skrd;
+      $save->no_rekening = $rekening[0]->no_rekening;
+      $save->kode_rekening = $d['kode_rekening'];
+      $save->status_tampil = '1';
+      $save->kepala_dinas = $d['penandatangan'];
+      $save->nip = $pejabat[0]->nip;
       $save->retribusi = $d['retribusi'][$k];
       $save->uraian = $d['uraian'][$k];
       $save->site_id = $k;
       $save->save();
+
+      $nosk.=$no_skrd.',';
     }
 
-    return $d['nomor_skrd'];
+    return substr($nosk,0,-1);
+    // return $d['nomor_skrd'];
   }
   public function hapus($id)
   {
@@ -79,7 +101,15 @@ class SkrdController extends Controller
 
   public function skrdcetak($id)
   {
-    $skrd=Skrd::where('no_skrd','=',$id)->get();
+    $n=explode(',',$id);
+
+    if(count($n)>1)
+      $skrd=Skrd::whereIn('no_skrd',$n)->where('status_tampil','=','1')->get();
+    else
+      $skrd=Skrd::where('id',$id)->where('status_tampil','=','1')->get();
+
+    // $skrd=DB::selectRaw("select * from skrd where (no_skrd = :noskrd or id='".$id."') and status_tampil=1",$n)->get();
+    // echo count($skrd);
     if($skrd)
     {
       // $rekening=Rekening::where('kode_rekening','like','%'.$skrd[0]->kode_rekening.'%')->get();
@@ -118,5 +148,66 @@ class SkrdController extends Controller
         's'=>$s
       );
     return view('skrd.skrd',$data);
+  }
+  public function skrdlaporan($tahun=-1)
+  {
+    $th=$tahun;
+    if($tahun==null)
+      $th=date('Y');
+
+    $data['tahun']=$th;
+    return view('skrd.laporan',$data);
+  }
+  public function skrdlaporandata($tahun=null)
+  {
+    $th=$tahun;
+    if($tahun==null)
+      $th=date('Y');
+
+    if($tahun==-1)
+    {
+      $d=Skrd::select('tahun')
+      ->selectRaw('SUM(retribusi) as total')
+      ->groupBy('tahun')
+      ->get();
+    }
+    else
+    {
+      $d=Skrd::select('tahun')
+      ->selectRaw('SUM(retribusi) as total')
+      ->groupBy('tahun')
+      ->havingRaw('tahun = '.$th)
+      ->get();
+    }
+
+    $data['tahun']=$th;
+    $data['d']=$d;
+    return view('skrd.laporan-data',$data);
+  }
+  public function skrdlaporancetak($tahun=null)
+  {
+    $th=$tahun;
+    if($tahun==null)
+      $th=date('Y');
+
+      if($tahun==-1)
+      {
+        $d=Skrd::select('tahun')
+        ->selectRaw('SUM(retribusi) as total')
+        ->groupBy('tahun')
+        ->get();
+      }
+      else
+      {
+        $d=Skrd::select('tahun')
+        ->selectRaw('SUM(retribusi) as total')
+        ->groupBy('tahun')
+        ->havingRaw('tahun = '.$th)
+        ->get();
+      }
+
+    $data['tahun']=$th;
+    $data['d']=$d;
+    return view('skrd.laporan-cetak',$data);
   }
 }

@@ -57,15 +57,15 @@
       </div>
 
       <div class="col-xs-12 col-sm-6">
-        <div class="form-group">
+        {{-- <div class="form-group">
           <div class="row" style="padding:15px;">
             <label for="password" class="col-xs-12 col-sm-12">Nomor SKRD</label>
 
-            <div class="col-xs-12 col-sm-12">
-              <input type="text" id="nomor_skrd" name="nomor_skrd" class="col-xs-12 col-sm-4"/>
-            </div>
+            <div class="col-xs-12 col-sm-12"> --}}
+              <input type="hidden" id="nomor_skrd" name="nomor_skrd" class="col-xs-12 col-sm-4"/>
+            {{-- </div>
           </div>
-        </div>
+        </div> --}}
         <div class="form-group">
           <div class="row" style="padding:15px;margin-top:-30px;">
             <label for="password" class="col-xs-12 col-sm-12">Tahun</label>

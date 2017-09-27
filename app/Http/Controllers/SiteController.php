@@ -187,6 +187,7 @@ class SiteController extends Controller
 			$d[$k]=$v;
 			$d[$k]['no']=$k+1;
 			$d[$k]['koordinat']=$v->lat_koord.' <br> '.$v->long_koord;
+			$d[$k]['pilih']='<input type="checkbox" name="pilihsite['.$v->id.']" id="pilihsite" value="'.$v->id.'">';
 			$d[$k]['showmap']='<button class="btn btn-xs btn-primary" type="button" onclick="showmap('.$v->lat_koord.','.$v->long_koord.')"><i class="glyphicon glyphicon-map-marker"></i></button><button class="btn btn-xs btn-danger" type="button" onclick="showstreet('.$v->lat_koord.','.$v->long_koord.')"><i class="glyphicon glyphicon-road"></i></button>';
 			$d[$k]['button']='<button class="btn btn-xs btn-primary" type="button" onclick="edit(\''.$v->id.'\')"><i class="fa fa-edit"></i></button><button class="btn btn-xs btn-danger" type="button" onclick="hapus(\''.$v->id.'\')"><i class="fa fa-trash"></i></button>';
 			if($v->akurat==1)
@@ -449,6 +450,32 @@ class SiteController extends Controller
 				echo 'Data '.ucwords($kolom).' Berhasil Di Edit';
 			else
 				echo 'Data '.ucwords($kolom).' Gagal Di Edit';
+		}
+
+		public function CetakSite()
+		{
+
+		}
+
+		public function Cetak()
+		{
+				$data['data'] = $dt=Input::all();
+				$d=$vn=array();
+				foreach ($dt['pilihsite'] as $k => $v)
+				{
+					$st=Site::find($k);
+					$d[$k]=$st;
+
+
+				}
+				$vendor=Vendor::all();
+				foreach ($vendor as $k => $vv)
+				{
+					$vn[$vv->id]=$vv;
+				}
+				$data['d']=$d;
+				$data['vn']=$vn;
+				return view('site.cetak',$data);
 		}
     //
 }
