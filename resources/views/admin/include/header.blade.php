@@ -23,15 +23,6 @@
 
               <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                 <li>
-                  <a href="#">
-                    <i class="ace-icon fa fa-cog"></i>
-                    Change Password
-                  </a>
-                </li>
-
-                <li class="divider"></li>
-
-                <li>
                   <a href="{{route('logout')}}">
                     <i class="ace-icon fa fa-power-off"></i>
                     Logout

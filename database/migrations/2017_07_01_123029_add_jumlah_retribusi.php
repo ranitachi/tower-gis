@@ -26,8 +26,6 @@ class AddJumlahRetribusi extends Migration
      */
     public function down()
     {
-        Schema::table('skrd', function (Blueprint $table) {
-            //
-        });
+        
     }
 }

@@ -26,8 +26,6 @@ class AddNamaBankRekening extends Migration
      */
     public function down()
     {
-        Schema::table('no_rekening', function (Blueprint $table) {
-            //
-        });
+        
     }
 }
