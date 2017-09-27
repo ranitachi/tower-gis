@@ -27,7 +27,9 @@ class SiteController extends Controller
 
 	public function Import()
 	{
-		return view('site.import');
+		$vendor=vendor::where('status_tampil','=','1')->orderBy('nama_vendor','asc')->get();
+		$data['vendor']=$vendor;
+		return view('site.import',$data);
 	}
 
 	public function FileFormat()
@@ -41,6 +43,7 @@ class SiteController extends Controller
 	public function UploadFile(Request $request)
 	{
 		$file = $request->file('import');
+		$vendor_id=$request->input('vendor_id');
 		$read=file_get_contents($file->getRealPath());
 		$d=explode("\n", $read);
 		$data=array();
@@ -160,6 +163,7 @@ class SiteController extends Controller
 					$data[$i]['njop_m']=str_replace(',', '.',$f[12]);
 					$data[$i]['imb_tahun']=$f[13];
 					$data[$i]['keterangan']=$f[14];
+					$data[$i]['vendor_id']=$vendor_id;
 					$i++;
 				}
 			}

@@ -168,6 +168,7 @@ class SkrdController extends Controller
     {
       $d=Skrd::select('tahun')
       ->selectRaw('SUM(retribusi) as total')
+      ->where('status_tampil','1')
       ->groupBy('tahun')
       ->get();
     }
@@ -175,6 +176,7 @@ class SkrdController extends Controller
     {
       $d=Skrd::select('tahun')
       ->selectRaw('SUM(retribusi) as total')
+      ->where('status_tampil','1')
       ->groupBy('tahun')
       ->havingRaw('tahun = '.$th)
       ->get();

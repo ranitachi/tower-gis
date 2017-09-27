@@ -10,6 +10,21 @@
 			</div>
 		</div>
 	</div>
+	<div class="form-group">
+		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Vendor</label>
+
+		<div class="col-xs-12 col-sm-4">
+			<div class="clearfix">
+				<select name="vendor_id" class="chosen-select form-control" id="vendor_id" data-placeholder="Pilih Data Vendor">
+					<option value="">Pilih Data Vendor</option>
+					@foreach($vendor as $k => $v)
+							<option value="{{$v->id}}">{{$v->nama_vendor}}</option>
+					@endforeach
+				</select>
+			</div>
+		</div>
+	</div>
+
 	<hr />
 	<div class="wizard-actions">
 		<button class="btn btn-success btn-next" data-last="Finish">

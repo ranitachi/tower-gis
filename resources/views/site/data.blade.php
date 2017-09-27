@@ -16,7 +16,7 @@
 				<option value="akurasi_data">Akurasi Data</option>
 				<option value="rekomendasi">Rekomendasi Site</option>
 			</select>
-			<button class="btn btn-sm btn-primary" type="submit" id="cetak"><i class="fa fa-print"></i> Cetak</button>
+			<button class="btn btn-sm btn-primary" type="button" id="cetak"><i class="fa fa-print"></i> Cetak</button>
 		</div>
 	</div>
 	<table id="datasite" class="table table-striped table-bordered table-hover">
@@ -61,25 +61,42 @@
 			}
 		});
 
-		// $('#cetak').click(function(){
-		// 	$.ajaxSetup({
-		// 					headers: {
-		// 							'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-		// 					}
-		// 			});
-		// 			// window.open(APP_URL+'/site/cetaksite','_blank');
-		//
-		// 				$.ajax({
-		// 					url : APP_URL+'/site/cetak',
-		// 					type : 'POST',
-		// 					data : $('#datacetak').serialize(),
-		// 					success : function(a){
-		// 				window.open(APP_URL+'/site/cetaksite','_blank');
-		// 					}
-		// 				})
-		//
-		//
-		// });
+		$('#cetak').click(function(){
+			// $.ajaxSetup({
+			// 				headers: {
+			// 						'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+			// 				}
+			// 		});
+			// var length = $('input#pilih').length;
+			var check = $('#datasite').find('input#pilihsite:checked').length;
+			var klm = $('#food :selected').length;
+
+			// alert(klm)
+			if(check==0)
+			{
+				$('div#body-alert').html('<h2>Data Site Belum Dipilih</h2>');
+	      $('div#modal-alert').modal('show');
+			}
+			else if(klm==0)
+			{
+				$('div#body-alert').html('<h2>Data Kolom Belum Dipilih</h2>');
+	      $('div#modal-alert').modal('show');
+			}
+			else
+				$('form#datacetak').submit();
+					// window.open(APP_URL+'/site/cetaksite','_blank');
+
+						// $.ajax({
+						// 	url : APP_URL+'/site/cetak',
+						// 	type : 'POST',
+						// 	data : $('#datacetak').serialize(),
+						// 	success : function(a){
+						// window.open(APP_URL+'/site/cetaksite','_blank');
+						// 	}
+						// })
+
+
+		});
 	});
 	</script>
 </form>

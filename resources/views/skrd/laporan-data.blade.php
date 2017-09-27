@@ -15,7 +15,7 @@
     <tr>
       <td class="center">{{$no}}</td>
       <td class="center">{{$v->tahun}}</td>
-      <td style="text-align:right;">{{number_format($v->total,2,',','.')}}</td>
+      <td style="text-align:right;">{{number_format($v->total,0,',','.')}}</td>
       <td></td>
     </tr>
     @php
@@ -27,7 +27,7 @@
   <thead>
 		<tr>
 			<th class="center" colspan="2"></th>
-			<th style="text-align:right">{{number_format($total,2,',','.')}}</th>
+			<th style="text-align:right">{{number_format($total,0,',','.')}}</th>
 			<th style="width:100px;"></th>
 		</tr>
 	</thead>
