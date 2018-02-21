@@ -3,7 +3,7 @@
 		<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Gambar</label>
 
 		<div class="col-xs-12 col-sm-9">
-				<img src="{{$id!=-1 ? $d->gambar : URL::to('/').'/img/16717-200.png'}}" alt="" id="gambar_site" style="border:1px solid #ddd;padding:3px;width:200px;height:200px;cursor:pointer" onclick="BrowseServer( 'Image:/', 'gambar' );"/>
+				<img src="{{$id!=-1 ? asset($d->gambar) : URL::to('/').'/img/16717-200.png'}}" alt="" id="gambar_site" style="border:1px solid #ddd;padding:3px;width:200px;height:200px;cursor:pointer" onclick="BrowseServer( 'Image:/', 'gambar' );"/>
 				<br>
 				<small><i>Click Dalam Kotak Untuk Memilih Gambar</i></small>
 				<input type="hidden" id="gambar" name="gambar" readonly="readonly" class="col-xs-12 col-sm-12" value="{{$id!=-1 ? $d->gambar : URL::to('/').'/img/16717-200.png'}}"/>
@@ -172,7 +172,7 @@
 							<optgroup label="{{$k}}">
 								@foreach ($v as $kk => $vv)
 									@if ($id!=-1)
-										@if ($vv->zona.' -- '.$vv->variabel==$d->type_power)
+										@if (strtolower($vv->zona.' -- '.$vv->variabel)==strtolower($d->type_power))
 											<option selected="selected" value="{{$d->type_power}}">{{$d->type_power}}</option>
 										@else
 											<option value="{{$vv->zona}} -- {{$vv->variabel}}">{{$vv->zona}} -- {{$vv->variabel}}</option>

@@ -45,7 +45,11 @@ class SiteController extends Controller
 		$file = $request->file('import');
 		$vendor_id=$request->input('vendor_id');
 		$read=file_get_contents($file->getRealPath());
-		$d=explode("\n", $read);
+		
+		$d=explode(";::", $read);
+		// echo '<pre>';
+		// print_r($d);
+		// echo '</pre>';
 		$data=array();
 		$i=0;
 		$vendor=Vendor::all();
@@ -73,6 +77,7 @@ class SiteController extends Controller
 				if($v!='')
 				{
 					$f=explode(';', $v);
+					// echo $v.'<br>';
 					// echo count($f).'<br>';
 					$opr=explode(',', $f[3]);
 					if(count($opr)>1)
@@ -91,13 +96,18 @@ class SiteController extends Controller
 							}
 							else
 							{
-								$cek=Operator::where('nama_operator','=',$iom)->get();
+								$cek=Operator::where('nama_operator','like',$iom)->get();
 								if(count($cek)==0)
 								{
 									$i_op['nama_operator']=$iom;
 									$i_op['status_tampil']='1';
 									$i_op['alamat']='';
-									$getid=Operator::create($i_op);
+									// $getid=Operator::create($i_op);
+									$getid= new Operator;
+									$getid->nama_operator = $iom;
+									$getid->status_tampil = '1';
+									$getid->alamat = '';
+									$getid->save();
 									$op_id.=$getid->id.',';
 
 								}
@@ -127,7 +137,13 @@ class SiteController extends Controller
 								$i_op['nama_operator']=$f[3];
 								$i_op['status_tampil']='1';
 								$i_op['alamat']='';
-								$getid=Operator::insert($i_op);
+								// $getid=Operator::insert($i_op);
+								$getid= new Operator;
+								$getid->nama_operator = $f[3];
+								$getid->status_tampil = '1';
+								$getid->alamat = '';
+								$getid->save();
+
 								$data[$i]['operator_id']=$getid->id;
 							}
 							else {
@@ -146,8 +162,21 @@ class SiteController extends Controller
 					$data[$i]['alamat']=$f[4];
 					$data[$i]['long_koord']=str_replace(',', '.', $f[5]);
 					$data[$i]['lat_koord']=str_replace(',', '.',$f[6]);
-					$data[$i]['type_power']=$f[7];
-					$data[$i]['luas_tanah']=str_replace(',', '.',$f[8]);
+					
+					$zone=str_replace(')','',$f[7]);
+					$explode_zone=explode('(',$zone);
+					if(count($explode_zone)!=0)
+					{
+						$zona='Zona '.trim($explode_zone[0]).' -- Menara '.trim(ucwords($explode_zone[1]));
+					}
+					else
+					{
+						$zona='';
+					}
+					$data[$i]['type_power']=$zona;
+					
+					
+					$data[$i]['luas_tanah']=($f[8]=='-' || $f[8]=="" ? 0 :str_replace(',', '.',$f[8]));
 					$data[$i]['imb_no']=$f[9];
 
 					if($f[10]!='')
@@ -159,10 +188,11 @@ class SiteController extends Controller
 					else
 						$data[$i]['tanggal']='0000-00-00';
 
-					$data[$i]['tinggi_menara_1']=str_replace(',', '.',$f[11]);
-					$data[$i]['njop_m']=str_replace(',', '.',$f[12]);
+					$data[$i]['tinggi_menara_1']=($f[11]=='-' ? 0 :str_replace(',', '.',$f[11]));
+					$data[$i]['njop_m']=($f[12]=='-' || $f[12]=="" ? 0 :str_replace(',', '.',$f[12]));
 					$data[$i]['imb_tahun']=$f[13];
 					$data[$i]['keterangan']=$f[14];
+					$data[$i]['gambar']='/img/LOGO KABUPATEN TANGERANG.png';
 					$data[$i]['vendor_id']=$vendor_id;
 					$i++;
 				}
@@ -170,8 +200,18 @@ class SiteController extends Controller
 		}
 
 		// echo '<pre>';
-		// print_r($data);
+		// print_r($handle);
 		// echo '</pre>';
+		// $row = 1;
+		// if (($handle = fopen($file->getRealPath(), "r")) !== FALSE) 
+		// {
+		// 	$data = fgetcsv($handle, 1000, "\n");
+		// 	// $data = str_getcsv($read, "\n");
+		// 	echo '<pre>';
+		// 	print_r($data);
+		// 	echo '</pre>';
+		// 	fclose($handle);
+		// }
 		Site::insert($data);
 		return redirect('site')->with('message', 'Import Berhasil Dilakukan');
 
