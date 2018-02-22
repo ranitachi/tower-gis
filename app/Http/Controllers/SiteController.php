@@ -219,7 +219,7 @@ class SiteController extends Controller
 	public function SiteJson($id=-1,$datatable=-1)
 	{
 		if($id==-1)
-			$site=Site::where('status_tampil','=','1')->limit(200)->get();
+			$site=Site::where('status_tampil','=','1')->get();
 		else
 			$site=Site::find($id);
 
@@ -422,8 +422,8 @@ class SiteController extends Controller
 		if($id!=-1)
 			$d=Site::find($id);
 
-		$operator=Operator::all();
-		$vendor=Vendor::all();
+		$operator=Operator::where('status_tampil', '1')->get();
+		$vendor=Vendor::where('status_tampil', '1')->get();
 		$b=Biaya::where('status_tampil','1')->orderBy('zona','asc')->get();
 		$biaya=array();
 		foreach ($b as $k => $v)
