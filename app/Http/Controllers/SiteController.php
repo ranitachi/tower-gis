@@ -219,9 +219,13 @@ class SiteController extends Controller
 	public function SiteJson($id=-1,$datatable=-1)
 	{
 		if($id==-1)
-			$site=Site::where('status_tampil','=','1')->get();
+			$site=Site::where('status_tampil','=','1')->limit(200)->get();
 		else
 			$site=Site::find($id);
+			
+		if ($datatable==1) {
+			$site=Site::where('status_tampil','=','1')->get();
+		}
 
 		$dt='{"data":';
 		$d=array();
