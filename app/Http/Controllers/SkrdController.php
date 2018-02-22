@@ -29,7 +29,8 @@ class SkrdController extends Controller
     $d=$n=array();
     if($id!=-1)
     {
-      $d=Skrd::findOrFail($id);
+      // $d=Skrd::findOrFail($id);
+      $d=Skrd::where('id','=',$id)->get()->first();
     }
     $vendor=vendor::where('status_tampil','=','1')->orderBy('nama_vendor','asc')->get();
     $rek=Rekening::where('status_tampil','=','1')->orderBy('kode_rekening','asc')->get();
