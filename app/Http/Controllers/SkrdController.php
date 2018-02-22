@@ -103,14 +103,14 @@ class SkrdController extends Controller
   {
     $n=explode(',',$id);
 
-    if(count($n)>1)
+    // if(count($n)>1)
       $skrd=Skrd::whereIn('no_skrd',$n)->where('status_tampil','=','1')->get();
-    else
-      $skrd=Skrd::where('id',$id)->where('status_tampil','=','1')->get();
+    // else
+    //   $skrd=Skrd::where('id',$id)->where('status_tampil','=','1')->get();
 
     // $skrd=DB::selectRaw("select * from skrd where (no_skrd = :noskrd or id='".$id."') and status_tampil=1",$n)->get();
     // echo count($skrd);
-    if($skrd)
+    if(count($skrd)!=0)
     {
       // $rekening=Rekening::where('kode_rekening','like','%'.$skrd[0]->kode_rekening.'%')->get();
       $pejabat=Kepaladinas::where('nama','like','%'.$skrd[0]->kepala_dinas.'%')->get();
