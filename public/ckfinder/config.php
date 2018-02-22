@@ -62,7 +62,7 @@ ATTENTION: The trailing slash is required.
 */
 $bu = "http://".$_SERVER['HTTP_HOST'];
 //$bu .= preg_replace('@/+$@','',dirname($_SERVER['SCRIPT_NAME'])).'/';
-$baseUrl = $bu.'/assets/';
+$baseUrl = $bu.'/tower-gis/public/';
 
 /*
 $baseDir : the path to the local directory (in the server) which points to the
