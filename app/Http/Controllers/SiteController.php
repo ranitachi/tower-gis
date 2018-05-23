@@ -222,6 +222,10 @@ class SiteController extends Controller
 			$site=Site::where('status_tampil','=','1')->limit(200)->get();
 		else
 			$site=Site::find($id);
+			
+		if ($datatable==1) {
+			$site=Site::where('status_tampil','=','1')->get();
+		}
 
 		$dt='{"data":';
 		$d=array();
@@ -422,8 +426,8 @@ class SiteController extends Controller
 		if($id!=-1)
 			$d=Site::find($id);
 
-		$operator=Operator::all();
-		$vendor=Vendor::all();
+		$operator=Operator::where('status_tampil', '1')->get();
+		$vendor=Vendor::where('status_tampil', '1')->get();
 		$b=Biaya::where('status_tampil','1')->orderBy('zona','asc')->get();
 		$biaya=array();
 		foreach ($b as $k => $v)
