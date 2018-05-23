@@ -74,7 +74,7 @@ function initMap() {
 
 			function allsite()
 			{
-				  var bounds = new google.maps.LatLngBounds();
+				var bounds = new google.maps.LatLngBounds();
 			    var mapOptions = {
 			        mapTypeId: 'roadmap'
 			    };
@@ -91,8 +91,8 @@ function initMap() {
 		             $('div#coords').html(text);
 		        });
 
-						var triangleCoords = [
-							{lng:106.723251, lat: -6.085765},
+					var triangleCoords = [
+						{lng:106.723251, lat: -6.085765},
  						 {lng:106.723766, lat: -6.086277},
  						 {lng:106.724024, lat: -6.086362},
  						 {lng:106.724625, lat: -6.086362},
