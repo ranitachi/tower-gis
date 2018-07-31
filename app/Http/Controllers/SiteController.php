@@ -9,6 +9,7 @@ use App\Operator as Operator;
 use App\Vendor as Vendor;
 use App\Biaya as Biaya;
 use Illuminate\Support\Facades\Input;
+
 class SiteController extends Controller
 {
 	public function index()
@@ -272,7 +273,7 @@ class SiteController extends Controller
 			if($v->vendor_id!=null)
 			{
 				$ven=Vendor::find($v->vendor_id);
-				if(count($ven)!=0)
+				if($ven->count()!=0)
 				{
 					$d[$k]['vendor']=$ven->nama_vendor;
 					$d[$k]['icon']=$ven->logo;
