@@ -9,6 +9,7 @@ use App\Operator as Operator;
 use App\Vendor as Vendor;
 use App\Biaya as Biaya;
 use Illuminate\Support\Facades\Input;
+use Excel;
 class SiteController extends Controller
 {
 	public function index()
@@ -43,46 +44,52 @@ class SiteController extends Controller
 	public function UploadFile(Request $request)
 	{
 		$file = $request->file('import');
-		$vendor_id=$request->input('vendor_id');
-		$read=file_get_contents($file->getRealPath());
 		
-		$d=explode(";::", $read);
-		// echo '<pre>';
-		// print_r($d);
-		// echo '</pre>';
-		$data=array();
-		$i=0;
-		$vendor=Vendor::all();
-		$vn=array();
-		foreach ($vendor as $k => $v)
-		{
-			$vn[$v->id]=$v;
-		}
+		$read=$file->getRealPath();
+		// echo $read;
+		$results=array();
 
-		$operator=Operator::where('status_tampil','1')->get();
-		$op=$opm=array();
-
-		foreach ($operator as $k => $vv)
-		{
-			$op[$vv->id]=$vv;
-			$om=strtolower(str_replace(' ', '_', $vv->nama_operator));
-			$opm[$om]=$vv;
-			// echo $om.'<br>';
-		}
-
-		foreach ($d as $k => $v)
-		{
-			if($k!=0)
+		
+		$vendor_id=$request->input('vendor_id');
+		Excel::load($read, function($reader) use ($vendor_id){
+			// use Request;
+			$data=array();
+			$i=0;
+			$vendor=Vendor::all();
+			$vn=array();
+			foreach ($vendor as $k => $v)
 			{
-				if($v!='')
-				{
-					$f=explode(';', $v);
-					// echo $v.'<br>';
-					// echo count($f).'<br>';
-					$opr=explode(',', $f[3]);
+				$vn[$v->id]=$v;
+			}
+	
+			$operator=Operator::where('status_tampil','1')->get();
+			$op=$opm=array();
+	
+			foreach ($operator as $k => $vv)
+			{
+				$op[$vv->id]=$vv;
+				$om=strtolower(str_replace(' ', '_', $vv->nama_operator));
+				$opm[$om]=$vv;
+				// echo $om.'<br>';
+			}
+
+			// Getting all results
+			// $results = $reader->get();
+
+			// ->all() is a wrapper for ->get() and will work the same
+			$results = $reader->all();
+			// dd($results);
+			foreach($results as $k=>$v)
+			{
+				// foreach($v as $i=>$item)
+				// {
+					//echo $i.':'.$item.'<br>';
+				// }
+				// echo $v['site_id'].'--------<br>';
+					$opr=explode(',', $v['operator']);
 					if(count($opr)>1)
 					{
-						$id_op=explode(',', $f[3]);
+						$id_op=explode(',', $v['operator']);
 						$op_id='';
 						foreach ($id_op as $ko => $vo)
 						{
@@ -122,7 +129,7 @@ class SiteController extends Controller
 					}
 					else
 					{
-						$iom=str_replace(' ', '_', $f[3]);
+						$iom=str_replace(' ', '_', $v['operator']);
 
 						if(isset($opm[$iom]))
 						{
@@ -131,15 +138,15 @@ class SiteController extends Controller
 						}
 						else
 						{
-							$cek=Operator::where('nama_operator','=',$f[3])->get();
+							$cek=Operator::where('nama_operator','=',$v['operator'])->get();
 							if(count($cek)==0)
 							{
-								$i_op['nama_operator']=$f[3];
+								$i_op['nama_operator']=$v['operator'];
 								$i_op['status_tampil']='1';
 								$i_op['alamat']='';
 								// $getid=Operator::insert($i_op);
 								$getid= new Operator;
-								$getid->nama_operator = $f[3];
+								$getid->nama_operator = $v['operator'];
 								$getid->status_tampil = '1';
 								$getid->alamat = '';
 								$getid->save();
@@ -156,16 +163,16 @@ class SiteController extends Controller
 						}
 					}
 
-					$data[$i]['operator_name']=$f[3];
-					$data[$i]['site_id']=$f[1];
-					$data[$i]['site_name']=$f[2];
-					$data[$i]['alamat']=$f[4];
-					$data[$i]['long_koord']=str_replace(',', '.', $f[5]);
-					$data[$i]['lat_koord']=str_replace(',', '.',$f[6]);
+					$data[$i]['operator_name']=$v['operator'];
+					$data[$i]['site_id']=$v['site_id'];
+					$data[$i]['site_name']=$v['site_name'];
+					$data[$i]['alamat']=$v['alamat'];
+					$data[$i]['long_koord']=str_replace(',', '.', $v['longitude']);
+					$data[$i]['lat_koord']=str_replace(',', '.',$v['latitude']);
 					
-					$zone=str_replace(')','',$f[7]);
+					$zone=str_replace(')','',$v['type_tower']);
 					$explode_zone=explode('(',$zone);
-					if(count($explode_zone)!=0)
+					if(count($explode_zone)>1)
 					{
 						$zona='Zona '.trim($explode_zone[0]).' -- Menara '.trim(ucwords($explode_zone[1]));
 					}
@@ -176,28 +183,167 @@ class SiteController extends Controller
 					$data[$i]['type_power']=$zona;
 					
 					
-					$data[$i]['luas_tanah']=($f[8]=='-' || $f[8]=="" ? 0 :str_replace(',', '.',$f[8]));
-					$data[$i]['imb_no']=$f[9];
+					$data[$i]['luas_tanah']=($v['luas_tanah']=='-' || $v['luas_tanah']=="" ? 0 :str_replace(',', '.',$v['luas_tanah']));
+					$data[$i]['imb_no']=$v['no_imb'];
 
-					if($f[10]!='')
+					if($v['tanggal']!='')
 					{
-						$date = $f[10];
+						$date = $v['tanggal'];
 						$tgl= date('Y-m-d', strtotime($date));
 						$data[$i]['tanggal']=$tgl;
 					}
 					else
 						$data[$i]['tanggal']='0000-00-00';
 
-					$data[$i]['tinggi_menara_1']=($f[11]=='-' ? 0 :str_replace(',', '.',$f[11]));
-					$data[$i]['njop_m']=($f[12]=='-' || $f[12]=="" ? 0 :str_replace(',', '.',$f[12]));
-					$data[$i]['imb_tahun']=$f[13];
-					$data[$i]['keterangan']=$f[14];
+					$data[$i]['tinggi_menara_1']=($v['tinggi_menara']=='-' ? 0 :str_replace(',', '.',$v['tinggi_menara']));
+					$data[$i]['njop_m']=($v['njop']=='-' || $v['njop']=="" ? 0 :str_replace(',', '.',$v['njop']));
+					$data[$i]['imb_tahun']=$v['tahun'];
+					$data[$i]['keterangan']=$v['keterangan'];
 					$data[$i]['gambar']='/img/LOGO KABUPATEN TANGERANG.png';
 					$data[$i]['vendor_id']=$vendor_id;
 					$i++;
-				}
+				
 			}
-		}
+			Site::insert($data);
+			// dd($data);
+		});
+		return redirect('site')->with('message', 'Import Berhasil Dilakukan');
+		// dd($request->file('import'));
+		// $d=explode(";::", $read);
+		// dd($d);
+		// // echo '<pre>';
+		// // print_r($d);
+		// // echo '</pre>';
+		// 
+
+		// foreach ($d as $k => $v)
+		// {
+		// 	if($k!=0)
+		// 	{
+		// 		if($v!='')
+		// 		{
+		// 			$f=explode(';', $v);
+		// 			// echo $v.'<br>';
+		// 			// echo count($f).'<br>';
+					// $opr=explode(',', $f[3]);
+					// if(count($opr)>1)
+					// {
+					// 	$id_op=explode(',', $f[3]);
+					// 	$op_id='';
+					// 	foreach ($id_op as $ko => $vo)
+					// 	{
+					// 		$iom=strtolower(str_replace(' ', '_', trim($vo)));
+
+					// 		if(isset($opm[$iom]))
+					// 		{
+					// 			$operator_id=$opm[$iom]->id;
+					// 			$data[$i]['operator_id']=$operator_id;
+					// 			$op_id.=$opm[trim($iom)]->id.',';
+					// 		}
+					// 		else
+					// 		{
+					// 			$cek=Operator::where('nama_operator','like',$iom)->get();
+					// 			if(count($cek)==0)
+					// 			{
+					// 				$i_op['nama_operator']=$iom;
+					// 				$i_op['status_tampil']='1';
+					// 				$i_op['alamat']='';
+					// 				// $getid=Operator::create($i_op);
+					// 				$getid= new Operator;
+					// 				$getid->nama_operator = $iom;
+					// 				$getid->status_tampil = '1';
+					// 				$getid->alamat = '';
+					// 				$getid->save();
+					// 				$op_id.=$getid->id.',';
+
+					// 			}
+					// 			else {
+					// 				# code...
+					// 				$op_id.=$cek->id.',';
+					// 			}
+					// 		}
+					// 	}
+					// 	$op_id=substr($op_id, 0,-1);
+					// 	$data[$i]['operator_id']=$op_id;
+					// }
+					// else
+					// {
+					// 	$iom=str_replace(' ', '_', $f[3]);
+
+					// 	if(isset($opm[$iom]))
+					// 	{
+					// 		$operator_id=$opm[$iom]->id;
+					// 		$data[$i]['operator_id']=$operator_id;
+					// 	}
+					// 	else
+					// 	{
+					// 		$cek=Operator::where('nama_operator','=',$f[3])->get();
+					// 		if(count($cek)==0)
+					// 		{
+					// 			$i_op['nama_operator']=$f[3];
+					// 			$i_op['status_tampil']='1';
+					// 			$i_op['alamat']='';
+					// 			// $getid=Operator::insert($i_op);
+					// 			$getid= new Operator;
+					// 			$getid->nama_operator = $f[3];
+					// 			$getid->status_tampil = '1';
+					// 			$getid->alamat = '';
+					// 			$getid->save();
+
+					// 			$data[$i]['operator_id']=$getid->id;
+					// 		}
+					// 		else {
+					// 			# code...
+					// 			foreach ($cek as $kc => $vc) {
+					// 				# code...
+					// 				$data[$i]['operator_id']=$vc->id;
+					// 			}
+					// 		}
+					// 	}
+					// }
+
+					// $data[$i]['operator_name']=$f[3];
+					// $data[$i]['site_id']=$f[1];
+					// $data[$i]['site_name']=$f[2];
+					// $data[$i]['alamat']=$f[4];
+					// $data[$i]['long_koord']=str_replace(',', '.', $f[5]);
+					// $data[$i]['lat_koord']=str_replace(',', '.',$f[6]);
+					
+					// $zone=str_replace(')','',$f[7]);
+					// $explode_zone=explode('(',$zone);
+					// if(count($explode_zone)!=0)
+					// {
+					// 	$zona='Zona '.trim($explode_zone[0]).' -- Menara '.trim(ucwords($explode_zone[1]));
+					// }
+					// else
+					// {
+					// 	$zona='';
+					// }
+					// $data[$i]['type_power']=$zona;
+					
+					
+					// $data[$i]['luas_tanah']=($f[8]=='-' || $f[8]=="" ? 0 :str_replace(',', '.',$f[8]));
+					// $data[$i]['imb_no']=$f[9];
+
+					// if($f[10]!='')
+					// {
+					// 	$date = $f[10];
+					// 	$tgl= date('Y-m-d', strtotime($date));
+					// 	$data[$i]['tanggal']=$tgl;
+					// }
+					// else
+					// 	$data[$i]['tanggal']='0000-00-00';
+
+					// $data[$i]['tinggi_menara_1']=($f[11]=='-' ? 0 :str_replace(',', '.',$f[11]));
+					// $data[$i]['njop_m']=($f[12]=='-' || $f[12]=="" ? 0 :str_replace(',', '.',$f[12]));
+					// $data[$i]['imb_tahun']=$f[13];
+					// $data[$i]['keterangan']=$f[14];
+					// $data[$i]['gambar']='/img/LOGO KABUPATEN TANGERANG.png';
+					// $data[$i]['vendor_id']=$vendor_id;
+					// $i++;
+		// 		}
+		// 	}
+		// }
 
 		// echo '<pre>';
 		// print_r($handle);
@@ -212,8 +358,8 @@ class SiteController extends Controller
 		// 	echo '</pre>';
 		// 	fclose($handle);
 		// }
-		Site::insert($data);
-		return redirect('site')->with('message', 'Import Berhasil Dilakukan');
+		// Site::insert($data);
+		// return redirect('site')->with('message', 'Import Berhasil Dilakukan');
 
 	}
 	public function SiteJson($id=-1,$datatable=-1)
