@@ -418,7 +418,7 @@ class SiteController extends Controller
 			if($v->vendor_id!=null)
 			{
 				$ven=Vendor::find($v->vendor_id);
-				if(count($ven)!=0)
+				if($ven->count()!=0)
 				{
 					$d[$k]['vendor']=$ven->nama_vendor;
 					$d[$k]['icon']=$ven->logo;
